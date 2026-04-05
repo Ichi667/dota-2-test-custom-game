@@ -27,7 +27,7 @@ function item_devastation_axe:OnSpellStart()
     caster:AddNewModifier(caster, self, "modifier_item_devastation_axe_active", { duration = duration })
 
     if SOUND_APPLY_ACTIVE ~= "" then
-        caster:EmitSound("devastation_activate")
+        caster:EmitSound(SOUND_APPLY_ACTIVE)
     end
 
     local particle = ParticleManager:CreateParticle("particles/items/sven_ti10_hgs_gods_strength_ring.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
@@ -193,7 +193,7 @@ function modifier_item_devastation_axe:OnAttackLanded(params)
     DoCleaveAttack(parent, target, ability, cleave_damage, 150, cleave_radius, cleave_radius, "particles/items/devastation_splash.vpcf")
 
     if SOUND_CLEAVE ~= "" then
-        parent:EmitSound("Hero_Sven.Attack")
+        parent:EmitSound(SOUND_CLEAVE)
     end
 
     local main_debuff = target:AddNewModifier(parent, ability, "modifier_item_devastation_axe_armor_debuff", {
