@@ -94,11 +94,12 @@ function modifier_item_tempest_edge:TriggerChainLightning(initial_target)
     local bounce_count = ability:GetSpecialValueFor("chain_bounces")
     local bounce_radius = ability:GetSpecialValueFor("chain_radius")
     local damage = ability:GetSpecialValueFor("chain_damage")
+    local total_hits = bounce_count + 1
 
     local hit_targets = {}
     local current_target = initial_target
 
-    for _ = 1, bounce_count do
+    for _ = 1, total_hits do
         if not current_target or current_target:IsNull() or not current_target:IsAlive() then
             break
         end
