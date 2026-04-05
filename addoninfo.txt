@@ -1,0 +1,10 @@
+"AddonInfo"
+{
+	maps			"cool"
+	"IsPlayable"	"1"
+	"HeroGuideSupported"	"0"
+	"cool"
+	{
+		"maxplayers"  "4"
+	}
+}
