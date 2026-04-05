@@ -6,6 +6,8 @@
 		"addon_game_name"			"Fin"
 		"DOTA_goodguys"			"Силы света"
 
+		"DOTA_Tooltip_ability_item_crimson_guard_Description"						"<h1>Пассивное: Damage Block</h1> С вероятностью в %block_chance%%% блокирует %block_damage_melee% урона, если владелец — герой ближнего боя, или %block_damage_ranged% урона, если герой дальнего боя."
+
 
 		"DOTA_Tooltip_Ability_item_dragon_lance_2"				"Dragon Lance 2"
 		"DOTA_Tooltip_Ability_item_recipe_dragon_lance_2"				"Рецепт: Dragon Lance 2"
@@ -126,7 +128,7 @@
 		"DOTA_tooltip_ability_item_arcane_reservoir_bonus_health"				"+ к здоровью"
 		"DOTA_tooltip_ability_item_arcane_reservoir_bonus_attack_speed"		"+ к скорости атаки"
 		"DOTA_tooltip_ability_item_arcane_reservoir_bonus_armor"				"+ к броне"
-		"DOTA_tooltip_ability_item_arcane_reservoir_bonus_mana_pct"			"% к максимальной мане"
+		"DOTA_tooltip_ability_item_arcane_reservoir_bonus_mana_pct"			"%+ к максимальной мане"
 		"DOTA_tooltip_ability_item_arcane_reservoir_bonus_mana_regen"			"+ к восстановлению маны"
 
 		"DOTA_tooltip_ability_item_arcane_reservoir_Description"				"<h1>Активное: Energy Charge</h1>Мгновенно восстанавливает %restore_per_charge% здоровья и маны за каждый имеющийся заряд. Может иметь до %max_charges% зарядов. Получает один заряд каждый раз, когда любой герой в радиусе %charge_radius% использует способность."
@@ -135,7 +137,7 @@
 		"DOTA_tooltip_ability_item_spear_of_resonance_bonus_attack_speed"      "+ к скорости атаки"
 		"DOTA_tooltip_ability_item_spear_of_resonance_bonus_strength"          "+ к силе"
 		"DOTA_tooltip_ability_item_spear_of_resonance_bonus_agility"           "+ к ловкости"
-		"DOTA_tooltip_ability_item_spear_of_resonance_bonus_move_speed_pct"    "% к скорости передвижения"
+		"DOTA_tooltip_ability_item_spear_of_resonance_bonus_move_speed_pct"    "%+ к скорости передвижения"
 		"DOTA_tooltip_ability_item_spear_of_resonance_bonus_mana_regen"        "+ к восстановлению маны"
 
         "DOTA_tooltip_ability_item_spear_of_resonance_Description" "<h1>Пассивное: Echo Strike</h1>Позволяет владельцу ближнего боя на короткое время ускорить следующую серию ударов. Во время эффекта скорость атаки становится максимальной на %echo_attack_speed_duration% сек., а атаки под эффектом замедляют цель на %echo_slow_pct%% на %echo_slow_duration% сек. Перезарядка: %echo_cooldown% сек.\n\n<h1>Пассивное: Resonant Chase</h1>Когда владелец отдаёт команду атаки по цели в радиусе %chase_radius%, его скорость передвижения увеличивается до %chase_move_speed%  на %chase_duration% сек. Эффект пропадает при отмене атаки. Перезарядка: %chase_cooldown% сек."
@@ -265,13 +267,13 @@
 		"DOTA_Tooltip_modifier_item_satanic_2_unholy_Description"			"Вампиризм увеличен на %dMODIFIER_PROPERTY_TOOLTIP%%%."
 
 		"DOTA_tooltip_ability_item_iron_shield" "Iron Shield"
-		"DOTA_Tooltip_ability_item_iron_shield_Description" "<h1>Пассивное: Damage Block</h1>Блокирует %block_damage_melee% физического урона у героя ближнего боя и %block_damage_ranged% у героя дальнего боя. Шанс срабатывания: %block_chance%%.\n\nПассивные эффекты уменьшения/блокирования урона от разных предметов не складываются."
+		"DOTA_Tooltip_ability_item_iron_shield_Description" "<h1>Пассивное: Damage Block</h1>Блокирует %block_damage_melee% физического урона у героя ближнего боя и %block_damage_ranged% у героя дальнего боя.\n\nПассивные эффекты уменьшения/блокирования урона от разных предметов не складываются."
 		"DOTA_Tooltip_ability_item_iron_shield_bonus_armor" "+ к броне"
 		"DOTA_Tooltip_ability_item_iron_shield_bonus_health_regen" "+ к восстановлению здоровья"
 		"DOTA_Tooltip_ability_item_iron_shield_bonus_health" "+ к здоровью"
 
 		"DOTA_tooltip_ability_item_crystal_defender" "Crystal Defender"
-		"DOTA_Tooltip_ability_item_crystal_defender_Description" "<h1>Пассивное: Crystal Guard</h1>Получаемый урон сначала уменьшается на %flat_damage_reduction%, а затем дополнительно уменьшается на %damage_reduction_pct%%.\n\n<h1>Активное: Crystal Stasis</h1>Накладывает на владельца неразвеиваемое оглушение на %active_duration% сек. Во время эффекта герой полностью неуязвим и восстанавливает %active_heal_pct_per_second%%% от максимального здоровья в секунду."
+		"DOTA_Tooltip_ability_item_crystal_defender_Description" "<h1>Активное: Crystal Stasis</h1>Накладывает на владельца оглушение на %active_duration% сек. Во время эффекта герой полностью неуязвим и восстанавливает %active_heal_pct_per_second%%%  от максимального здоровья в секунду.\n\n<h1>Пассивное: Crystal Guard</h1>Получаемый урон уменьшается на %flat_damage_reduction% + %damage_reduction_pct%%."
 		"DOTA_Tooltip_ability_item_crystal_defender_bonus_armor" "+ к броне"
 		"DOTA_Tooltip_ability_item_crystal_defender_bonus_health_regen" "+ к восстановлению здоровья"
 		"DOTA_Tooltip_ability_item_crystal_defender_bonus_health" "+ к здоровью"
@@ -285,30 +287,30 @@
 		"DOTA_Tooltip_ability_item_dragonic_heart_bonus_strength" "+ к силе"
 		"DOTA_Tooltip_ability_item_dragonic_heart_bonus_agility" "+ к ловкости"
 		"DOTA_Tooltip_ability_item_dragonic_heart_bonus_intellect" "+ к интеллекту"
-		"DOTA_Tooltip_ability_item_dragonic_heart_bonus_max_health_pct" "% к максимальному здоровью"
-		"DOTA_Tooltip_ability_item_dragonic_heart_bonus_health_regen_pct" "% к восстановлению здоровья"
+		"DOTA_Tooltip_ability_item_dragonic_heart_bonus_max_health_pct" "%+ к максимальному здоровью"
+		"DOTA_Tooltip_ability_item_dragonic_heart_bonus_health_regen_pct" "%+ к макс. здоровья в секунду"
 		"DOTA_Tooltip_modifier_item_dragonic_heart_heal_reduction" "Draconic Wounds"
 		"DOTA_Tooltip_modifier_item_dragonic_heart_heal_reduction_Description" "Пополнение здоровья уменьшено."
 
 		"DOTA_tooltip_ability_item_heartforge_blade" "Heartforge Blade"
 		"DOTA_Tooltip_ability_item_heartforge_blade_Description" "<h1>Пассивное: Heartforge Pulse</h1>Каждую секунду наносит врагам в радиусе %burn_radius% урон в размере %burn_damage_base% + %burn_damage_max_health_pct%%% от максимального здоровья владельца.\n\nБонус к процентному восстановлению здоровья от разных предметов не складывается."
 		"DOTA_Tooltip_ability_item_heartforge_blade_bonus_damage" "+ к урону"
-		"DOTA_Tooltip_ability_item_heartforge_blade_bonus_evasion" "% к уклонению"
+		"DOTA_Tooltip_ability_item_heartforge_blade_bonus_evasion" "%+ к уклонению"
 		"DOTA_Tooltip_ability_item_heartforge_blade_bonus_strength" "+ к силе"
-		"DOTA_Tooltip_ability_item_heartforge_blade_bonus_health_regen_pct" "% к восстановлению здоровья"
-
+		"DOTA_Tooltip_ability_item_heartforge_blade_bonus_health_regen_pct" "%+ макс. здоровья в секунду"
+егенерации от
 		"DOTA_tooltip_ability_item_tempest_edge" "Tempest Edge"
-		"DOTA_Tooltip_ability_item_tempest_edge_Description" "<h1>Пассивное: Chain Lightning</h1>Каждая атака с вероятностью в %chain_chance%% может создать разряд цепной молнии, которая %chain_bounces% раза перескочит между случайными врагами в радиусе %chain_radius%, нанося каждому по %chain_damage% магического урона. От атаки с цепной молнией нельзя уклониться."
-		"DOTA_Tooltip_ability_item_tempest_edge_bonus_evasion" "% к уклонению"
+		"DOTA_Tooltip_ability_item_tempest_edge_Description" "<h1>Пассивное: Chain Lightning</h1>Каждая атака с вероятностью в %chain_chance%%  может создать разряд цепной молнии, которая %chain_bounces% раза перескочит между случайными врагами в радиусе %chain_radius%, нанося каждому по %chain_damage% магического урона. От атаки с цепной молнией нельзя уклониться."
+		"DOTA_Tooltip_ability_item_tempest_edge_bonus_evasion" "%+ к уклонению"
 		"DOTA_Tooltip_ability_item_tempest_edge_bonus_agility" "+ к ловкости"
 		"DOTA_Tooltip_ability_item_tempest_edge_bonus_damage" "+ к урону"
-		"DOTA_Tooltip_ability_item_tempest_edge_bonus_base_attack_speed_pct" "% к базовой скорости атаки"
+		"DOTA_Tooltip_ability_item_tempest_edge_bonus_base_attack_speed_pct" "%+ к базовой скорости атаки"
 
 		"DOTA_tooltip_ability_item_phaseblade" "Phaseblade"
-		"DOTA_Tooltip_ability_item_phaseblade_Description" "<h1>Пассивное: Phase Dodge</h1>С шансом в %damage_evade_chance%% позволяет уклониться от любого входящего урона.\n\nПассивные эффекты уменьшения/блокирования урона от разных предметов не складываются."
 		"DOTA_Tooltip_ability_item_phaseblade_bonus_agility" "+ к ловкости"
 		"DOTA_Tooltip_ability_item_phaseblade_bonus_damage" "+ к урону"
-		"DOTA_Tooltip_ability_item_phaseblade_bonus_base_attack_speed_pct" "% к базовой скорости атаки"
+		"DOTA_Tooltip_ability_item_phaseblade_bonus_base_attack_speed_pct" "%+ к базовой скорости атаки"
+		"DOTA_Tooltip_ability_item_phaseblade_Description" "<h1>Пассивное: Phase Dodge</h1>С шансом в %damage_evade_chance%%  позволяет уклониться от любого входящего урона."
 
 		"DOTA_SUBSHOP_CONSUMABLES" "Новые предметы"
 

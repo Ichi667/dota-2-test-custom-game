@@ -16,11 +16,13 @@ function modifier_item_tempest_edge:GetAttributes() return MODIFIER_ATTRIBUTE_MU
 function modifier_item_tempest_edge:OnCreated()
     if not IsServer() then return end
     self.attack_records = {}
+    self.pseudo_random_id = self:GetAbility() and self:GetAbility():entindex() or 0
 end
 
 function modifier_item_tempest_edge:OnRefresh()
     if not IsServer() then return end
     self.attack_records = self.attack_records or {}
+    self.pseudo_random_id = self:GetAbility() and self:GetAbility():entindex() or self.pseudo_random_id
 end
 
 function modifier_item_tempest_edge:DeclareFunctions()
@@ -28,7 +30,7 @@ function modifier_item_tempest_edge:DeclareFunctions()
         MODIFIER_PROPERTY_EVASION_CONSTANT,
         MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
         MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
-        MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT,
+        MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_EVENT_ON_ATTACK_LANDED,
         MODIFIER_EVENT_ON_ATTACK_RECORD_DESTROY,
     }
@@ -49,14 +51,9 @@ function modifier_item_tempest_edge:GetModifierPreAttack_BonusDamage()
     return ability and ability:GetSpecialValueFor("bonus_damage") or 0
 end
 
-function modifier_item_tempest_edge:GetModifierBaseAttackTimeConstant()
-    local parent = self:GetParent()
+function modifier_item_tempest_edge:GetModifierAttackSpeedBonus_Constant()
     local ability = self:GetAbility()
-    if not parent or not ability then return nil end
-
-    local current_base_attack_time = parent:GetBaseAttackTime()
-    local bonus_pct = ability:GetSpecialValueFor("bonus_base_attack_speed_pct")
-    return current_base_attack_time / (1 + (bonus_pct * 0.01))
+    return ability and ability:GetSpecialValueFor("bonus_attack_speed") or 0
 end
 
 function modifier_item_tempest_edge:OnAttackRecordDestroy(params)
@@ -86,7 +83,8 @@ function modifier_item_tempest_edge:OnAttackLanded(params)
         self.attack_records[params.record] = true
     end
 
-    if not RollPercentage(ability:GetSpecialValueFor("chain_chance")) then return end
+    local chain_chance = ability:GetSpecialValueFor("chain_chance")
+    if not RollPseudoRandomPercentage(chain_chance, self.pseudo_random_id, parent) then return end
 
     self:TriggerChainLightning(target)
 end
@@ -99,30 +97,46 @@ function modifier_item_tempest_edge:TriggerChainLightning(initial_target)
     local bounce_count = ability:GetSpecialValueFor("chain_bounces")
     local bounce_radius = ability:GetSpecialValueFor("chain_radius")
     local damage = ability:GetSpecialValueFor("chain_damage")
+    local jump_delay = ability:GetSpecialValueFor("chain_jump_delay")
+    if jump_delay < 0 then
+        jump_delay = 0
+    end
 
     local hit_targets = {}
     local current_target = initial_target
 
-    for _ = 1, bounce_count do
-        if not current_target or current_target:IsNull() or not current_target:IsAlive() then
-            break
+    local start_particle = ParticleManager:CreateParticle("particles/items_fx/chain_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, current_target)
+    ParticleManager:SetParticleControlEnt(start_particle, 0, parent, PATTACH_POINT_FOLLOW, "attach_attack1", parent:GetAbsOrigin(), true)
+    ParticleManager:SetParticleControlEnt(start_particle, 1, current_target, PATTACH_POINT_FOLLOW, "attach_hitloc", current_target:GetAbsOrigin(), true)
+    ParticleManager:ReleaseParticleIndex(start_particle)
+
+    hit_targets[current_target:entindex()] = true
+    ApplyDamage({
+        victim = current_target,
+        attacker = parent,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        damage_flags = DOTA_DAMAGE_FLAG_NONE,
+        ability = ability,
+    })
+
+    local remaining_bounces = bounce_count
+
+    local function PerformBounce()
+        if remaining_bounces <= 0 then
+            return nil
         end
 
-        hit_targets[current_target:entindex()] = true
+        if not parent or parent:IsNull() or not parent:IsAlive() then
+            return nil
+        end
 
-        local particle = ParticleManager:CreateParticle("particles/items_fx/chain_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, current_target)
-        ParticleManager:SetParticleControlEnt(particle, 0, parent, PATTACH_POINT_FOLLOW, "attach_attack1", parent:GetAbsOrigin(), true)
-        ParticleManager:SetParticleControlEnt(particle, 1, current_target, PATTACH_POINT_FOLLOW, "attach_hitloc", current_target:GetAbsOrigin(), true)
-        ParticleManager:ReleaseParticleIndex(particle)
-
-        ApplyDamage({
-            victim = current_target,
-            attacker = parent,
-            damage = damage,
-            damage_type = DAMAGE_TYPE_MAGICAL,
-            damage_flags = DOTA_DAMAGE_FLAG_NONE,
-            ability = ability,
-        })
+        if not ability or ability:IsNull() then
+            return nil
+        end
+        if not current_target or current_target:IsNull() or not current_target:IsAlive() then
+            return nil
+        end
 
         local enemies = FindUnitsInRadius(
             parent:GetTeamNumber(),
@@ -144,7 +158,37 @@ function modifier_item_tempest_edge:TriggerChainLightning(initial_target)
             end
         end
 
+        if not next_target then
+            return nil
+        end
+
+        local bounce_particle = ParticleManager:CreateParticle("particles/items_fx/chain_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, next_target)
+        ParticleManager:SetParticleControlEnt(bounce_particle, 0, current_target, PATTACH_POINT_FOLLOW, "attach_hitloc", current_target:GetAbsOrigin(), true)
+        ParticleManager:SetParticleControlEnt(bounce_particle, 1, next_target, PATTACH_POINT_FOLLOW, "attach_hitloc", next_target:GetAbsOrigin(), true)
+        ParticleManager:ReleaseParticleIndex(bounce_particle)
+
+        hit_targets[next_target:entindex()] = true
+        ApplyDamage({
+            victim = next_target,
+            attacker = parent,
+            damage = damage,
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            damage_flags = DOTA_DAMAGE_FLAG_NONE,
+            ability = ability,
+        })
+
         current_target = next_target
+        remaining_bounces = remaining_bounces - 1
+
+        if remaining_bounces > 0 then
+            return jump_delay
+        end
+
+        return nil
+    end
+
+    if remaining_bounces > 0 then
+        GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("tempest_edge_chain_"), PerformBounce, jump_delay)
     end
 
     parent:EmitSound("Item.Maelstrom.Chain_Lightning")

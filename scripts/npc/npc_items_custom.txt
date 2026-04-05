@@ -1,6 +1,132 @@
 "DOTAAbilities"
 {
 
+	"item_radiance"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_INVISIBLE"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"4700" 
+		"ItemShopTags"					"damage;farming;dps"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"
+		
+
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_damage"			"55"
+				"aura_damage"			"60"
+				"aura_damage_illusions"	"35"
+				"upgrade_day_vision"	"250"
+				"evasion"				"10"
+				"blind_pct"				"0"
+				"aura_radius"			
+				{
+					"value"		"650"
+					"affected_by_aoe_increase"	"1"
+				}
+				"illusion_multiplier_pct"	"100"
+		}
+	}
+
+	"item_butterfly"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		//"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"5450"
+		"ItemShopTags"					"agi;damage;evasion;attack_speed;dps;tank"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_agility"			"35"
+			"bonus_evasion"			"20"
+			"bonus_attack_speed_pct"	"20"
+			"bonus_damage"	"25"
+		}
+	}
+
+	"item_recipe_crimson_guard"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"Model"							"models/props_gameplay/recipe.vmdl"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"550"	
+		"ItemShopTags"					""
+		
+		
+
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_crimson_guard"
+		"ItemRequirements"
+		{
+			"01"						"item_vanguard;item_helm_of_iron_will"
+		}
+	}
+
+	"item_crimson_guard"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"3725"
+		"ItemShopTags"					"armor;boost_armor;regen_health;block;health_pool;teamfight;tank"
+		"ItemQuality"					"epic"
+		"ItemAlertable"					"1"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_health"			"250"
+				"bonus_health_regen"	"12"
+				"bonus_armor"			"6"
+				"block_damage_melee"	"75"
+				"block_damage_ranged"	"50"
+				"block_chance"			"60"
+				"duration"	"7"
+				"bonus_aoe_radius"		
+				{
+					"value"			"0"
+					"affected_by_aoe_increase"	"1"
+				}
+				"block_damage_active"			"0"
+				"block_chance_active"			"0"
+				"block_penalty_ranged"			"0"
+				"max_hp_pct"					"0"
+		}
+	}
+
 	"item_recipe_revenants_brooch"
 	{
 		// General
@@ -1237,7 +1363,7 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_iron_shield"
-	    "AbilityTextureName"            "vanguard"
+	    "AbilityTextureName"            "iron_shield"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	    "ItemCost"                      "0"
 	    "ItemShopTags"                  "armor;regen;health"
@@ -1245,12 +1371,27 @@
 
 	    "AbilityValues"
 	    {
-	        "bonus_armor"               "14"
-	        "bonus_health_regen"        "10"
-	        "bonus_health"              "350"
+	        "bonus_armor"               "16"
+	        "bonus_health_regen"        "12"
+	        "bonus_health"              "300"
 	        "block_chance"              "100"
 	        "block_damage_melee"        "200"
 	        "block_damage_ranged"       "125"
+	    }
+	}
+
+	"item_recipe_iron_shield"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "1100"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_iron_shield"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_crimson_guard;item_platemail"
 	    }
 	}
 
@@ -1258,7 +1399,7 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_crystal_defender"
-	    "AbilityTextureName"            "lotus_orb"
+	    "AbilityTextureName"            "crystal_defender"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 	    "AbilityCooldown"               "30"
 	    "AbilityManaCost"               "0"
@@ -1269,9 +1410,9 @@
 	    "AbilityValues"
 	    {
 	        "bonus_armor"               "18"
-	        "bonus_health_regen"        "12"
+	        "bonus_health_regen"        "15"
 	        "bonus_health"              "450"
-	        "bonus_strength"            "20"
+	        "bonus_strength"            "25"
 	        "bonus_damage"              "55"
 	        "flat_damage_reduction"     "225"
 	        "damage_reduction_pct"      "20"
@@ -1280,11 +1421,26 @@
 	    }
 	}
 
+	"item_recipe_crystal_defender"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "2350"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_crystal_defender"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_iron_shield;item_reaver;item_relic"
+	    }
+	}
+
 	"item_dragonic_heart"
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_dragonic_heart"
-	    "AbilityTextureName"            "heart"
+	    "AbilityTextureName"            "dragonic_heart"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	    "ItemCost"                      "0"
 	    "ItemShopTags"                  "str;agi;int;health;regen"
@@ -1292,13 +1448,28 @@
 
 	    "AbilityValues"
 	    {
-	        "bonus_strength"            "20"
-	        "bonus_agility"             "20"
-	        "bonus_intellect"           "20"
-	        "bonus_max_health_pct"      "18"
-	        "bonus_health_regen_pct"    "35"
+	        "bonus_strength"            "35"
+	        "bonus_agility"             "35"
+	        "bonus_intellect"           "35"
+	        "bonus_max_health_pct"      "10"
+	        "bonus_health_regen_pct"    "2"
 	        "heal_reduction_pct"        "50"
 	        "heal_reduction_duration"   "4"
+	    }
+	}
+
+	"item_recipe_dragonic_heart"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "2600"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_dragonic_heart"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_heart;item_skadi"
 	    }
 	}
 
@@ -1306,7 +1477,7 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_heartforge_blade"
-	    "AbilityTextureName"            "radiance"
+	    "AbilityTextureName"            "heartforge_blade"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	    "ItemCost"                      "0"
 	    "ItemShopTags"                  "damage;evasion;str;regen"
@@ -1315,12 +1486,27 @@
 	    "AbilityValues"
 	    {
 	        "bonus_damage"              "90"
-	        "bonus_evasion"             "20"
-	        "bonus_strength"            "24"
-	        "bonus_health_regen_pct"    "35"
+	        "bonus_evasion"             "13"
+	        "bonus_strength"            "45"
+	        "bonus_health_regen_pct"    "1.5"
 	        "burn_radius"               "650"
 	        "burn_damage_base"          "100"
 	        "burn_damage_max_health_pct" "2"
+	    }
+	}
+
+	"item_recipe_heartforge_blade"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "1700"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_heartforge_blade"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_heart;item_radiance"
 	    }
 	}
 
@@ -1328,7 +1514,7 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_tempest_edge"
-	    "AbilityTextureName"            "maelstrom"
+	    "AbilityTextureName"            "tempest_edge"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	    "ItemCost"                      "0"
 	    "ItemShopTags"                  "agi;damage;evasion;attack_speed"
@@ -1337,13 +1523,30 @@
 	    "AbilityValues"
 	    {
 	        "bonus_evasion"             "20"
-	        "bonus_agility"             "32"
-	        "bonus_damage"              "80"
-	        "bonus_base_attack_speed_pct" "30"
+	        "bonus_agility"             "35"
+	        "bonus_damage"              "60"
+	        "bonus_base_attack_speed_pct" "20"
+	        "bonus_attack_speed"        "90"
 	        "chain_chance"              "25"
-	        "chain_bounces"             "4"
+	        "chain_bounces"             "12"
 	        "chain_radius"              "650"
-	        "chain_damage"              "110"
+	        "chain_damage"              "210"
+	        "chain_jump_delay"          "0.15"
+	    }
+	}
+
+	"item_recipe_tempest_edge"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "1200"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_tempest_edge"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_butterfly;item_mjollnir"
 	    }
 	}
 
@@ -1351,7 +1554,7 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_phaseblade"
-	    "AbilityTextureName"            "butterfly"
+	    "AbilityTextureName"            "phaseblade"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	    "ItemCost"                      "0"
 	    "ItemShopTags"                  "agi;damage;attack_speed;defense"
@@ -1359,10 +1562,26 @@
 
 	    "AbilityValues"
 	    {
-	        "bonus_agility"             "40"
-	        "bonus_damage"              "85"
-	        "bonus_base_attack_speed_pct" "35"
+	        "bonus_agility"             "45"
+	        "bonus_damage"              "45"
+	        "bonus_base_attack_speed_pct" "25"
+	        "bonus_attack_speed"        "25"
 	        "damage_evade_chance"       "10"
+	    }
+	}
+
+	"item_recipe_phaseblade"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "3500"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_phaseblade"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_butterfly"
 	    }
 	}
 

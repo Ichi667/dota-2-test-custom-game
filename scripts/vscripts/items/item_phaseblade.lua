@@ -19,6 +19,16 @@ function modifier_item_phaseblade:IsPurgable() return false end
 function modifier_item_phaseblade:RemoveOnDeath() return false end
 function modifier_item_phaseblade:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 
+function modifier_item_phaseblade:OnCreated()
+    if not IsServer() then return end
+    self.pseudo_random_id = self:GetAbility() and self:GetAbility():entindex() or 0
+end
+
+function modifier_item_phaseblade:OnRefresh()
+    if not IsServer() then return end
+    self.pseudo_random_id = self:GetAbility() and self:GetAbility():entindex() or self.pseudo_random_id
+end
+
 function modifier_item_phaseblade:IsPrimaryDefenseModifier()
     local parent = self:GetParent()
     if not parent then return false end
@@ -37,7 +47,7 @@ function modifier_item_phaseblade:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
         MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
-        MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT,
+        MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
         MODIFIER_PROPERTY_INCOMING_DAMAGE_CONSTANT,
     }
 end
@@ -52,14 +62,9 @@ function modifier_item_phaseblade:GetModifierPreAttack_BonusDamage()
     return ability and ability:GetSpecialValueFor("bonus_damage") or 0
 end
 
-function modifier_item_phaseblade:GetModifierBaseAttackTimeConstant()
-    local parent = self:GetParent()
+function modifier_item_phaseblade:GetModifierAttackSpeedBonus_Constant()
     local ability = self:GetAbility()
-    if not parent or not ability then return nil end
-
-    local current_base_attack_time = parent:GetBaseAttackTime()
-    local bonus_pct = ability:GetSpecialValueFor("bonus_base_attack_speed_pct")
-    return current_base_attack_time / (1 + (bonus_pct * 0.01))
+    return ability and ability:GetSpecialValueFor("bonus_attack_speed") or 0
 end
 
 function modifier_item_phaseblade:GetModifierIncomingDamageConstant(params)
@@ -73,7 +78,7 @@ function modifier_item_phaseblade:GetModifierIncomingDamageConstant(params)
     if bit.band(params.damage_flags or 0, DOTA_DAMAGE_FLAG_HPLOSS) == DOTA_DAMAGE_FLAG_HPLOSS then return 0 end
 
     local chance = ability:GetSpecialValueFor("damage_evade_chance")
-    if not RollPercentage(chance) then return 0 end
+    if not RollPseudoRandomPercentage(chance, self.pseudo_random_id, parent) then return 0 end
 
     return -(params.damage or 0)
 end

@@ -43,7 +43,7 @@ function modifier_item_dragonic_heart:DeclareFunctions()
         MODIFIER_PROPERTY_STATS_AGILITY_BONUS,
         MODIFIER_PROPERTY_STATS_INTELLECT_BONUS,
         MODIFIER_PROPERTY_EXTRA_HEALTH_PERCENTAGE,
-        MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
+        MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
         MODIFIER_EVENT_ON_ATTACK_LANDED,
     }
 end
@@ -69,10 +69,17 @@ function modifier_item_dragonic_heart:GetModifierExtraHealthPercentage()
     return ability and ability:GetSpecialValueFor("bonus_max_health_pct") or 0
 end
 
-function modifier_item_dragonic_heart:GetModifierHealthRegenPercentage()
+function modifier_item_dragonic_heart:GetModifierConstantHealthRegen()
     if not self:IsPrimaryModifier(HP_REGEN_PERCENT_PRIORITY) then return 0 end
+
+    local parent = self:GetParent()
+    if not parent then return 0 end
+
     local ability = self:GetAbility()
-    return ability and ability:GetSpecialValueFor("bonus_health_regen_pct") or 0
+    if not ability then return 0 end
+
+    local regen_pct = ability:GetSpecialValueFor("bonus_health_regen_pct")
+    return parent:GetMaxHealth() * regen_pct * 0.01
 end
 
 function modifier_item_dragonic_heart:OnAttackLanded(params)

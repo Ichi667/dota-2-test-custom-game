@@ -37,7 +37,7 @@ function modifier_item_heartforge_blade:DeclareFunctions()
         MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
         MODIFIER_PROPERTY_EVASION_CONSTANT,
         MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
-        MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
+        MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT,
     }
 end
 
@@ -66,10 +66,17 @@ function modifier_item_heartforge_blade:GetModifierBonusStats_Strength()
     return ability and ability:GetSpecialValueFor("bonus_strength") or 0
 end
 
-function modifier_item_heartforge_blade:GetModifierHealthRegenPercentage()
+function modifier_item_heartforge_blade:GetModifierConstantHealthRegen()
     if not self:IsPrimaryRegenModifier() then return 0 end
+
+    local parent = self:GetParent()
+    if not parent then return 0 end
+
     local ability = self:GetAbility()
-    return ability and ability:GetSpecialValueFor("bonus_health_regen_pct") or 0
+    if not ability then return 0 end
+
+    local regen_pct = ability:GetSpecialValueFor("bonus_health_regen_pct")
+    return parent:GetMaxHealth() * regen_pct * 0.01
 end
 
 function modifier_item_heartforge_blade:OnIntervalThink()

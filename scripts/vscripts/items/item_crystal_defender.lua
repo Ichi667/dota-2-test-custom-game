@@ -2,9 +2,14 @@ LinkLuaModifier("modifier_item_crystal_defender", "items/item_crystal_defender",
 LinkLuaModifier("modifier_item_crystal_defender_active", "items/item_crystal_defender", LUA_MODIFIER_MOTION_NONE)
 
 item_crystal_defender = class({})
+local WINTER_WYVERN_COLD_EMBRACE_PARTICLE = "particles/units/heroes/hero_winter_wyvern/wyvern_cold_embrace_buff.vpcf"
 
 function item_crystal_defender:GetIntrinsicModifierName()
     return "modifier_item_crystal_defender"
+end
+
+function item_crystal_defender:Precache(context)
+    PrecacheResource("particle", WINTER_WYVERN_COLD_EMBRACE_PARTICLE, context)
 end
 
 function item_crystal_defender:OnSpellStart()
@@ -119,7 +124,15 @@ end
 
 function modifier_item_crystal_defender_active:OnCreated()
     if not IsServer() then return end
+    self:GetParent():EmitSound("Hero_Winter_Wyvern.ColdEmbraceCast")
+    self.effect_cast = ParticleManager:CreateParticle(WINTER_WYVERN_COLD_EMBRACE_PARTICLE, PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self:AddParticle(self.effect_cast, false, false, -1, false, false)
     self:StartIntervalThink(1.0)
+end
+
+function modifier_item_crystal_defender_active:OnDestroy()
+    if not IsServer() then return end
+    self:GetParent():StopSound("Hero_Winter_Wyvern.ColdEmbraceCast")
 end
 
 function modifier_item_crystal_defender_active:OnIntervalThink()
