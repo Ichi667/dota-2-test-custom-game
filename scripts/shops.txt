@@ -13,6 +13,12 @@
         "item"      "item_soul_reaper"
         "item"      "item_devastation_axe"
         "item"      "item_bloody_shard"
+        "item"      "item_iron_shield"
+        "item"      "item_crystal_defender"
+        "item"      "item_dragonic_heart"
+        "item"      "item_heartforge_blade"
+        "item"      "item_tempest_edge"
+        "item"      "item_phaseblade"
     }
 
     "attributes"
