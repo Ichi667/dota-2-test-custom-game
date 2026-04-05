@@ -1,0 +1,18 @@
+"DOTAAbilities"
+{
+	"juggernaut_agility_mastery"
+	{
+		"BaseClass" "ability_lua"
+		"ScriptFile" "custom_abilities/juggernaut_agility_mastery/juggernaut_agility_mastery"
+		"AbilityTextureName" "juggernaut_blade_dance"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "10"
+		"FightRecapLevel" "1"
+
+		"AbilityValues"
+		{
+			"bonus_per_agi" "0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2"
+		}
+	}
+}

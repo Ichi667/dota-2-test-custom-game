@@ -1,0 +1,24 @@
+"DOTAAbilities"
+{
+	"juggernaut_blade_fury_custom"
+	{
+		"BaseClass" "ability_lua"
+		"ScriptFile" "custom_abilities/juggernaut_blade_fury_custom/juggernaut_blade_fury_custom"
+		"AbilityTextureName" "juggernaut_blade_fury"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"MaxLevel" "10"
+		"FightRecapLevel" "1"
+		"AbilityCastPoint" "0.1"
+		"AbilityManaCost" "110 110 110 110 110 120 120 120 120 120"
+		"AbilityCooldown" "24 22 20 18 16 15 14 13 12 11"
+
+		"AbilityValues"
+		{
+			"duration" "3 3.2 3.4 3.6 3.8 4 4.2 4.4 4.6 5"
+			"radius" "250 255 260 265 270 275 280 285 290 300"
+			"move_speed_bonus" "10 12 14 16 18 20 22 24 26 30"
+			"damage_pct" "70 70 70 70 70 70 70 70 70 70"
+		}
+	}
+}
