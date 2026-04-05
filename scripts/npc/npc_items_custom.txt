@@ -1233,4 +1233,139 @@
 	    }
 	}
 
+	"item_iron_shield"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_iron_shield"
+	    "AbilityTextureName"            "vanguard"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "ItemCost"                      "0"
+	    "ItemShopTags"                  "armor;regen;health"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_armor"               "14"
+	        "bonus_health_regen"        "10"
+	        "bonus_health"              "350"
+	        "block_chance"              "100"
+	        "block_damage_melee"        "200"
+	        "block_damage_ranged"       "125"
+	    }
+	}
+
+	"item_crystal_defender"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_crystal_defender"
+	    "AbilityTextureName"            "lotus_orb"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"               "30"
+	    "AbilityManaCost"               "0"
+	    "ItemCost"                      "0"
+	    "ItemShopTags"                  "armor;regen;health;str;damage"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_armor"               "18"
+	        "bonus_health_regen"        "12"
+	        "bonus_health"              "450"
+	        "bonus_strength"            "20"
+	        "bonus_damage"              "55"
+	        "flat_damage_reduction"     "225"
+	        "damage_reduction_pct"      "20"
+	        "active_duration"           "3"
+	        "active_heal_pct_per_second" "20"
+	    }
+	}
+
+	"item_dragonic_heart"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_dragonic_heart"
+	    "AbilityTextureName"            "heart"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "ItemCost"                      "0"
+	    "ItemShopTags"                  "str;agi;int;health;regen"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_strength"            "20"
+	        "bonus_agility"             "20"
+	        "bonus_intellect"           "20"
+	        "bonus_max_health_pct"      "18"
+	        "bonus_health_regen_pct"    "35"
+	        "heal_reduction_pct"        "50"
+	        "heal_reduction_duration"   "4"
+	    }
+	}
+
+	"item_heartforge_blade"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_heartforge_blade"
+	    "AbilityTextureName"            "radiance"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "ItemCost"                      "0"
+	    "ItemShopTags"                  "damage;evasion;str;regen"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_damage"              "90"
+	        "bonus_evasion"             "20"
+	        "bonus_strength"            "24"
+	        "bonus_health_regen_pct"    "35"
+	        "burn_radius"               "650"
+	        "burn_damage_base"          "100"
+	        "burn_damage_max_health_pct" "2"
+	    }
+	}
+
+	"item_tempest_edge"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_tempest_edge"
+	    "AbilityTextureName"            "maelstrom"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "ItemCost"                      "0"
+	    "ItemShopTags"                  "agi;damage;evasion;attack_speed"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_evasion"             "20"
+	        "bonus_agility"             "32"
+	        "bonus_damage"              "80"
+	        "bonus_base_attack_speed_pct" "30"
+	        "bonus_attack_speed"        "30"
+	        "chain_chance"              "25"
+	        "chain_bounces"             "4"
+	        "chain_radius"              "650"
+	        "chain_damage"              "110"
+	    }
+	}
+
+	"item_phaseblade"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_phaseblade"
+	    "AbilityTextureName"            "butterfly"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "ItemCost"                      "0"
+	    "ItemShopTags"                  "agi;damage;attack_speed;defense"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_agility"             "40"
+	        "bonus_damage"              "85"
+	        "bonus_base_attack_speed_pct" "35"
+	        "bonus_attack_speed"        "35"
+	        "damage_evade_chance"       "10"
+	    }
+	}
+
 }
