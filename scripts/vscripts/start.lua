@@ -1,5 +1,5 @@
 if main == nil then
-	main = class({})
+    main = class({})
 end
 
 xptable = {
@@ -16,7 +16,7 @@ xptable = {
 }
 
 function main:InitGameMode()
-	print( "Template addon is loaded." )
+    print( "Template addon is loaded." )
 
     GameRules:SetStartingGold(99999)
     GameRules:SetHeroSelectionTime(120)
@@ -27,7 +27,7 @@ function main:InitGameMode()
     GameRules:SetTreeRegrowTime(10.0)
 
     GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_GOODGUYS, 5)
-    GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS, 0)
+    GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS, 1)
 
     GameRules:GetGameModeEntity():SetLoseGoldOnDeath(false)
     GameRules:GetGameModeEntity():SetUnseenFogOfWarEnabled(false)
@@ -42,12 +42,12 @@ end
 
 -- Evaluate the state of the game
 function main:OnThink()
-	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		--print( "Template addon script is running." )
-	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
-		return nil
-	end
-	return 1
+    if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+        --print( "Template addon script is running." )
+    elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
+        return nil
+    end
+    return 1
 end
 
 
