@@ -244,7 +244,25 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_juggernaut_custom_6"              "+0.5 сек. к длительности OMNISLASH"
 		"DOTA_Tooltip_ability_special_bonus_unique_juggernaut_custom_7"              "+10% к шансу DOUBLE STRIKE"
 		"DOTA_Tooltip_ability_special_bonus_unique_juggernaut_custom_8"              "+0.1 к бонусу от AGILITY MASTERY"		
-		"DOTA_Tooltip_ability_pudge_juggernaut_rage_custom_shard_description"						"Притягивание врага наносит ему дополнительный урон, зависящий от преодолеваемого на крюке расстояния.<br><br>Попадание по союзнику уменьшает перезарядку этой способности на %cooldown_reduction_pct_allied_hook%%%."
+		"DOTA_Tooltip_ability_juggernaut_rage_custom_shard_description"						"Дает владельцу обычное развеивание. Увеличивает сопротивление магии на 80% и обеспечивает невосприимчивость к отраженному и чистому урону. Защищает от негативных эффектов."
+
+
+		"DOTA_Tooltip_ability_juggernaut_swift_slash_custom"									"Swiftslash"
+		"DOTA_Tooltip_ability_juggernaut_swift_slash_custom_Description"						"Использует короткую версию Omnislash"
+		"DOTA_Tooltip_ability_juggernaut_swift_slash_custom_Lore"								"«Плоды дисциплины; повторение — мать умения»."
+		"DOTA_Tooltip_ability_juggernaut_swift_slash_custom_duration"							"ДЛИТЕЛЬНОСТЬ:"	
+
+		"DOTA_Tooltip_ability_item_satanic_2"							"Satanic 2"
+		"DOTA_Tooltip_ability_item_satanic_2_Description"							"<h1>Активное: Unholy Rage</h1> Увеличивает эффект вампиризма до %unholy_lifesteal_total_tooltip%%% на %unholy_duration% сек.<br><br>Тип развеивания: <span class=\"GameplayValues GameplayVariable\">нормальное</span> \n\n<h1>Пассивное: Lifesteal</h1>Излечивает владельца на долю от физического урона, который наносят его атаки."
+		"DOTA_Tooltip_ability_item_satanic_2_Lore"								"Колоссальная сила в обмен на вашу душу."
+		"DOTA_Tooltip_ability_item_satanic_2_bonus_strength"						"+$str"
+		"DOTA_Tooltip_ability_item_satanic_2_bonus_damage"						"+$damage"
+		"DOTA_Tooltip_ability_item_satanic_2_lifesteal_percent"					"%+$lifesteal"
+		//"DOTA_Tooltip_ability_item_satanic_2_unholy_lifesteal_total_tooltip"		"%UNHOLY RAGE LIFESTEAL:"
+		//"DOTA_Tooltip_ability_item_satanic_2_unholy_duration"					    "UNHOLY RAGE DURATION:"
+
+		"DOTA_Tooltip_modifier_item_satanic_2_unholy"				"Unholy Rage"
+		"DOTA_Tooltip_modifier_item_satanic_2_unholy_Description"			"Вампиризм увеличен на %dMODIFIER_PROPERTY_TOOLTIP%%%."
 
 		"DOTA_SUBSHOP_CONSUMABLES" "Новые предметы"
 

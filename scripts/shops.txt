@@ -5,7 +5,7 @@
         "item"      "item_magic_diadem"
         "item"      "item_grove_essence"
         "item"      "item_Staff_of_Streams"
-        "item"      "item_vampire_sword"
+        "item"      "item_satanic_2"
         "item"      "item_woodsplitter_axe_3"
         "item"      "item_crossbow_of_polycephaly"
         "item"      "item_arcane_reservoir"

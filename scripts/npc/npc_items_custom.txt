@@ -255,6 +255,63 @@
 		}
 	}
 
+	"item_satanic_2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"baseclass"						"item_satanic"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"FightRecapLevel"				"2"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"25.0"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"5050"
+		"ItemShopTags"					"damage;str;armor;unique;hard_to_tag;dps"
+		"ItemQuality"					"artifact"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+				"bonus_strength"		"45"
+				"bonus_damage"			"95"
+				"lifesteal_percent"		"25"
+				"unholy_lifesteal_percent"	"50"
+				"unholy_lifesteal_total_tooltip"	"75"
+				"unholy_duration"		"4.5"
+		}
+	}
+
+	"item_recipe_satanic_2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"1600"	
+		"ItemShopTags"					""
+		
+		// Recipe
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_satanic_2"
+		"ItemRequirements"
+		{
+			"01"						"item_satanic;item_ogre_axe;item_relic"
+		}
+	}
+
 	"item_satanic"
 	{
 		// General

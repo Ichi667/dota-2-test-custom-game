@@ -15,7 +15,12 @@ function item_woodsplitter_axe:OnSpellStart()
 end
 
 modifier_item_woodsplitter_axe = class({})
-
+local CLEAVE_MODIFIER_PRIORITY = {
+    "modifier_item_devastation_axe",
+    "modifier_item_woodsplitter_axe_3",
+    "modifier_item_woodsplitter_axe_2",
+    "modifier_item_woodsplitter_axe",
+}
 function modifier_item_woodsplitter_axe:IsHidden()
     return true
 end
@@ -32,6 +37,19 @@ function modifier_item_woodsplitter_axe:GetAttributes()
     return MODIFIER_ATTRIBUTE_MULTIPLE
 end
 
+function modifier_item_woodsplitter_axe:IsPrimaryCleaveSource()
+    local parent = self:GetParent()
+    if not parent then return false end
+
+    for _, modifier_name in ipairs(CLEAVE_MODIFIER_PRIORITY) do
+        local modifiers = parent:FindAllModifiersByName(modifier_name)
+        if #modifiers > 0 then
+            return modifiers[1] == self
+        end
+    end
+
+    return false
+end
 function modifier_item_woodsplitter_axe:DeclareFunctions()
     return
     {
@@ -80,6 +98,10 @@ function modifier_item_woodsplitter_axe:OnAttackLanded(params)
     end
 
     if params.target:IsBuilding() or params.target:IsOther() then
+        return
+    end
+
+    if not self:IsPrimaryCleaveSource() then
         return
     end
 
