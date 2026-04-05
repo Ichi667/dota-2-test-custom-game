@@ -27,7 +27,7 @@ function item_devastation_axe:OnSpellStart()
     caster:AddNewModifier(caster, self, "modifier_item_devastation_axe_active", { duration = duration })
 
     if SOUND_APPLY_ACTIVE ~= "" then
-        caster:EmitSound("devastation_activate")
+        caster:EmitSound(SOUND_APPLY_ACTIVE)
     end
 
     local particle = ParticleManager:CreateParticle("particles/items/sven_ti10_hgs_gods_strength_ring.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
@@ -35,6 +35,12 @@ function item_devastation_axe:OnSpellStart()
 end
 
 modifier_item_devastation_axe = class({})
+local CLEAVE_MODIFIER_PRIORITY = {
+    "modifier_item_devastation_axe",
+    "modifier_item_woodsplitter_axe_3",
+    "modifier_item_woodsplitter_axe_2",
+    "modifier_item_woodsplitter_axe",
+}
 
 function modifier_item_devastation_axe:IsHidden() return true end
 function modifier_item_devastation_axe:IsPurgable() return false end
@@ -54,8 +60,15 @@ end
 function modifier_item_devastation_axe:IsPrimaryModifier()
     local parent = self:GetParent()
     if not parent then return false end
-    local modifiers = parent:FindAllModifiersByName("modifier_item_devastation_axe")
-    return modifiers[1] == self
+
+    for _, modifier_name in ipairs(CLEAVE_MODIFIER_PRIORITY) do
+        local modifiers = parent:FindAllModifiersByName(modifier_name)
+        if #modifiers > 0 then
+            return modifiers[1] == self
+        end
+    end
+
+    return false
 end
 
 function modifier_item_devastation_axe:DeclareFunctions()
@@ -193,7 +206,7 @@ function modifier_item_devastation_axe:OnAttackLanded(params)
     DoCleaveAttack(parent, target, ability, cleave_damage, 150, cleave_radius, cleave_radius, "particles/items/devastation_splash.vpcf")
 
     if SOUND_CLEAVE ~= "" then
-        parent:EmitSound("Hero_Sven.Attack")
+        parent:EmitSound(SOUND_CLEAVE)
     end
 
     local main_debuff = target:AddNewModifier(parent, ability, "modifier_item_devastation_axe_armor_debuff", {

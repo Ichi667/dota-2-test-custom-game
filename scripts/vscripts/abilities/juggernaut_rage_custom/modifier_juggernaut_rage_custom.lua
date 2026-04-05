@@ -9,12 +9,16 @@ function modifier_juggernaut_rage_custom:IsDebuff()
 end
 
 function modifier_juggernaut_rage_custom:IsPurgable()
-	return true
+	return false
 end
 
 function modifier_juggernaut_rage_custom:OnCreated()
 	self.flat_armor_ignore = self:GetAbility():GetSpecialValueFor("flat_armor_ignore")
 	self.agi_bonus_pct = self:GetAbility():GetSpecialValueFor("agility_bonus_pct")
+	self.shard_magic_resist = self:GetAbility():GetSpecialValueFor("shard_magic_resist")
+	if self.shard_magic_resist == nil or self.shard_magic_resist == 0 then
+		self.shard_magic_resist = 80
+	end
 
 	if IsServer() then
 		self:PlayEffects()
@@ -24,6 +28,21 @@ end
 function modifier_juggernaut_rage_custom:OnRefresh()
 	self.flat_armor_ignore = self:GetAbility():GetSpecialValueFor("flat_armor_ignore")
 	self.agi_bonus_pct = self:GetAbility():GetSpecialValueFor("agility_bonus_pct")
+	self.shard_magic_resist = self:GetAbility():GetSpecialValueFor("shard_magic_resist")
+	if self.shard_magic_resist == nil or self.shard_magic_resist == 0 then
+		self.shard_magic_resist = 80
+	end
+end
+
+function modifier_juggernaut_rage_custom:HasShardUpgrade()
+	local parent = self:GetParent()
+	if not parent then return false end
+
+	if parent.HasShard and parent:HasShard() then
+		return true
+	end
+
+	return parent:HasModifier("modifier_item_aghanims_shard")
 end
 
 function modifier_juggernaut_rage_custom:DeclareFunctions()
@@ -61,8 +80,8 @@ function modifier_juggernaut_rage_custom:GetModifierBonusStats_Agility()
 end
 
 function modifier_juggernaut_rage_custom:GetModifierMagicalResistanceBonus()
-	if self:GetParent():HasShard() then
-		return 80
+	if self:HasShardUpgrade() then
+		return self.shard_magic_resist
 	end
 	return 0
 end
@@ -72,8 +91,16 @@ function modifier_juggernaut_rage_custom:CheckState()
 		[MODIFIER_STATE_SILENCED] = true,
 	}
 
-	if self:GetParent():HasShard() then
-		state[MODIFIER_STATE_DEBUFF_IMMUNE] = true
+	if MODIFIER_STATE_MUTED ~= nil then
+		state[MODIFIER_STATE_MUTED] = true
+	end
+
+	if self:HasShardUpgrade() then
+		if MODIFIER_STATE_DEBUFF_IMMUNE ~= nil then
+			state[MODIFIER_STATE_DEBUFF_IMMUNE] = true
+		elseif MODIFIER_STATE_MAGIC_IMMUNE ~= nil then
+			state[MODIFIER_STATE_MAGIC_IMMUNE] = true
+		end
 	end
 
 	return state

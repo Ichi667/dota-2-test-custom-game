@@ -52,33 +52,47 @@ end
 
 
 function main:finalbosskilled(data)
-
-    DeepPrintTable(data)
+    if not data or not data.entindex_killed then
+        return
+    end
 
     local killed_unit = EntIndexToHScript(data.entindex_killed)
+    if not killed_unit or killed_unit:IsNull() then
+        return
+    end
 
-    if killed_unit:GetUnitName() == 'npc_dota_creature_gnoll_assassindsdsdsd' then
+    if killed_unit:GetUnitName() == "npc_dota_creature_gnoll_assassindsdsdsd" then
         GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
     end
 end
 
 function main:testspawn()
-local point = Entities:FindByName(nil, "ward"):GetAbsOrigin()
+local ward_spawn = Entities:FindByName(nil, "ward")
+if not ward_spawn then return end
+local point = ward_spawn:GetAbsOrigin()
     local ward1 = CreateUnitByName("npc_dota_base_ward", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
     ward1:AddNewModifier(ward1, nil, "modifier_invulnerable", {})
 
-    local point1 = Entities:FindByName(nil, "ward1"):GetAbsOrigin()
+    local ward_spawn_1 = Entities:FindByName(nil, "ward1")
+    if not ward_spawn_1 then return end
+    local point1 = ward_spawn_1:GetAbsOrigin()
     local ward2 = CreateUnitByName("npc_dota_base_ward1", point1, true, nil, nil, DOTA_TEAM_GOODGUYS)
     ward2:AddNewModifier(ward2, nil, "modifier_invulnerable", {})
 
-    local point2 = Entities:FindByName(nil, "ward2"):GetAbsOrigin()
+    local ward_spawn_2 = Entities:FindByName(nil, "ward2")
+    if not ward_spawn_2 then return end
+    local point2 = ward_spawn_2:GetAbsOrigin()
     local ward3 = CreateUnitByName("npc_dota_base_ward", point2, true, nil, nil, DOTA_TEAM_GOODGUYS)
     ward3:AddNewModifier(ward3, nil, "modifier_invulnerable", {})
 
-    local point3 = Entities:FindByName(nil, "tower1"):GetAbsOrigin()
+    local tower_spawn_1 = Entities:FindByName(nil, "tower1")
+    local tower_spawn_2 = Entities:FindByName(nil, "tower2")
+    if not tower_spawn_1 or not tower_spawn_2 then return end
+
+    local point3 = tower_spawn_1:GetAbsOrigin()
     local tower1 = CreateUnitByName("npc_dota_t1_tower", point3, false, nil, nil, DOTA_TEAM_GOODGUYS)
 
-    local point4 = Entities:FindByName(nil, "tower2"):GetAbsOrigin()
+    local point4 = tower_spawn_2:GetAbsOrigin()
     local tower2 = CreateUnitByName("npc_dota_t1_tower", point4, false, nil, nil, DOTA_TEAM_GOODGUYS)
 
     tower1:RemoveModifierByName("modifier_invulnerable")
@@ -111,19 +125,6 @@ function main:OrderFilter(filterTable)
             ["item_bottle"] = true,
             ["item_infused_raindrop"] = true,
             ["item_gem"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
-            ["item_blink"] = true,
             ["item_rapier"] = true
         }
 

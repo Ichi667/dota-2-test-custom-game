@@ -244,7 +244,7 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_juggernaut_custom_6"              "+0.5 сек. к длительности OMNISLASH"
 		"DOTA_Tooltip_ability_special_bonus_unique_juggernaut_custom_7"              "+10% к шансу DOUBLE STRIKE"
 		"DOTA_Tooltip_ability_special_bonus_unique_juggernaut_custom_8"              "+0.1 к бонусу от AGILITY MASTERY"		
-		"DOTA_Tooltip_ability_pudge_juggernaut_rage_custom_shard_description"						"Притягивание врага наносит ему дополнительный урон, зависящий от преодолеваемого на крюке расстояния.<br><br>Попадание по союзнику уменьшает перезарядку этой способности на %cooldown_reduction_pct_allied_hook%%%."
+		"DOTA_Tooltip_ability_juggernaut_rage_custom_shard_description"						"С Aghanim's Shard во время Rage герой получает невосприимчивость к дебаффам и +%shard_magic_resist%% к сопротивлению магии."
 
 		"DOTA_SUBSHOP_CONSUMABLES" "Новые предметы"
 

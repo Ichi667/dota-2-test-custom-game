@@ -149,8 +149,16 @@ function modifier_item_bloody_shard:GetModifierPreAttack_CriticalStrike(params)
         return
     end
 
+    parent._global_item_crit_records = parent._global_item_crit_records or {}
+    if params.record ~= nil and parent._global_item_crit_records[params.record] then
+        return
+    end
+
     if RollPseudoRandomPercentage(self.crit_chance, self:GetAbility():entindex(), parent) then
         self.records[params.record] = true
+        if params.record ~= nil then
+            parent._global_item_crit_records[params.record] = true
+        end
 
         parent:AddNewModifier(parent, self:GetAbility(), "modifier_item_bloody_shard_crit_nomiss", {
             record = params.record
@@ -200,6 +208,11 @@ function modifier_item_bloody_shard:ClearRecord(record)
     self.records[record] = nil
 
     local parent = self:GetParent()
+    if not parent then return end
+    if parent and parent._global_item_crit_records and record ~= nil then
+        parent._global_item_crit_records[record] = nil
+    end
+
     local modifiers = parent:FindAllModifiersByName("modifier_item_bloody_shard_crit_nomiss")
 
     for _, modifier in pairs(modifiers) do

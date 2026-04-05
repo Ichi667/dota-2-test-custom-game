@@ -152,6 +152,7 @@
 			"special_bonus_unique_juggernaut_custom_5" "+1"
 			"flat_armor_ignore" "5 10 15 20 25 30 35 40 45 50"
 			"agility_bonus_pct" "10 10 20 20 30 30 40 40 50 50"
+			"shard_magic_resist" "80"
 			"special_bonus_unique_juggernaut_custom_3" "+10"
 		}
 	}
@@ -220,6 +221,135 @@
 			{
 				"value"			"120"
 				"special_bonus_unique_juggernaut_custom_4"			"-25"
+			}
+		}
+	}
+
+	"special_bonus_unique_juggernaut_custom_1"
+	{
+		"BaseClass" "special_bonus_base"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "1"
+		"AbilityTextureName" "attribute_bonus"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" "FIELD_INTEGER"
+				"value" "10"
+			}
+		}
+	}
+	"special_bonus_unique_juggernaut_custom_2"
+	{
+		"BaseClass" "special_bonus_base"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "1"
+		"AbilityTextureName" "attribute_bonus"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" "FIELD_FLOAT"
+				"value" "0.8"
+			}
+		}
+	}
+	"special_bonus_unique_juggernaut_custom_3"
+	{
+		"BaseClass" "special_bonus_base"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "1"
+		"AbilityTextureName" "attribute_bonus"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" "FIELD_INTEGER"
+				"value" "10"
+			}
+		}
+	}
+	"special_bonus_unique_juggernaut_custom_4"
+	{
+		"BaseClass" "special_bonus_base"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "1"
+		"AbilityTextureName" "attribute_bonus"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" "FIELD_INTEGER"
+				"value" "-25"
+			}
+		}
+	}
+	"special_bonus_unique_juggernaut_custom_5"
+	{
+		"BaseClass" "special_bonus_base"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "1"
+		"AbilityTextureName" "attribute_bonus"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" "FIELD_INTEGER"
+				"value" "1"
+			}
+		}
+	}
+	"special_bonus_unique_juggernaut_custom_6"
+	{
+		"BaseClass" "special_bonus_base"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "1"
+		"AbilityTextureName" "attribute_bonus"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" "FIELD_FLOAT"
+				"value" "0.5"
+			}
+		}
+	}
+	"special_bonus_unique_juggernaut_custom_7"
+	{
+		"BaseClass" "special_bonus_base"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "1"
+		"AbilityTextureName" "attribute_bonus"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" "FIELD_INTEGER"
+				"value" "10"
+			}
+		}
+	}
+	"special_bonus_unique_juggernaut_custom_8"
+	{
+		"BaseClass" "special_bonus_base"
+		"AbilityType" "DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "1"
+		"AbilityTextureName" "attribute_bonus"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" "FIELD_FLOAT"
+				"value" "0.1"
 			}
 		}
 	}
