@@ -106,4 +106,22 @@
 		"Ability16"			"special_bonus_unique_juggernaut_custom_7"
 		"Ability17"			"special_bonus_unique_juggernaut_custom_8"
 	}
+
+	"npc_dota_hero_axe"
+	{
+		"Ability1"			"axe_berserkers_call_custom"
+		"Ability2"			"axe_spiked_armor"
+		"Ability3"			"axe_berserk_helix_custom"
+		"Ability4"			"axe_master_of_armory"
+		"Ability5"			""
+		"Ability6"			"axe_guts_blood"
+		"Ability10"			"special_bonus_unique_axe_custom_1"
+		"Ability11"			"special_bonus_unique_axe_custom_2"
+		"Ability12"			"special_bonus_unique_axe_custom_3"
+		"Ability13"			"special_bonus_unique_axe_custom_4"
+		"Ability14"			"special_bonus_unique_axe_custom_5"
+		"Ability15"			"special_bonus_unique_axe_custom_6"
+		"Ability16"			"special_bonus_unique_axe_custom_7"
+		"Ability17"			"special_bonus_unique_axe_custom_8"
+	}
 }
