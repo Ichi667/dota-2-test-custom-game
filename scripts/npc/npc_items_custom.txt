@@ -1585,4 +1585,214 @@
 	    }
 	}
 
+
+	"item_mage_destroyer"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_mage_destroyer"
+	    "AbilityTextureName"            "mage_slayer"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "ItemCost"                      "0"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_magic_resistance"    "25"
+	        "bonus_health_regen"        "6"
+	        "bonus_mana_regen"          "2"
+	        "bonus_damage"              "45"
+	        "bonus_agility"             "18"
+	        "bonus_intellect"           "22"
+
+	        "debuff_duration"           "3"
+	        "debuff_pure_dps"           "60"
+	        "damage_reduction_pct"      "30"
+	        "debuff_mana_burn_per_second" "60"
+	    }
+	}
+
+	"item_duelist_amylet"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_duelist_amylet"
+	    "AbilityTextureName"            "pavise"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+	    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+	    "AbilityCastRange"              "600"
+	    "AbilityCooldown"               "16"
+	    "AbilityManaCost"               "50"
+	    "ItemCost"                      "0"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_armor"               "8"
+	        "bonus_movement_speed"      "20"
+	        "bonus_mana"                "300"
+	        "bonus_health"              "300"
+	        "bonus_magic_resistance"    "20"
+
+	        "active_duration"           "8"
+	        "active_barrier"            "625"
+	        "active_attack_speed"       "80"
+	        "active_armor"              "6"
+	        "active_move_speed_pct"     "20"
+	    }
+	}
+
+	"item_cuirass_of_weakness"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_cuirass_of_weakness"
+	    "AbilityTextureName"            "assault"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"               "30"
+	    "AbilityManaCost"               "75"
+	    "ItemCost"                      "0"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_attack_speed"        "35"
+	        "bonus_armor"               "10"
+
+	        "aura_radius"               "1200"
+	        "aura_armor_reduction"      "7"
+	        "aura_attack_speed_reduction" "60"
+
+	        "active_duration"           "4"
+	    }
+	}
+
+	"item_bloody_guard"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_bloody_guard"
+	    "AbilityTextureName"            "bloodstone"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+	    "AbilityCooldown"               "30"
+	    "AbilityManaCost"               "0"
+	    "ItemCost"                      "0"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_mana"                "350"
+	        "bonus_health"              "300"
+	        "bonus_intellect"           "35"
+	        "bonus_armor"               "8"
+	        "bonus_spell_lifesteal"     "18"
+	        "bonus_cast_range"          "150"
+
+	        "aura_radius"               "1200"
+	        "aura_spell_damage_taken_pct" "18"
+	        "aura_attack_speed_slow"    "45"
+
+	        "active_duration"           "5"
+	        "active_bonus_spell_lifesteal" "20"
+	    }
+	}
+
+	"item_staff_of_stars"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_staff_of_stars"
+	    "AbilityTextureName"            "mystic_staff"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "ItemCost"                      "0"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_intellect"           "45"
+	        "bonus_spell_amp"           "12"
+	        "bonus_mana_regen_amp"      "25"
+	        "bonus_health"              "300"
+	        "bonus_mana"                "350"
+	        "bonus_cdr"                 "20"
+
+	        "spell_amp_per_int"         "0.25"
+	    }
+	}
+
+	"item_spell_blade"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_spell_blade"
+	    "AbilityTextureName"            "ethereal_blade"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+	    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_BOTH"
+	    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC"
+	    "AbilityCastRange"              "800"
+	    "AbilityCooldown"               "22"
+	    "AbilityManaCost"               "100"
+	    "ItemCost"                      "0"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_strength"            "16"
+	        "bonus_agility"             "16"
+	        "bonus_intellect"           "16"
+	        "bonus_mana"                "300"
+	        "bonus_mana_regen"          "2"
+	        "bonus_cast_range"          "125"
+
+	        "spell_damage_multiplier"   "1.6"
+	        "active_int_multiplier"     "3.5"
+	        "ethereal_duration"         "4"
+	    }
+	}
+
+	"item_thunder_scepter"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_thunder_scepter"
+	    "AbilityTextureName"            "cyclone"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+	    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_BOTH"
+	    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC"
+	    "AbilityCastRange"              "550"
+	    "AbilityCooldown"               "23"
+	    "AbilityManaCost"               "175"
+	    "ItemCost"                      "0"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_movement_speed"      "25"
+	        "bonus_intellect"           "30"
+	        "bonus_mana_regen"          "2.5"
+	        "bonus_mana_regen_amp"      "20"
+	        "bonus_spell_amp"           "10"
+	        "bonus_cast_speed_pct"      "25"
+
+	        "cyclone_duration"          "2.5"
+	        "cyclone_enemy_damage"      "50"
+	    }
+	}
+
+	"item_steam_blade"
+	{
+	    "BaseClass"                     "item_lua"
+	    "ScriptFile"                    "items/item_steam_blade"
+	    "AbilityTextureName"            "wind_waker"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	    "ItemCost"                      "0"
+	    "ItemQuality"                   "epic"
+
+	    "AbilityValues"
+	    {
+	        "bonus_evasion"             "20"
+	        "bonus_spell_amp"           "16"
+	        "bonus_intellect"           "30"
+	        "bonus_mana_regen_amp"      "20"
+
+	        "pulse_radius"              "750"
+	        "pulse_damage_base"         "100"
+	        "pulse_damage_max_mana_pct" "3"
+	    }
+	}
+
 }
