@@ -19,6 +19,14 @@
         "item"      "item_heartforge_blade"
         "item"      "item_tempest_edge"
         "item"      "item_phaseblade"
+        "item"      "item_mage_destroyer"
+        "item"      "item_duelist_amylet"
+        "item"      "item_cuirass_of_weakness"
+        "item"      "item_bloody_guard"
+        "item"      "item_staff_of_stars"
+        "item"      "item_spell_blade"
+        "item"      "item_thunder_scepter"
+        "item"      "item_steam_blade"
     }
 
     "attributes"

@@ -1,6 +1,238 @@
 "DOTAAbilities"
 {
 
+	"item_octarine_core"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"4900"
+		"ItemShopTags"					"move_speed;boost_mana;mana_pool;mana"
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_cooldown"		"12"
+			"bonus_health"			"450"
+			"bonus_mana"			"450"
+			"bonus_health_regen"	"0"
+			"bonus_mana_regen"		"6"
+		}
+	}
+
+	"item_recipe_kaya_3"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+		"ItemCost"						"650"	
+		"ItemShopTags"					""
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_kaya_3"
+		"ItemRequirements"
+		{
+			"01"						"item_kaya_2;item_kaya"
+		}
+	}
+	
+	"item_kaya_3"
+	{
+		"baseclass"						"item_kaya"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"ItemCost"						"2100"
+		"ItemShopTags"					"int;mana;magic_dmg"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
+		"SuggestLategame"				"1"
+		"AbilityValues"
+		{
+				"bonus_intellect"			"48"
+				"spell_amp"			"30"
+				"mana_regen_multiplier"		"60"
+		}
+	}
+
+	"item_recipe_kaya_2"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+		"ItemCost"						"650"	
+		"ItemShopTags"					""
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_kaya_2"
+		"ItemRequirements"
+		{
+			"01"						"item_kaya;item_kaya"
+		}
+	}
+	
+	"item_kaya_2"
+	{
+		"baseclass"						"item_kaya"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"ItemCost"						"2100"
+		"ItemShopTags"					"int;mana;magic_dmg"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
+		"SuggestLategame"				"1"
+		"AbilityValues"
+		{
+				"bonus_intellect"			"32"
+				"spell_amp"			"20"
+				"mana_regen_multiplier"		"45"
+		}
+	}
+
+	"item_veil_of_discord"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"16"
+		"AbilityCastRange"				"900"
+		"AbilityCastPoint"				"0.0"
+		"AbilityManaCost"				"50"
+
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"1700"
+		"ItemShopTags"					"int;regen_health;hard_to_tag;magic_dmg"
+		"ItemQuality"					"rare"
+
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_health"				"175"
+			"bonus_intellect"			"10"
+			"spell_lifesteal"			"8"
+			"spell_amp"					"10"
+			"debuff_radius"			
+			{
+				"value"						"900"
+				"affected_by_aoe_increase"	"1"
+			}
+			"resist_debuff_duration"	"16.0"
+		}
+	}
+
+	"item_voodoo_mask"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"650"
+		"ItemShopTags"					"unique"
+		"ItemQuality"					"component"
+		//"SideShop"						"1"
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"spell_lifesteal"		"6"
+		}
+	}
+	
+
+	"item_bloodstone"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"FightRecapLevel"				"2"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"30.0"
+		"AbilityManaCost"				"0"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"4700"
+		"ItemShopTags"					"int;regen_health;mana_pool;health_pool;tank"
+		"ItemQuality"					"epic"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"AllowedInBackpack"				"1"
+		"SuggestLategame"				"1"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_health"			"650"
+			"bonus_mana"			"450"
+			"bonus_mp_regen"		"0"
+			"bonus_hp_regen"		"0"
+			"bonus_intellect"		"15"
+			"spell_lifesteal"		"10"
+			"buff_duration"			"5"
+			"spell_lifesteal_while_active"	"30"
+			"hp_cost"				"0"
+
+			"aura_spell_vulnerability"		"12"
+			"aura_radius"			
+			{
+				"value"	"1200"
+				"affected_by_aoe_increase"	"1"
+			}
+		}
+	}
+
+	"item_mage_slayer"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_DONT_PROC_OTHER_ABILITIES"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"3100"
+		"ItemShopTags"					"hard_to_tag;dps;magic_resist"
+		"ItemQuality"					"rare"
+		"SuggestLategame"				"1"
+
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+			"bonus_magical_armor"	"20"
+			"spell_amp_debuff"		"20"
+			"bonus_health_regen"	"6"
+			"bonus_mana_regen"		"2.5"
+			"bonus_damage"			"15"
+			"duration"				"3"
+			"dps"					"40"
+		}
+	}
+
 	"item_radiance"
 	{
 		// General
@@ -1585,29 +1817,43 @@
 	    }
 	}
 
-
 	"item_mage_destroyer"
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_mage_destroyer"
-	    "AbilityTextureName"            "mage_slayer"
+	    "AbilityTextureName"            "mage_destroyer"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	    "ItemCost"                      "0"
 	    "ItemQuality"                   "epic"
 
 	    "AbilityValues"
 	    {
-	        "bonus_magic_resistance"    "25"
-	        "bonus_health_regen"        "6"
-	        "bonus_mana_regen"          "2"
-	        "bonus_damage"              "45"
-	        "bonus_agility"             "18"
-	        "bonus_intellect"           "22"
+	        "bonus_magic_resistance"    "20"
+	        "bonus_health_regen"        "7"
+	        "bonus_mana_regen"          "3"
+	        "bonus_damage"              "20"
+	        "bonus_agility"             "20"
+	        "bonus_intellect"           "12"
 
 	        "debuff_duration"           "3"
-	        "debuff_pure_dps"           "60"
+	        "debuff_pure_dps"           "50"
 	        "damage_reduction_pct"      "30"
-	        "debuff_mana_burn_per_second" "60"
+	        "debuff_mana_burn_per_second" "50"
+	    }
+	}
+
+	"item_recipe_mage_destroyer"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "500"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_mage_destroyer"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_diffusal_blade;item_mage_slayer"
 	    }
 	}
 
@@ -1615,7 +1861,7 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_duelist_amylet"
-	    "AbilityTextureName"            "pavise"
+	    "AbilityTextureName"            "duelist_amylet"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 	    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 	    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
@@ -1628,7 +1874,7 @@
 	    "AbilityValues"
 	    {
 	        "bonus_armor"               "8"
-	        "bonus_movement_speed"      "20"
+	        "bonus_movement_speed"      "25"
 	        "bonus_mana"                "300"
 	        "bonus_health"              "300"
 	        "bonus_magic_resistance"    "20"
@@ -1641,11 +1887,26 @@
 	    }
 	}
 
+	"item_recipe_duelist_amylet"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "450"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_duelist_amylet"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_solar_crest;item_glimmer_cape"
+	    }
+	}
+
 	"item_cuirass_of_weakness"
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_cuirass_of_weakness"
-	    "AbilityTextureName"            "assault"
+	    "AbilityTextureName"            "cuirass_of_weakness"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 	    "AbilityCooldown"               "30"
 	    "AbilityManaCost"               "75"
@@ -1654,14 +1915,31 @@
 
 	    "AbilityValues"
 	    {
-	        "bonus_attack_speed"        "35"
-	        "bonus_armor"               "10"
+	        "bonus_attack_speed"        "70"
+	        "bonus_armor"               "32"
 
 	        "aura_radius"               "1200"
 	        "aura_armor_reduction"      "7"
 	        "aura_attack_speed_reduction" "60"
 
 	        "active_duration"           "4"
+	        "active_armor_per_enemy"    "4"
+	        "active_attack_speed_per_enemy" "20"
+	    }
+	}
+
+	"item_recipe_cuirass_of_weakness"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "1125"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_cuirass_of_weakness"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_assault;item_shivas_guard"
 	    }
 	}
 
@@ -1669,7 +1947,7 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_bloody_guard"
-	    "AbilityTextureName"            "bloodstone"
+	    "AbilityTextureName"            "bloody_guard"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 	    "AbilityCooldown"               "30"
 	    "AbilityManaCost"               "0"
@@ -1682,7 +1960,7 @@
 	        "bonus_health"              "300"
 	        "bonus_intellect"           "35"
 	        "bonus_armor"               "8"
-	        "bonus_spell_lifesteal"     "18"
+	        "bonus_spell_lifesteal"     "15"
 	        "bonus_cast_range"          "150"
 
 	        "aura_radius"               "1200"
@@ -1690,7 +1968,22 @@
 	        "aura_attack_speed_slow"    "45"
 
 	        "active_duration"           "5"
-	        "active_bonus_spell_lifesteal" "20"
+	        "active_bonus_spell_lifesteal" "25"
+	    }
+	}
+
+	"item_recipe_bloody_guard"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "900"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_bloody_guard"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_shivas_guard;item_bloodstone"
 	    }
 	}
 
@@ -1698,21 +1991,36 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_staff_of_stars"
-	    "AbilityTextureName"            "mystic_staff"
+	    "AbilityTextureName"            "staff_of_stars"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	    "ItemCost"                      "0"
 	    "ItemQuality"                   "epic"
 
 	    "AbilityValues"
 	    {
-	        "bonus_intellect"           "45"
-	        "bonus_spell_amp"           "12"
-	        "bonus_mana_regen_amp"      "25"
-	        "bonus_health"              "300"
-	        "bonus_mana"                "350"
-	        "bonus_cdr"                 "20"
+	        "bonus_intellect"           "48"
+	        "bonus_spell_amp"           "30"
+	        "bonus_mana_regen_amp"      "60"
+	        "bonus_health"              "450"
+	        "bonus_mana"                "450"
+	        "bonus_cdr"                 "18"
 
 	        "spell_amp_per_int"         "0.25"
+	    }
+	}
+
+	"item_recipe_staff_of_stars"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "1250"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_staff_of_stars"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_kaya_3;item_octarine_core"
 	    }
 	}
 
@@ -1720,7 +2028,7 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_spell_blade"
-	    "AbilityTextureName"            "ethereal_blade"
+	    "AbilityTextureName"            "spell_blade"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 	    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_BOTH"
 	    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC"
@@ -1732,12 +2040,12 @@
 
 	    "AbilityValues"
 	    {
-	        "bonus_strength"            "16"
-	        "bonus_agility"             "16"
-	        "bonus_intellect"           "16"
-	        "bonus_mana"                "300"
-	        "bonus_mana_regen"          "2"
-	        "bonus_cast_range"          "125"
+	        "bonus_strength"            "38"
+	        "bonus_agility"             "32"
+	        "bonus_intellect"           "32"
+	        "bonus_mana"                "900"
+	        "bonus_mana_regen"          "7"
+	        "bonus_cast_range"          "225"
 
 	        "spell_crit_chance"         "30"
 	        "spell_damage_multiplier"   "160"
@@ -1747,11 +2055,26 @@
 	    }
 	}
 
+	"item_recipe_spell_blade"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "350"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_spell_blade"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_aether_lens;item_ethereal_blade;item_angels_demise"
+	    }
+	}
+
 	"item_thunder_scepter"
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_thunder_scepter"
-	    "AbilityTextureName"            "cyclone"
+	    "AbilityTextureName"            "thunder_scepter"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 	    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_BOTH"
 	    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC"
@@ -1763,15 +2086,30 @@
 
 	    "AbilityValues"
 	    {
-	        "bonus_movement_speed"      "25"
-	        "bonus_intellect"           "30"
-	        "bonus_mana_regen"          "2.5"
-	        "bonus_mana_regen_amp"      "20"
-	        "bonus_spell_amp"           "10"
+	        "bonus_movement_speed"      "45"
+	        "bonus_intellect"           "32"
+	        "bonus_mana_regen"          "6"
+	        "bonus_mana_regen_amp"      "40"
+	        "bonus_spell_amp"           "16"
 	        "bonus_cast_speed_pct"      "25"
 
-	        "cyclone_duration"          "2.5"
-	        "cyclone_enemy_damage"      "50"
+	        "cyclone_duration"          "2.75"
+	        "cyclone_enemy_damage"      "175"
+	    }
+	}
+
+	"item_recipe_thunder_scepter"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "450"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_thunder_scepter"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_sange_and_yasha;item_cyclone"
 	    }
 	}
 
@@ -1779,21 +2117,36 @@
 	{
 	    "BaseClass"                     "item_lua"
 	    "ScriptFile"                    "items/item_steam_blade"
-	    "AbilityTextureName"            "wind_waker"
+	    "AbilityTextureName"            "steam_blade"
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	    "ItemCost"                      "0"
 	    "ItemQuality"                   "epic"
 
 	    "AbilityValues"
 	    {
-	        "bonus_evasion"             "20"
-	        "bonus_spell_amp"           "16"
-	        "bonus_intellect"           "30"
-	        "bonus_mana_regen_amp"      "20"
+	        "bonus_evasion"             "17"
+	        "bonus_spell_amp"           "42"
+	        "bonus_intellect"           "68"
+	        "bonus_mana_regen_amp"      "60"
 
 	        "pulse_radius"              "750"
 	        "pulse_damage_base"         "100"
 	        "pulse_damage_max_mana_pct" "3"
+	    }
+	}
+
+	"item_recipe_steam_blade"
+	{
+	    "BaseClass"                     "item_datadriven"
+	    "AbilityTextureName"            "item_recipe"
+	    "Model"                         "models/props_gameplay/recipe.vmdl"
+	    "ItemCost"                      "255"
+	    "ItemShopTags"                  ""
+	    "ItemRecipe"                    "1"
+	    "ItemResult"                    "item_steam_blade"
+	    "ItemRequirements"
+	    {
+	        "01"                        "item_kaya_3;item_radiance"
 	    }
 	}
 

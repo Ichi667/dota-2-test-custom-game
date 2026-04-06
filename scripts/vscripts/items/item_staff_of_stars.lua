@@ -38,7 +38,7 @@ function modifier_item_staff_of_stars:DeclareFunctions()
         MODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE,
         MODIFIER_PROPERTY_HEALTH_BONUS,
         MODIFIER_PROPERTY_MANA_BONUS,
-        MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE_STACKING,
+        MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE,
     }
 end
 
@@ -66,6 +66,6 @@ function modifier_item_staff_of_stars:GetModifierManaBonus()
     return self.bonus_mana or 0
 end
 
-function modifier_item_staff_of_stars:GetModifierPercentageCooldownStacking()
+function modifier_item_staff_of_stars:GetModifierPercentageCooldown()
     return self.bonus_cdr or 0
 end

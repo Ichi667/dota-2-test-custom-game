@@ -74,6 +74,10 @@ function modifier_item_duelist_amylet_barrier:IsHidden() return false end
 function modifier_item_duelist_amylet_barrier:IsPurgable() return true end
 
 function modifier_item_duelist_amylet_barrier:OnCreated()
+    self.parent = self:GetParent()
+    self.caster = self:GetCaster()
+    self.ability = self:GetAbility()
+
     self.barrier = self:GetAbility():GetSpecialValueFor("active_barrier")
     self.max_barrier = self.barrier
 
@@ -87,6 +91,12 @@ function modifier_item_duelist_amylet_barrier:OnCreated()
     self:AddParticle(self.pavise_fx, false, false, -1, false, false)
 
     self:SetHasCustomTransmitterData(true)
+    self:SendBuffRefreshToClients()
+end
+
+function modifier_item_duelist_amylet_barrier:OnRefresh()
+    if not IsServer() then return end
+    self.barrier = self.max_barrier
     self:SendBuffRefreshToClients()
 end
 
@@ -117,7 +127,8 @@ function modifier_item_duelist_amylet_barrier:GetModifierIncomingDamageConstant(
         return self.barrier or 0
     end
 
-    if not IsServer() then return 0 end
+    if not IsServer() then return end
+    if self.barrier <= 0 then return end
     if not params or not params.damage or params.damage <= 0 then return 0 end
     if bit.band(params.damage_flags or 0, DOTA_DAMAGE_FLAG_HPLOSS) == DOTA_DAMAGE_FLAG_HPLOSS then return 0 end
 
@@ -125,6 +136,7 @@ function modifier_item_duelist_amylet_barrier:GetModifierIncomingDamageConstant(
     self.barrier = self.barrier - block
 
     self:SendBuffRefreshToClients()
+
 
     if self.barrier <= 0 then
         if self.shield_fx then
@@ -135,6 +147,7 @@ function modifier_item_duelist_amylet_barrier:GetModifierIncomingDamageConstant(
 
         self:GetParent():GenericParticle("particles/general/generic_armor_reduction.vpcf", self, true)
         self:GetParent():EmitSound("Item.Star_emblem_break")
+        self:Destroy()
     end
 
     return -block

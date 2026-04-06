@@ -2,7 +2,7 @@ require("start")
 
 function Precache( context )
 	PrecacheResource("soundfile", "soundevents/all_sounds.vsndevts", context)
-	PrecacheResource( "particle_folder", "particles/staff_of_streams", context)
+	PrecacheResource( "particle_folder", "particles/items", context)
 end
 
 -- Create the game mode when we activate
