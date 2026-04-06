@@ -11,7 +11,6 @@ function item_spell_blade:OnSpellStart()
 
     local caster = self:GetCaster()
     local target = self:GetCursorTarget()
-
     if not caster or not target then return end
 
     local projectile = {
@@ -77,7 +76,6 @@ function modifier_item_spell_blade:GetAttributes() return MODIFIER_ATTRIBUTE_MUL
 
 function modifier_item_spell_blade:OnCreated()
     if not IsServer() then return end
-    self.processing = false
     self.pseudo_random_id = DOTA_PSEUDO_RANDOM_CUSTOM_GAME_2
 end
 
@@ -89,7 +87,7 @@ function modifier_item_spell_blade:DeclareFunctions()
         MODIFIER_PROPERTY_MANA_BONUS,
         MODIFIER_PROPERTY_MANA_REGEN_CONSTANT,
         MODIFIER_PROPERTY_CAST_RANGE_BONUS_STACKING,
-        MODIFIER_EVENT_ON_TAKEDAMAGE,
+        MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE,
     }
 end
 
@@ -100,39 +98,18 @@ function modifier_item_spell_blade:GetModifierManaBonus() return self:GetAbility
 function modifier_item_spell_blade:GetModifierConstantManaRegen() return self:GetAbility():GetSpecialValueFor("bonus_mana_regen") end
 function modifier_item_spell_blade:GetModifierCastRangeBonusStacking() return self:GetAbility():GetSpecialValueFor("bonus_cast_range") end
 
-function modifier_item_spell_blade:OnTakeDamage(params)
+function modifier_item_spell_blade:GetModifierSpellCriticalStrike(params)
     if not IsServer() then return end
-    if self.processing then return end
 
     local parent = self:GetParent()
     local ability = self:GetAbility()
 
-    if not ability or not parent or params.attacker ~= parent then return end
-    if parent:IsIllusion() or parent:PassivesDisabled() then return end
-    if not params.unit or params.unit:IsNull() then return end
-    if not params.inflictor then return end
-    if bit.band(params.damage_flags or 0, DOTA_DAMAGE_FLAG_REFLECTION) == DOTA_DAMAGE_FLAG_REFLECTION then return end
-    if bit.band(params.damage_flags or 0, DOTA_DAMAGE_FLAG_HPLOSS) == DOTA_DAMAGE_FLAG_HPLOSS then return end
+    if not ability or not parent or parent:IsIllusion() or parent:PassivesDisabled() then return end
+    if not params or not params.target then return end
+    if params.target:GetTeamNumber() == parent:GetTeamNumber() then return end
 
     local crit_chance = ability:GetSpecialValueFor("spell_crit_chance")
-    if not RollPseudoRandomPercentage(crit_chance, self.pseudo_random_id, parent) then
-        return
+    if RollPseudoRandomPercentage(crit_chance, self.pseudo_random_id, parent) then
+        return ability:GetSpecialValueFor("spell_damage_multiplier")
     end
-
-    local multiplier = ability:GetSpecialValueFor("spell_damage_multiplier")
-    local extra_damage = params.damage * (multiplier - 1)
-    if extra_damage <= 0 then return end
-
-    self.processing = true
-    ApplyDamage({
-        victim = params.unit,
-        attacker = parent,
-        damage = extra_damage,
-        damage_type = params.damage_type,
-        ability = ability,
-        damage_flags = DOTA_DAMAGE_FLAG_HPLOSS,
-    })
-    self.processing = false
-
-    SendOverheadEventMessage(nil, OVERHEAD_ALERT_CRITICAL_SPELL, params.unit, params.damage * multiplier, nil)
 end

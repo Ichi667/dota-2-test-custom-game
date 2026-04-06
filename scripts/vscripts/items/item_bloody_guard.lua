@@ -26,11 +26,6 @@ function modifier_item_bloody_guard:GetAuraSearchType() return DOTA_UNIT_TARGET_
 function modifier_item_bloody_guard:GetModifierAura() return "modifier_item_bloody_guard_aura" end
 function modifier_item_bloody_guard:GetAuraRadius() return self:GetAbility():GetSpecialValueFor("aura_radius") end
 
-function modifier_item_bloody_guard:OnCreated()
-    if not IsServer() then return end
-    self.processing = false
-end
-
 function modifier_item_bloody_guard:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_MANA_BONUS,
@@ -48,41 +43,41 @@ function modifier_item_bloody_guard:GetModifierBonusStats_Intellect() return sel
 function modifier_item_bloody_guard:GetModifierPhysicalArmorBonus() return self:GetAbility():GetSpecialValueFor("bonus_armor") end
 function modifier_item_bloody_guard:GetModifierCastRangeBonusStacking() return self:GetAbility():GetSpecialValueFor("bonus_cast_range") end
 
-function modifier_item_bloody_guard:GetSpellLifestealPct()
-    local ability = self:GetAbility()
-    if not ability then return 0 end
-
-    local total = ability:GetSpecialValueFor("bonus_spell_lifesteal")
-    local active_modifier = self:GetParent():FindModifierByName("modifier_item_bloody_guard_active")
-    if active_modifier then
-        total = total + ability:GetSpecialValueFor("active_bonus_spell_lifesteal")
+function modifier_item_bloody_guard:GetSpellLifestealValue()
+    local value = self:GetAbility():GetSpecialValueFor("bonus_spell_lifesteal")
+    if self:GetParent():HasModifier("modifier_item_bloody_guard_active") then
+        value = value + self:GetAbility():GetSpecialValueFor("active_bonus_spell_lifesteal")
     end
-
-    return total
+    return value
 end
 
-function modifier_item_bloody_guard:OnTakeDamage(params)
+function modifier_item_bloody_guard:OnTakeDamage(keys)
     if not IsServer() then return end
-    if self.processing then return end
 
-    local parent = self:GetParent()
-    if params.attacker ~= parent then return end
-    if parent:IsIllusion() then return end
-    if not params.inflictor then return end
-    if not params.unit or params.unit:IsNull() or params.unit:IsBuilding() then return end
-    if params.damage <= 0 then return end
-    if bit.band(params.damage_flags or 0, DOTA_DAMAGE_FLAG_HPLOSS) == DOTA_DAMAGE_FLAG_HPLOSS then return end
+    if keys.attacker ~= self:GetParent() then return end
+    if keys.unit == keys.attacker then return end
+    if not keys.unit or keys.unit:IsBuilding() or keys.unit:IsOther() then return end
 
-    local lifesteal_pct = self:GetSpellLifestealPct()
-    if lifesteal_pct <= 0 then return end
+    if self:GetParent():FindAllModifiersByName(self:GetName())[1] ~= self then return end
+    if keys.damage_category ~= 0 then return end
+    if not keys.inflictor then return end
 
-    local heal = params.damage * lifesteal_pct * 0.01
+    local flags = keys.damage_flags or 0
+    if bit.band(flags, DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL) == DOTA_DAMAGE_FLAG_NO_SPELL_LIFESTEAL then return end
+
+    local lifesteal = self:GetSpellLifestealValue()
+    local heal = (keys.original_damage or keys.damage or 0) * lifesteal * 0.01
     if heal <= 0 then return end
 
-    self.processing = true
-    parent:Heal(heal, self:GetAbility())
-    SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, parent, heal, nil)
-    self.processing = false
+    local pfx = ParticleManager:CreateParticle("particles/items3_fx/octarine_core_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, keys.attacker)
+    ParticleManager:SetParticleControl(pfx, 0, keys.attacker:GetAbsOrigin())
+    ParticleManager:ReleaseParticleIndex(pfx)
+
+    if keys.attacker:GetHealth() <= heal and bit.band(flags, DOTA_DAMAGE_FLAG_REFLECTION) == DOTA_DAMAGE_FLAG_REFLECTION then
+        keys.attacker:ForceKill(true)
+    else
+        keys.attacker:Heal(heal, self:GetAbility())
+    end
 end
 
 modifier_item_bloody_guard_aura = class({})

@@ -9,24 +9,29 @@ end
 function item_thunder_scepter:OnSpellStart()
     if not IsServer() then return end
 
-    local target = self:GetCursorTarget()
     local caster = self:GetCaster()
-    if not target or not caster then return end
+    local target = self:GetCursorTarget()
+    if not caster or not target then return end
 
     local is_enemy = target:GetTeamNumber() ~= caster:GetTeamNumber()
     if is_enemy and target:TriggerSpellAbsorb(self) then
         return
     end
 
-    local duration = self:GetSpecialValueFor("cyclone_duration")
-    target:AddNewModifier(caster, self, "modifier_eul_cyclone", { duration = duration })
     target:EmitSound("DOTA_Item.Cyclone.Activate")
+
+    if target == caster then
+        caster:Purge(false, true, false, false, false)
+    end
+
+    local duration = self:GetSpecialValueFor("cyclone_duration")
+    target:AddNewModifier(caster, self, "modifier_wind_waker", { duration = duration })
 
     if is_enemy then
         local target_index = target:entindex()
         local damage = self:GetSpecialValueFor("cyclone_enemy_damage")
 
-        GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("thunder_scepter_cyclone_"), function()
+        GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("thunder_scepter_cyclone_damage_"), function()
             local victim = EntIndexToHScript(target_index)
             if not victim or victim:IsNull() or not victim:IsAlive() then return nil end
 
@@ -37,7 +42,6 @@ function item_thunder_scepter:OnSpellStart()
                 damage_type = DAMAGE_TYPE_MAGICAL,
                 ability = self,
             })
-
             victim:EmitSound("DOTA_Item.Cyclone.Damage")
             return nil
         end, duration)

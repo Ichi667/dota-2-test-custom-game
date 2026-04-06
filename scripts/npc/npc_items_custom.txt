@@ -1740,7 +1740,7 @@
 	        "bonus_cast_range"          "125"
 
 	        "spell_crit_chance"         "30"
-	        "spell_damage_multiplier"   "1.6"
+	        "spell_damage_multiplier"   "160"
 	        "active_int_multiplier"     "3.5"
 	        "ethereal_duration"         "4"
 	        "projectile_speed"          "1275"
