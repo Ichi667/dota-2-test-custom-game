@@ -9,8 +9,31 @@ function item_cuirass_of_weakness:GetIntrinsicModifierName()
 end
 
 function item_cuirass_of_weakness:OnSpellStart()
-    self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_item_cuirass_of_weakness_buff", {
+    local caster = self:GetCaster()
+    local radius = self:GetSpecialValueFor("aura_radius")
+    local affected_count = 0
+
+    local enemies = FindUnitsInRadius(
+        caster:GetTeamNumber(),
+        caster:GetAbsOrigin(),
+        nil,
+        radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_ANY_ORDER,
+        false
+    )
+
+    for _, enemy in ipairs(enemies) do
+        if enemy:HasModifier("modifier_item_cuirass_of_weakness_aura") then
+            affected_count = affected_count + 1
+        end
+    end
+
+    caster:AddNewModifier(caster, self, "modifier_item_cuirass_of_weakness_buff", {
         duration = self:GetSpecialValueFor("active_duration"),
+        affected_count = affected_count,
     })
 end
 
@@ -67,6 +90,10 @@ modifier_item_cuirass_of_weakness_buff = class({})
 function modifier_item_cuirass_of_weakness_buff:IsHidden() return false end
 function modifier_item_cuirass_of_weakness_buff:IsPurgable() return true end
 
+function modifier_item_cuirass_of_weakness_buff:OnCreated(kv)
+    self.affected_count = tonumber(kv and kv.affected_count) or 0
+end
+
 function modifier_item_cuirass_of_weakness_buff:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
@@ -75,9 +102,9 @@ function modifier_item_cuirass_of_weakness_buff:DeclareFunctions()
 end
 
 function modifier_item_cuirass_of_weakness_buff:GetModifierPhysicalArmorBonus()
-    return self:GetAbility():GetSpecialValueFor("aura_armor_reduction")
+    return self:GetAbility():GetSpecialValueFor("aura_armor_reduction") * self.affected_count
 end
 
 function modifier_item_cuirass_of_weakness_buff:GetModifierAttackSpeedBonus_Constant()
-    return self:GetAbility():GetSpecialValueFor("aura_attack_speed_reduction")
+    return self:GetAbility():GetSpecialValueFor("aura_attack_speed_reduction") * self.affected_count
 end

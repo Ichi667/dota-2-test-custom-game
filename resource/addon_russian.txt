@@ -356,13 +356,14 @@
 		"DOTA_Tooltip_ability_item_staff_of_stars_bonus_cdr" "%+ к снижению перезарядки"
 
 		"DOTA_tooltip_ability_item_spell_blade" "Spell Blade"
-		"DOTA_Tooltip_ability_item_spell_blade_Description" "<h1>Пассивное: Spell Pierce</h1>Любой урон от заклинаний владельца наносит %spell_damage_multiplier%x урона.\n\n<h1>Активное: Ethereal Blast</h1>Накладывает бесплотность как у Ethereal Blade. По врагу дополнительно наносит магический урон в размере интеллект * %active_int_multiplier%."
+		"DOTA_Tooltip_ability_item_spell_blade_Description" "<h1>Пассивное: Spell Pierce</h1>Любой урон от заклинаний владельца с шансом %spell_crit_chance%% наносит %spell_damage_multiplier%x урона.\n\n<h1>Активное: Ethereal Blast</h1>Запускает снаряд, накладывает бесплотность как у Ethereal Blade и по врагу наносит магический урон в размере интеллект * %active_int_multiplier%."
 		"DOTA_Tooltip_ability_item_spell_blade_bonus_strength" "+ к силе"
 		"DOTA_Tooltip_ability_item_spell_blade_bonus_agility" "+ к ловкости"
 		"DOTA_Tooltip_ability_item_spell_blade_bonus_intellect" "+ к интеллекту"
 		"DOTA_Tooltip_ability_item_spell_blade_bonus_mana" "+ к мане"
 		"DOTA_Tooltip_ability_item_spell_blade_bonus_mana_regen" "+ к восстановлению маны"
 		"DOTA_Tooltip_ability_item_spell_blade_bonus_cast_range" "+ к дальности применения заклинаний"
+		"DOTA_Tooltip_ability_item_spell_blade_spell_crit_chance" "%шанс крита заклинаний"
 
 		"DOTA_tooltip_ability_item_thunder_scepter" "Thunder Scepter"
 		"DOTA_Tooltip_ability_item_thunder_scepter_Description" "<h1>Активное: Cyclone</h1>Поднимает цель в воздух на %cyclone_duration% сек. По врагу после приземления наносит %cyclone_enemy_damage% магического урона."

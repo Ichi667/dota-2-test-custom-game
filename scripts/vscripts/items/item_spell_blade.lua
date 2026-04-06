@@ -13,13 +13,44 @@ function item_spell_blade:OnSpellStart()
     local target = self:GetCursorTarget()
 
     if not caster or not target then return end
-    if target:TriggerSpellAbsorb(self) then return end
+
+    local projectile = {
+        Target = target,
+        Source = caster,
+        Ability = self,
+        EffectName = "particles/items_fx/ethereal_blade.vpcf",
+        iMoveSpeed = self:GetSpecialValueFor("projectile_speed"),
+        bDodgeable = true,
+        bVisibleToEnemies = true,
+        bReplaceExisting = false,
+        bProvidesVision = false,
+        ExtraData = {
+            intellect = caster:GetIntellect(),
+        },
+    }
+
+    ProjectileManager:CreateTrackingProjectile(projectile)
+    caster:EmitSound("DOTA_Item.EtherealBlade.Activate")
+end
+
+function item_spell_blade:OnProjectileHit_ExtraData(target, location, extra_data)
+    if not IsServer() then return true end
+    if not target then return true end
+
+    local caster = self:GetCaster()
+    if not caster then return true end
+
+    if target:GetTeamNumber() ~= caster:GetTeamNumber() and target:TriggerSpellAbsorb(self) then
+        return true
+    end
 
     local duration = self:GetSpecialValueFor("ethereal_duration")
     target:AddNewModifier(caster, self, "modifier_item_ethereal_blade_ethereal", { duration = duration })
 
     if target:GetTeamNumber() ~= caster:GetTeamNumber() then
-        local damage = caster:GetIntellect() * self:GetSpecialValueFor("active_int_multiplier")
+        local int_at_cast = tonumber(extra_data and extra_data.intellect) or caster:GetIntellect()
+        local damage = int_at_cast * self:GetSpecialValueFor("active_int_multiplier")
+
         ApplyDamage({
             victim = target,
             attacker = caster,
@@ -30,6 +61,11 @@ function item_spell_blade:OnSpellStart()
     end
 
     target:EmitSound("DOTA_Item.EtherealBlade.Target")
+
+    local pfx = ParticleManager:CreateParticle("particles/items_fx/ethereal_blade_explosion.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+    ParticleManager:ReleaseParticleIndex(pfx)
+
+    return true
 end
 
 modifier_item_spell_blade = class({})
@@ -42,6 +78,7 @@ function modifier_item_spell_blade:GetAttributes() return MODIFIER_ATTRIBUTE_MUL
 function modifier_item_spell_blade:OnCreated()
     if not IsServer() then return end
     self.processing = false
+    self.pseudo_random_id = DOTA_PSEUDO_RANDOM_CUSTOM_GAME_2
 end
 
 function modifier_item_spell_blade:DeclareFunctions()
@@ -77,9 +114,13 @@ function modifier_item_spell_blade:OnTakeDamage(params)
     if bit.band(params.damage_flags or 0, DOTA_DAMAGE_FLAG_REFLECTION) == DOTA_DAMAGE_FLAG_REFLECTION then return end
     if bit.band(params.damage_flags or 0, DOTA_DAMAGE_FLAG_HPLOSS) == DOTA_DAMAGE_FLAG_HPLOSS then return end
 
+    local crit_chance = ability:GetSpecialValueFor("spell_crit_chance")
+    if not RollPseudoRandomPercentage(crit_chance, self.pseudo_random_id, parent) then
+        return
+    end
+
     local multiplier = ability:GetSpecialValueFor("spell_damage_multiplier")
     local extra_damage = params.damage * (multiplier - 1)
-
     if extra_damage <= 0 then return end
 
     self.processing = true
@@ -92,4 +133,6 @@ function modifier_item_spell_blade:OnTakeDamage(params)
         damage_flags = DOTA_DAMAGE_FLAG_HPLOSS,
     })
     self.processing = false
+
+    SendOverheadEventMessage(nil, OVERHEAD_ALERT_CRITICAL_SPELL, params.unit, params.damage * multiplier, nil)
 end
