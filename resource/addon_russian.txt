@@ -314,5 +314,72 @@
 
 		"DOTA_SUBSHOP_CONSUMABLES" "Новые предметы"
 
+
+		"DOTA_tooltip_ability_item_mage_destroyer" "Mage Destroyer"
+		"DOTA_Tooltip_ability_item_mage_destroyer_Description" "<h1>Пассивное: Mage Slayer</h1>Атаки накладывают на врага дебафф на %debuff_duration% сек. Дебафф наносит %debuff_pure_dps% чистого урона в секунду, выжигает %debuff_mana_burn_per_second% маны в секунду и уменьшает урон заклинаний на %damage_reduction_pct%%."
+		"DOTA_Tooltip_ability_item_mage_destroyer_bonus_magic_resistance" "+ к сопротивлению магии"
+		"DOTA_Tooltip_ability_item_mage_destroyer_bonus_health_regen" "+ к восстановлению здоровья"
+		"DOTA_Tooltip_ability_item_mage_destroyer_bonus_mana_regen" "+ к восстановлению маны"
+		"DOTA_Tooltip_ability_item_mage_destroyer_bonus_damage" "+ к урону"
+		"DOTA_Tooltip_ability_item_mage_destroyer_bonus_agility" "+ к ловкости"
+		"DOTA_Tooltip_ability_item_mage_destroyer_bonus_intellect" "+ к интеллекту"
+
+		"DOTA_tooltip_ability_item_duelist_amylet" "Duelist Amylet"
+		"DOTA_Tooltip_ability_item_duelist_amylet_Description" "<h1>Активное: Duel Barrier</h1>Накладывает на выбранного союзного героя барьер прочностью %active_barrier% на %active_duration% сек. Пока барьер активен, цель получает +%active_attack_speed% к скорости атаки, +%active_armor% к броне и +%active_move_speed_pct%%% к скорости передвижения."
+		"DOTA_Tooltip_ability_item_duelist_amylet_bonus_armor" "+ к броне"
+		"DOTA_Tooltip_ability_item_duelist_amylet_bonus_movement_speed" "+ к скорости передвижения"
+		"DOTA_Tooltip_ability_item_duelist_amylet_bonus_mana" "+ к мане"
+		"DOTA_Tooltip_ability_item_duelist_amylet_bonus_health" "+ к здоровью"
+		"DOTA_Tooltip_ability_item_duelist_amylet_bonus_magic_resistance" "+ к сопротивлению магии"
+
+		"DOTA_tooltip_ability_item_cuirass_of_weakness" "Cuirass of Weakness"
+		"DOTA_Tooltip_ability_item_cuirass_of_weakness_Description" "<h1>Пассивное: Aura of Weakness</h1>Враги в радиусе %aura_radius% теряют %aura_armor_reduction% брони и %aura_attack_speed_reduction% скорости атаки.\n\n<h1>Активное: Stolen Strength</h1>Даёт владельцу эти же значения на %active_duration% сек."
+		"DOTA_Tooltip_ability_item_cuirass_of_weakness_bonus_attack_speed" "+ к скорости атаки"
+		"DOTA_Tooltip_ability_item_cuirass_of_weakness_bonus_armor" "+ к броне"
+
+		"DOTA_tooltip_ability_item_bloody_guard" "Bloody Guard"
+		"DOTA_Tooltip_ability_item_bloody_guard_Description" "<h1>Пассивное: Blood Pressure</h1>Враги в радиусе %aura_radius% получают на %aura_spell_damage_taken_pct%%% больше урона от заклинаний и теряют %aura_attack_speed_slow% скорости атаки.\n\n<h1>Активное: Crimson Drain</h1>Увеличивает вампиризм от заклинаний на %active_bonus_spell_lifesteal%% на %active_duration% сек."
+		"DOTA_Tooltip_ability_item_bloody_guard_bonus_mana" "+ к мане"
+		"DOTA_Tooltip_ability_item_bloody_guard_bonus_health" "+ к здоровью"
+		"DOTA_Tooltip_ability_item_bloody_guard_bonus_intellect" "+ к интеллекту"
+		"DOTA_Tooltip_ability_item_bloody_guard_bonus_armor" "+ к броне"
+		"DOTA_Tooltip_ability_item_bloody_guard_bonus_spell_lifesteal" "%+ к вампиризму от заклинаний"
+		"DOTA_Tooltip_ability_item_bloody_guard_bonus_cast_range" "+ к дальности применения заклинаний"
+
+		"DOTA_tooltip_ability_item_staff_of_stars" "Staff of Stars"
+		"DOTA_Tooltip_ability_item_staff_of_stars_Description" "<h1>Пассивное: Stellar Mind</h1>Каждая единица интеллекта дополнительно увеличивает урон от заклинаний на %spell_amp_per_int%%."
+		"DOTA_Tooltip_ability_item_staff_of_stars_bonus_intellect" "+ к интеллекту"
+		"DOTA_Tooltip_ability_item_staff_of_stars_bonus_spell_amp" "%+ к урону от заклинаний"
+		"DOTA_Tooltip_ability_item_staff_of_stars_bonus_mana_regen_amp" "%+ к усилению восстановления маны"
+		"DOTA_Tooltip_ability_item_staff_of_stars_bonus_health" "+ к здоровью"
+		"DOTA_Tooltip_ability_item_staff_of_stars_bonus_mana" "+ к мане"
+		"DOTA_Tooltip_ability_item_staff_of_stars_bonus_cdr" "%+ к снижению перезарядки"
+
+		"DOTA_tooltip_ability_item_spell_blade" "Spell Blade"
+		"DOTA_Tooltip_ability_item_spell_blade_Description" "<h1>Пассивное: Spell Pierce</h1>Любой урон от заклинаний владельца с шансом %spell_crit_chance%% наносит %spell_damage_multiplier%x урона.\n\n<h1>Активное: Ethereal Blast</h1>Запускает снаряд, накладывает бесплотность как у Ethereal Blade и по врагу наносит магический урон в размере интеллект * %active_int_multiplier%."
+		"DOTA_Tooltip_ability_item_spell_blade_bonus_strength" "+ к силе"
+		"DOTA_Tooltip_ability_item_spell_blade_bonus_agility" "+ к ловкости"
+		"DOTA_Tooltip_ability_item_spell_blade_bonus_intellect" "+ к интеллекту"
+		"DOTA_Tooltip_ability_item_spell_blade_bonus_mana" "+ к мане"
+		"DOTA_Tooltip_ability_item_spell_blade_bonus_mana_regen" "+ к восстановлению маны"
+		"DOTA_Tooltip_ability_item_spell_blade_bonus_cast_range" "+ к дальности применения заклинаний"
+		"DOTA_Tooltip_ability_item_spell_blade_spell_crit_chance" "%шанс крита заклинаний"
+
+		"DOTA_tooltip_ability_item_thunder_scepter" "Thunder Scepter"
+		"DOTA_Tooltip_ability_item_thunder_scepter_Description" "<h1>Активное: Cyclone</h1>Поднимает цель в воздух на %cyclone_duration% сек. По врагу после приземления наносит %cyclone_enemy_damage% магического урона."
+		"DOTA_Tooltip_ability_item_thunder_scepter_bonus_movement_speed" "+ к скорости передвижения"
+		"DOTA_Tooltip_ability_item_thunder_scepter_bonus_intellect" "+ к интеллекту"
+		"DOTA_Tooltip_ability_item_thunder_scepter_bonus_mana_regen" "+ к восстановлению маны"
+		"DOTA_Tooltip_ability_item_thunder_scepter_bonus_mana_regen_amp" "%+ к усилению восстановления маны"
+		"DOTA_Tooltip_ability_item_thunder_scepter_bonus_spell_amp" "%+ к урону от заклинаний"
+		"DOTA_Tooltip_ability_item_thunder_scepter_bonus_cast_speed_pct" "%+ к скорости применения способностей"
+
+		"DOTA_tooltip_ability_item_steam_blade" "Steam Blade"
+		"DOTA_Tooltip_ability_item_steam_blade_Description" "<h1>Пассивное: Steam Pulse</h1>Каждую секунду наносит врагам в радиусе %pulse_radius% магический урон: %pulse_damage_base% + %pulse_damage_max_mana_pct%%% от максимальной маны владельца."
+		"DOTA_Tooltip_ability_item_steam_blade_bonus_evasion" "%+ к уклонению"
+		"DOTA_Tooltip_ability_item_steam_blade_bonus_spell_amp" "%+ к урону от заклинаний"
+		"DOTA_Tooltip_ability_item_steam_blade_bonus_intellect" "+ к интеллекту"
+		"DOTA_Tooltip_ability_item_steam_blade_bonus_mana_regen_amp" "%+ к усилению восстановления маны"
+
 	}
 }
