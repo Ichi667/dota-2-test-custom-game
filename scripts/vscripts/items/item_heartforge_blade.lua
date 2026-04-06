@@ -1,4 +1,5 @@
 LinkLuaModifier("modifier_item_heartforge_blade", "items/item_heartforge_blade", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_item_heartforge_blade_burn", "items/item_heartforge_blade", LUA_MODIFIER_MOTION_NONE)
 
 item_heartforge_blade = class({})
 
@@ -44,6 +45,9 @@ end
 function modifier_item_heartforge_blade:OnCreated()
     if not IsServer() then return end
     self:StartIntervalThink(1.0)
+
+    self.owner_particle = ParticleManager:CreateParticle("particles/items2_fx/radiance_owner.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    self:AddParticle(self.owner_particle, false, false, -1, false, false)
 end
 
 function modifier_item_heartforge_blade:OnRefresh()
@@ -102,6 +106,7 @@ function modifier_item_heartforge_blade:OnIntervalThink()
     )
 
     for _, enemy in ipairs(enemies) do
+        enemy:AddNewModifier(parent, ability, "modifier_item_heartforge_blade_burn", { duration = 1.1 })
         ApplyDamage({
             victim = enemy,
             attacker = parent,
@@ -110,4 +115,19 @@ function modifier_item_heartforge_blade:OnIntervalThink()
             ability = ability,
         })
     end
+end
+
+modifier_item_heartforge_blade_burn = class({})
+
+function modifier_item_heartforge_blade_burn:IsHidden() return false end
+function modifier_item_heartforge_blade_burn:IsPurgable() return false end
+function modifier_item_heartforge_blade_burn:IsDebuff() return true end
+function modifier_item_heartforge_blade_burn:GetTexture() return "item_radiance" end
+
+function modifier_item_heartforge_blade_burn:OnCreated()
+    if not IsServer() then return end
+
+    self.particle = ParticleManager:CreateParticle("particles/items2_fx/radiance.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+    ParticleManager:SetParticleControl(self.particle, 1, self:GetCaster():GetAbsOrigin())
+    self:AddParticle(self.particle, false, false, -1, false, false)
 end
