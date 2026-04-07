@@ -52,6 +52,8 @@ modifier_axe_berserkers_call_custom = class({})
 function modifier_axe_berserkers_call_custom:IsPurgable() return false end
 
 function modifier_axe_berserkers_call_custom:OnCreated()
+	self.bonus_armor_pct = 0
+	self.attack_speed_bonus = 0
 	self:OnRefresh()
 
 	if not IsServer() then
@@ -81,9 +83,9 @@ end
 
 function modifier_axe_berserkers_call_custom:GetModifierPhysicalArmorBonus()
 	local parent = self:GetParent()
-	return parent:GetPhysicalArmorBaseValue() * self.bonus_armor_pct * 0.01
+	return parent:GetPhysicalArmorBaseValue() * (self.bonus_armor_pct or 0) * 0.01
 end
 
 function modifier_axe_berserkers_call_custom:GetModifierAttackSpeedBonus_Constant()
-	return self.attack_speed_bonus
+	return self.attack_speed_bonus or 0
 end

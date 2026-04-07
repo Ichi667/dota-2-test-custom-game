@@ -89,6 +89,9 @@ function modifier_axe_berserk_helix_custom:IsPurgable() return false end
 
 function modifier_axe_berserk_helix_custom:OnCreated()
 	self.damage_pool = 0
+	self.damage_for_charge = 200
+	self.max_charges = 0
+	self.shard_spin_chance = 0
 	self:OnRefresh()
 	if IsServer() then
 		self:SetStackCount(0)

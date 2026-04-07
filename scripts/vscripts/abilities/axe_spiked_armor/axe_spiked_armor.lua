@@ -3,7 +3,7 @@ axe_spiked_armor = class({})
 LinkLuaModifier("modifier_axe_spiked_armor", "abilities/axe_spiked_armor/axe_spiked_armor", LUA_MODIFIER_MOTION_NONE)
 
 axe_spiked_armor.EFFECTS = {
-	retaliate_particle = "particles/units/heroes/hero_centaur/centaur_return.vpcf",
+	retaliate_particle = "particles/axe_spiked_armor/centaur_crownfall_belt_retaliate.vpcf",
 	retaliate_sound = "Hero_Centaur.Return",
 }
 
@@ -17,6 +17,7 @@ function modifier_axe_spiked_armor:IsHidden() return true end
 function modifier_axe_spiked_armor:IsPurgable() return false end
 
 function modifier_axe_spiked_armor:OnCreated()
+	self.reflect_pct_per_armor = 0
 	self:OnRefresh()
 end
 
@@ -60,7 +61,7 @@ function modifier_axe_spiked_armor:OnAttackLanded(params)
 	end
 
 	local armor = parent:GetPhysicalArmorValue(false)
-	local reflect_damage = math.max(0, armor * self.reflect_pct_per_armor * 0.01)
+	local reflect_damage = math.max(0, armor * (self.reflect_pct_per_armor or 0) * 0.01)
 
 	if reflect_damage <= 0 then
 		return

@@ -9,7 +9,7 @@ function modifier_juggernaut_blade_fury_custom:OnCreated()
 	self.accumulator = 0
 	if not IsServer() then return end
 	self:StartIntervalThink(0.03)
-	self.fx = ParticleManager:CreateParticle("particles/units/heroes/hero_juggernaut/juggernaut_blade_fury.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
+	self.fx = ParticleManager:CreateParticle("particles/hero/juggernaut_blade_fury_abyssal_golden.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
 end
 
 function modifier_juggernaut_blade_fury_custom:OnDestroy()

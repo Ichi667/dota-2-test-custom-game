@@ -29,6 +29,8 @@ modifier_axe_guts_blood = class({})
 function modifier_axe_guts_blood:IsPurgable() return false end
 
 function modifier_axe_guts_blood:OnCreated()
+	self.spin_interval = 0.5
+	self.model_scale_bonus = 0
 	self:OnRefresh()
 	if not IsServer() then
 		return
@@ -72,7 +74,7 @@ function modifier_axe_guts_blood:GetMinHealth()
 end
 
 function modifier_axe_guts_blood:GetModifierModelScale()
-	return self.model_scale_bonus
+	return self.model_scale_bonus or 0
 end
 
 function modifier_axe_guts_blood:GetDisableHealing()
