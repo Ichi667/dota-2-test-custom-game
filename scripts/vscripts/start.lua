@@ -2,6 +2,8 @@ if main == nil then
     main = class({})
 end
 
+require("wave_settings")
+
 xptable = {
 0,1000,2000,3000,4000,5000,6000,7000,8000,9000,
 10000,11000,12000,13000,14000,15000,16000,17000,18000,19000,
@@ -247,16 +249,16 @@ function main:OrderFilter(filterTable)
 end
 
 function main:InitRoundSystem()
+    self.wave_settings = WAVE_SETTINGS or {}
     self.round_settings = {
-        prep_time = 20,
-        spawn_per_wave = 6,
-        wave_interval = 35,
-        wave_unit_name = "npc_dota_creep_badguys_melee",
-        spawn_point_name = "wave_spawn",
-        waypoint_prefix = "wave_path_",
-        waypoint_count_max = 64,
-        target_scan_radius = 700,
-        fort_override_radius = 1200
+        prep_time = self.wave_settings.initial_delay or 20,
+        wave_interval = self.wave_settings.default_interval or 35,
+        spawn_point_name = self.wave_settings.spawn_point_name or "wave_spawn",
+        waypoint_prefix = self.wave_settings.waypoint_prefix or "wave_path_",
+        waypoint_count_max = self.wave_settings.waypoint_count_max or 64,
+        target_scan_radius = self.wave_settings.target_scan_radius or 700,
+        fort_override_radius = self.wave_settings.fort_override_radius or 1200,
+        spawn_scatter_radius = self.wave_settings.spawn_scatter_radius or 120
     }
 
     self.round_state = {
@@ -276,6 +278,9 @@ function main:InitRoundSystem()
     GameRules:GetGameModeEntity():SetContextThink("round_system_think", function()
         return self:RoundSystemThink()
     end, 0.25)
+    Convars:RegisterCommand("wave_debug_print", function()
+        self:DebugPrintWaveSettings()
+    end, "Print configured waves", FCVAR_CHEAT)
 end
 
 function main:CollectWaypoints(prefix, max_count)
@@ -312,7 +317,12 @@ end
 
 function main:StartNextWave()
     self.round_state.current_round = self.round_state.current_round + 1
-    self.round_state.next_wave_time = GameRules:GetGameTime() + self.round_settings.wave_interval
+    local wave_data = self:GetWaveDataByRound(self.round_state.current_round)
+    local next_interval = self.round_settings.wave_interval
+    if wave_data and wave_data.interval then
+        next_interval = wave_data.interval
+    end
+    self.round_state.next_wave_time = GameRules:GetGameTime() + next_interval
 
     local spawn_point = Entities:FindByName(nil, self.round_settings.spawn_point_name)
     if not spawn_point then
@@ -320,23 +330,53 @@ function main:StartNextWave()
         return
     end
 
-    for i = 1, self.round_settings.spawn_per_wave do
-        local spawn_pos = spawn_point:GetAbsOrigin() + RandomVector(RandomFloat(0, 120))
-        local creep = CreateUnitByName(
-            self.round_settings.wave_unit_name,
-            spawn_pos,
-            true,
-            nil,
-            nil,
-            DOTA_TEAM_BADGUYS
-        )
+    if not wave_data or not wave_data.creeps or #wave_data.creeps == 0 then
+        print("[RoundSystem] Wave " .. tostring(self.round_state.current_round) .. " has no creeps configured.")
+        return
+    end
 
-        if creep then
-            creep.round_waypoint_index = 1
-            creep:SetMustReachEachGoalEntity(false)
-            table.insert(self.round_creeps, creep)
+    self:DebugPrintCurrentWave(self.round_state.current_round, wave_data)
+
+    for _, creep_group in ipairs(wave_data.creeps) do
+        local unit_name = creep_group.name
+        local count = creep_group.count or 1
+        local team = creep_group.team or DOTA_TEAM_BADGUYS
+
+        for i = 1, count do
+            local spawn_pos = spawn_point:GetAbsOrigin() + RandomVector(RandomFloat(0, self.round_settings.spawn_scatter_radius))
+            local creep = CreateUnitByName(
+                unit_name,
+                spawn_pos,
+                true,
+                nil,
+                nil,
+                team
+            )
+
+            if creep then
+                creep.round_waypoint_index = 1
+                creep:SetMustReachEachGoalEntity(false)
+                table.insert(self.round_creeps, creep)
+            end
         end
     end
+end
+
+function main:GetWaveDataByRound(round_number)
+    local waves = self.wave_settings.waves or {}
+    if #waves == 0 then
+        return nil
+    end
+
+    if waves[round_number] then
+        return waves[round_number]
+    end
+
+    if self.wave_settings.repeat_last_wave then
+        return waves[#waves]
+    end
+
+    return nil
 end
 
 function main:UpdateWaveCreepsBehavior()
@@ -403,5 +443,35 @@ function main:MoveCreepAlongPath(creep)
 
     if current_target then
         creep:MoveToPositionAggressive(current_target)
+    end
+end
+
+function main:DebugPrintWaveSettings()
+    print("[RoundSystem] ===== Wave Settings =====")
+    print("[RoundSystem] initial_delay: " .. tostring(self.round_settings.prep_time))
+    print("[RoundSystem] default_interval: " .. tostring(self.round_settings.wave_interval))
+    print("[RoundSystem] spawn_point_name: " .. tostring(self.round_settings.spawn_point_name))
+    print("[RoundSystem] waypoint_prefix: " .. tostring(self.round_settings.waypoint_prefix))
+
+    local waves = self.wave_settings.waves or {}
+    print("[RoundSystem] configured waves: " .. tostring(#waves))
+    for wave_index, wave_data in ipairs(waves) do
+        local interval = wave_data.interval or self.round_settings.wave_interval
+        print("[RoundSystem] wave " .. tostring(wave_index) .. " interval=" .. tostring(interval))
+
+        if wave_data.creeps then
+            for _, creep_group in ipairs(wave_data.creeps) do
+                print("[RoundSystem]   " .. tostring(creep_group.name) .. " x" .. tostring(creep_group.count or 1))
+            end
+        end
+    end
+    print("[RoundSystem] =========================")
+end
+
+function main:DebugPrintCurrentWave(round_number, wave_data)
+    local interval = wave_data.interval or self.round_settings.wave_interval
+    print("[RoundSystem] Spawning round " .. tostring(round_number) .. " (next in " .. tostring(interval) .. " sec)")
+    for _, creep_group in ipairs(wave_data.creeps or {}) do
+        print("[RoundSystem]   spawn: " .. tostring(creep_group.name) .. " x" .. tostring(creep_group.count or 1))
     end
 end
