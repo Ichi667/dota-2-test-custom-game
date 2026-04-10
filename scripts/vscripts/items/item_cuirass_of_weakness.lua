@@ -236,6 +236,50 @@ function modifier_item_cuirass_of_weakness_buff:OnCreated(kv)
     if IsServer() then
         self:SetStackCount(self.affected_count)
     end
+
+    local parent = self:GetParent()
+
+    local particle = ParticleManager:CreateParticle(
+        "particles/items/cuirass.vpcf",
+        PATTACH_OVERHEAD_FOLLOW,
+        parent
+    )
+
+    ParticleManager:SetParticleControlEnt(
+        particle,
+        2,
+        parent,
+        PATTACH_POINT_FOLLOW,
+        "attach_hitloc",
+        parent:GetAbsOrigin(),
+        true
+    )
+
+    ParticleManager:SetParticleControlEnt(
+        particle,
+        1,
+        parent,
+        PATTACH_POINT_FOLLOW,
+        "attach_hitloc",
+        parent:GetAbsOrigin(),
+        true
+    )
+
+    ParticleManager:SetParticleControlEnt(
+        particle,
+        6,
+        parent,
+        PATTACH_POINT_FOLLOW,
+        "attach_hitloc",
+        parent:GetAbsOrigin(),
+        true
+    )
+
+    self:AddParticle(particle, false, false, -1, false, true)
+
+    local caster = self:GetCaster()
+    caster:EmitSound("cuirass")
+
 end
 
 function modifier_item_cuirass_of_weakness_buff:OnRefresh(kv)

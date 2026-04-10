@@ -3,16 +3,16 @@ if main == nil then
 end
 
 xptable = {
-0,1,2,3,4,5,6,7,8,9,
-10,11,12,13,14,15,16,17,18,19,
-20,21,22,23,24,25,26,27,28,29,
-30,31,32,33,34,35,36,37,38,39,
-40,41,42,43,44,45,46,47,48,49,
-50,51,52,53,54,55,56,57,58,59,
-60,61,62,63,64,65,66,67,68,69,
-70,71,72,73,74,75,76,77,78,79,
-80,81,82,83,84,85,86,87,88,89,
-90,91,92,93,94,95,96,97,98,99
+0,1000,2000,3000,4000,5000,6000,7000,8000,9000,
+10000,11000,12000,13000,14000,15000,16000,17000,18000,19000,
+20000,21000,22000,23000,24000,25000,26000,27000,28000,29000,
+30000,31000,32000,33000,34000,35000,36000,37000,38000,39000,
+40000,41000,42000,43000,44000,45000,46000,47000,48000,49000,
+50000,51000,52000,53000,54000,55000,56000,57000,58000,59000,
+60000,61000,62000,63000,64000,65000,66000,67000,68000,69000,
+70000,71000,72000,73000,74000,75000,76000,77000,78000,79000,
+80000,81000,82000,83000,84000,85000,86000,87000,88000,89000,
+90000,91000,92000,93000,94000,95000,96000,97000,98000,99000
 }
 
 function main:InitGameMode()
@@ -66,46 +66,154 @@ function main:finalbosskilled(data)
     end
 end
 
-function main:testspawn()
-local ward_spawn = Entities:FindByName(nil, "ward")
-if not ward_spawn then return end
-local point = ward_spawn:GetAbsOrigin()
-    local ward1 = CreateUnitByName("npc_dota_base_ward", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
-    ward1:AddNewModifier(ward1, nil, "modifier_invulnerable", {})
+function main:spawns()
+    local spawns = {
+        {
+            spawn_name = "ward",
+            unit_name = "npc_dota_base_ward",
+            team = DOTA_TEAM_GOODGUYS,
+            find_clear_space = true,
+            modifiers = {
+                "modifier_invulnerable"
+            }
+        },
+        {
+            spawn_name = "ward1",
+            unit_name = "npc_dota_base_ward1",
+            team = DOTA_TEAM_GOODGUYS,
+            find_clear_space = true,
+            modifiers = {
+                "modifier_invulnerable"
+            },
+            abilities = {
+            }
+        },
+        {
+            spawn_name = "ward2",
+            unit_name = "npc_dota_base_ward",
+            team = DOTA_TEAM_GOODGUYS,
+            find_clear_space = true,
+            modifiers = {
+                "modifier_invulnerable"
+            },
+            abilities = {
+            }
+        },
+        {
+            spawn_name = "tower1",
+            unit_name = "npc_dota_t1_tower",
+            team = DOTA_TEAM_GOODGUYS,
+            find_clear_space = false,
+            remove_modifiers = {
+                "modifier_invulnerable"
+            },
+            abilities = {
+                {
+                    name = "tower_splitshot",
+                    level = 1,
+                    toggle = true
+                },
+            }
+        },
+        {
+            spawn_name = "tower2",
+            unit_name = "npc_dota_t1_tower",
+            team = DOTA_TEAM_GOODGUYS,
+            find_clear_space = false,
+            remove_modifiers = {
+                "modifier_invulnerable"
+            },
+            abilities = {
+                {
+                    name = "tower_splitshot",
+                    level = 1,
+                    toggle = true
+                }
+            }
+        },
+    }
 
-    local ward_spawn_1 = Entities:FindByName(nil, "ward1")
-    if not ward_spawn_1 then return end
-    local point1 = ward_spawn_1:GetAbsOrigin()
-    local ward2 = CreateUnitByName("npc_dota_base_ward1", point1, true, nil, nil, DOTA_TEAM_GOODGUYS)
-    ward2:AddNewModifier(ward2, nil, "modifier_invulnerable", {})
+    self.spawned_units = self.spawned_units or {}
 
-    local ward_spawn_2 = Entities:FindByName(nil, "ward2")
-    if not ward_spawn_2 then return end
-    local point2 = ward_spawn_2:GetAbsOrigin()
-    local ward3 = CreateUnitByName("npc_dota_base_ward", point2, true, nil, nil, DOTA_TEAM_GOODGUYS)
-    ward3:AddNewModifier(ward3, nil, "modifier_invulnerable", {})
+    for _, data in ipairs(spawns) do
+        local unit = self:SpawnUnitFromConfig(data)
+        if unit then
+            table.insert(self.spawned_units, unit)
+        end
+    end
+end
 
-    local tower_spawn_1 = Entities:FindByName(nil, "tower1")
-    local tower_spawn_2 = Entities:FindByName(nil, "tower2")
-    if not tower_spawn_1 or not tower_spawn_2 then return end
+function main:SpawnUnitFromConfig(data)
+    local spawn_ent = Entities:FindByName(nil, data.spawn_name)
+    if not spawn_ent then
+        print("Не найдена точка: " .. tostring(data.spawn_name))
+        return nil
+    end
 
-    local point3 = tower_spawn_1:GetAbsOrigin()
-    local tower1 = CreateUnitByName("npc_dota_t1_tower", point3, false, nil, nil, DOTA_TEAM_GOODGUYS)
+    local unit = CreateUnitByName(
+        data.unit_name,
+        spawn_ent:GetAbsOrigin(),
+        data.find_clear_space or false,
+        nil,
+        nil,
+        data.team or DOTA_TEAM_NEUTRALS
+    )
 
-    local point4 = tower_spawn_2:GetAbsOrigin()
-    local tower2 = CreateUnitByName("npc_dota_t1_tower", point4, false, nil, nil, DOTA_TEAM_GOODGUYS)
+    if not unit then
+        print("Не удалось создать юнита: " .. tostring(data.unit_name))
+        return nil
+    end
 
-    tower1:RemoveModifierByName("modifier_invulnerable")
-    tower2:RemoveModifierByName("modifier_invulnerable")
+    if data.modifiers then
+        for _, modifier_name in ipairs(data.modifiers) do
+            unit:AddNewModifier(unit, nil, modifier_name, {})
+        end
+    end
 
-    local ability1 = tower1:AddAbility("tower_splitshot")
-    ability1:SetLevel(1)
+    if data.remove_modifiers then
+        for _, modifier_name in ipairs(data.remove_modifiers) do
+            unit:RemoveModifierByName(modifier_name)
+        end
+    end
 
-    local ability2 = tower2:AddAbility("tower_splitshot")
-    ability2:SetLevel(1)
+    if data.abilities then
+        for _, ability_data in ipairs(data.abilities) do
+            self:AddAbilityFromConfig(unit, ability_data)
+        end
+    end
 
-    ability1:ToggleAbility()
-    ability2:ToggleAbility()
+    return unit
+end
+
+function main:AddAbilityFromConfig(unit, ability_data)
+    if not ability_data or not ability_data.name then
+        return
+    end
+
+    local ability = unit:FindAbilityByName(ability_data.name)
+
+    if not ability then
+        ability = unit:AddAbility(ability_data.name)
+    end
+
+    if not ability then
+        print("Не удалось добавить способность " .. tostring(ability_data.name) .. " юниту " .. tostring(unit:GetUnitName()))
+        return
+    end
+
+    if ability_data.level and ability_data.level > 0 then
+        ability:SetLevel(ability_data.level)
+    end
+
+    if ability_data.toggle and ability:IsToggle() then
+        if not ability:GetToggleState() then
+            ability:ToggleAbility()
+        end
+    end
+
+    if ability_data.auto_cast and unit:GetPlayerOwnerID() ~= nil then
+        unit:CastAbilityNoTarget(ability, unit:GetPlayerOwnerID())
+    end
 end
 
 function main:OrderFilter(filterTable)

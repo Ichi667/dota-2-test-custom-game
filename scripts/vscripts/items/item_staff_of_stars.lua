@@ -11,10 +11,10 @@ modifier_item_staff_of_stars = class({})
 function modifier_item_staff_of_stars:IsHidden() return true end
 function modifier_item_staff_of_stars:IsPurgable() return false end
 function modifier_item_staff_of_stars:RemoveOnDeath() return false end
-function modifier_item_staff_of_stars:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
+-- УБРАЛИ MULTIPLE
+-- function modifier_item_staff_of_stars:GetAttributes() return MODIFIER_ATTRIBUTE_MULTIPLE end
 
 function modifier_item_staff_of_stars:OnCreated()
-    if not self:GetAbility() then return end
     self:OnRefresh()
 end
 
@@ -47,10 +47,12 @@ function modifier_item_staff_of_stars:GetModifierBonusStats_Intellect()
 end
 
 function modifier_item_staff_of_stars:GetModifierSpellAmplify_Percentage()
-    local caster = self:GetCaster()
-    if not caster then return self.base_spell_amp or 0 end
+    local parent = self:GetParent()
+    if not parent then
+        return self.base_spell_amp or 0
+    end
 
-    local int_amp = caster:GetIntellect(true) * (self.spell_amp_per_int or 0)
+    local int_amp = parent:GetIntellect(true) * (self.spell_amp_per_int or 0)
     return (self.base_spell_amp or 0) + int_amp
 end
 

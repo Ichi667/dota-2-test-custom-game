@@ -9,9 +9,13 @@ function item_bloody_guard:GetIntrinsicModifierName()
 end
 
 function item_bloody_guard:OnSpellStart()
-    self:GetCaster():AddNewModifier(self:GetCaster(), self, "modifier_item_bloody_guard_active", {
+    local caster = self:GetCaster()
+
+    caster:AddNewModifier(caster, self, "modifier_item_bloody_guard_active", {
         duration = self:GetSpecialValueFor("active_duration"),
     })
+
+    caster:EmitSound("DOTA_Item.Bloodstone.Cast")
 end
 
 modifier_item_bloody_guard = class({})
@@ -106,3 +110,47 @@ modifier_item_bloody_guard_active = class({})
 
 function modifier_item_bloody_guard_active:IsHidden() return false end
 function modifier_item_bloody_guard_active:IsPurgable() return true end
+
+function modifier_item_bloody_guard_active:OnCreated()
+    if not IsServer() then return end
+
+    local parent = self:GetParent()
+
+    local particle = ParticleManager:CreateParticle(
+        "particles/items/bloodstone_heal.vpcf",
+        PATTACH_OVERHEAD_FOLLOW,
+        parent
+    )
+
+    ParticleManager:SetParticleControlEnt(
+        particle,
+        2,
+        parent,
+        PATTACH_POINT_FOLLOW,
+        "attach_hitloc",
+        parent:GetAbsOrigin(),
+        true
+    )
+
+    ParticleManager:SetParticleControlEnt(
+        particle,
+        1,
+        parent,
+        PATTACH_POINT_FOLLOW,
+        "attach_hitloc",
+        parent:GetAbsOrigin(),
+        true
+    )
+
+    ParticleManager:SetParticleControlEnt(
+        particle,
+        6,
+        parent,
+        PATTACH_POINT_FOLLOW,
+        "attach_hitloc",
+        parent:GetAbsOrigin(),
+        true
+    )
+
+    self:AddParticle(particle, false, false, -1, false, true)
+end

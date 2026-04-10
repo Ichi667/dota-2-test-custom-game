@@ -83,7 +83,6 @@
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel" "10"
 		"IsBreakable"					"1"
-		"FightRecapLevel" "3"
 
 		"AbilityValues"
 		{
@@ -107,7 +106,6 @@
 		"Innate"						"1"
 		"IsBreakable"					"1"
 		"MaxLevel" "1"
-		"FightRecapLevel" "10"
 
 		"AbilityValues"
 		{
@@ -130,7 +128,6 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"MaxLevel" "10"
-		"FightRecapLevel" "2"
 		"AbilityCastPoint" "0.1"
 		"AbilityManaCost" "70 80 90 100 110 120 130 140 150 160"
 		"AbilityCooldown" "40 38 36 34 32 30 28 26 24 22"
@@ -171,7 +168,6 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"MaxLevel" "10"
-		"FightRecapLevel" "2"
 		"AbilityCastPoint" "0.0"
 		"HasShardUpgrade" "1"
 		"AbilityManaCost" "50 70 90 110 130 150 170 190 210 230"
@@ -211,7 +207,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
-		"FightRecapLevel"				"6"
+		"FightRecapLevel"				"2"
 		"MaxLevel" "5"
 		"AbilityDraftExtraAbilities"
 		{
@@ -331,8 +327,6 @@
 		"AbilityManaCost" "80 90 100 110 120 130 140 150 160 170"
 		"AbilityCooldown" "27 26 25 24 23 22 21 20 19 18"
 		"MaxLevel" "10"
-		"FightRecapLevel"				"2"
-
 		"AbilityValues"
 		{
 			"radius" "325"
@@ -386,7 +380,6 @@
 		"HasScepterUpgrade" "1"
 		"HasShardUpgrade" "1"
 		"MaxLevel" "10"
-		"FightRecapLevel"				"2"
 
 		"AbilityValues"
 		{
@@ -447,7 +440,7 @@
 		"AbilityManaCost" "150 200 250 300 350"
 		"AbilityCooldown" "80 70 60 50 40"
 		"MaxLevel" "5"
-		"FightRecapLevel"				"6"
+		"FightRecapLevel"				"2"
 
 		"AbilityValues"
 		{
@@ -460,4 +453,191 @@
 			"model_scale_bonus" "15 20 25 30 35"
 		}
 	}
+
+	"lina_dragon_slave_custom"
+	{
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/lina/lina_dragon_slave_custom"
+		"AbilityTextureName" "lina_dragon_slave"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityCastPoint" "0.3"
+		"AbilityManaCost" "70 100 130 160 190 220 250 280 310 340"
+		"AbilityCooldown" "12 11.5 11 10.5 10 9.5 9 8.5 8 7.5"
+		"MaxLevel" "10"
+		"HasScepterUpgrade"				"1"
+		"AbilityDraftExtraAbilities"
+		{
+			"lina_dragon_slave_custom_aghanim" "scepter"
+		}
+
+		"AbilityValues"
+		{
+			"damage" "60 120 180 240 300 360 420 480 540 600"
+			"dragon_length" "800"
+			"dragon_slave_distance" "800"
+			"dragon_slave_width_initial" "135"
+			"dragon_slave_width_end" "275"
+			"dragon_slave_speed" "1200"
+			"int_damage_pct"
+			{
+				"value" "10 20 30 40 50 60 70 80 90 100"
+				"special_bonus_unique_lina_custom_1" "+10"
+			}
+			"slow_pct" "40"
+			"slow_duration" "3"
+		}
+	}
+
+	"lina_dragon_slave_custom_aghanim"
+	{
+		"BaseClass" "lina_dragon_slave_custom"
+		"ScriptFile" "abilities/lina/lina_dragon_slave_custom"
+		"AbilityTextureName" "lina_dragon_slave"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityCastPoint" "0.3"
+		"AbilityManaCost" "400"
+		"AbilityCooldown" "9"
+		"MaxLevel" "1"
+
+		"AbilityValues"
+		{
+			"damage" "600"
+			"dragon_length" "800"
+			"dragon_slave_distance" "800"
+			"dragon_slave_width_initial" "135"
+			"dragon_slave_width_end" "275"
+			"dragon_slave_speed" "1200"
+			"int_damage_pct"
+			{
+				"value" "100"
+			}
+			"slow_pct" "40"
+			"slow_duration" "3"
+		}
+	}
+
+
+	"lina_light_strike_array_custom"
+	{
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/lina/lina_light_strike_array_custom"
+		"AbilityTextureName" "lina_light_strike_array"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityCastPoint" "0.45"
+		"AbilityManaCost" "125 150 175 200 225 250 275 300 325 350"
+		"AbilityCooldown" "16"
+		"MaxLevel" "10"
+		"AbilityCastRange"	600
+
+		"AbilityValues"
+		{
+			"light_strike_array_aoe" "250"
+			"light_strike_array_delay_time" "0.5"
+			"light_strike_array_stun_duration" "1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2"
+			"light_strike_array_damage_mana_pct" "20 20 40 40 60 60 80 80 100 100"
+			"burn_duration"
+				{
+					"value" "4"
+					"special_bonus_unique_lina_custom_3" "+1"
+				}
+			"burn_radius" "250"
+			"burn_tick" "0.5"
+			"burn_max_hp_pct_per_sec"
+			{
+				"value" "2"
+				"special_bonus_unique_lina_custom_6" "+1"
+			}
+		}
+	}
+
+	"lina_fiery_soul_custom"
+	{
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/lina/lina_fiery_soul_custom"
+		"AbilityTextureName" "lina_fiery_soul"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Innate" "1"
+		"IsBreakable" "1"
+		"MaxLevel" "1"
+
+		"AbilityValues"
+		{
+			"stack_duration" "18"
+			"cooldown_reduction_per_stack" "2.5"
+			"cast_speed_per_stack" "2.5"
+			"spell_damage_bonus_per_stack" "10"
+			"max_stacks"
+			{
+				"value" "6"
+				"special_bonus_unique_lina_custom_7" "+4"
+			}
+		}
+	}
+
+	"lina_laguna_blade_custom"
+	{
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/lina/lina_laguna_blade_custom"
+		"AbilityTextureName" "lina_laguna_blade"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel" "10"
+
+		"AbilityValues"
+		{
+			"damage_threshold" "2000 1900 1800 1700 1600 1500 1400 1300 1200 1100"
+			"search_radius" "900"
+			"proc_cooldown"
+			{
+				"value" "1"
+				"special_bonus_unique_lina_custom_5" "-0.3"
+			}
+			"knockback_distance" "300"
+			"knockback_duration" "0.3"
+			"aoe_radius" "300"
+			"attribute_damage_pct" "5 10 15 20 25 30 35 40 45 50"
+		}
+	}
+
+	"lina_flame_clock_custom"
+	{
+		"BaseClass" "ability_lua"
+		"ScriptFile" "abilities/lina/lina_flame_clock_custom"
+		"AbilityTextureName" "lina_flame_cloak"
+		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
+		"AbilityCastPoint" "0.3"
+		"AbilityManaCost" "200 400 600 800 1000"
+		"AbilityCooldown" "100 90 80 70 60"
+		"MaxLevel" "5"	
+		"FightRecapLevel"				"2"
+		"HasShardUpgrade" "1"
+
+		"AbilityValues"
+		{
+			"duration" "5 6 7 8 9"
+			"radius" "900"
+			"damage_interval" "1"
+			"int_damage_pct" "60 70 80 90 100"
+			"shard_bonus_int"
+			{
+				"value" "0"
+				"special_bonus_shard" "+1"
+			}
+			"shard_bonus_duration" "6"
+		}
+	}
+
 }

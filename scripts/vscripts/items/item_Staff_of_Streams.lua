@@ -23,14 +23,14 @@ function item_Staff_of_Streams:OnToggle()
 
     local modifiers = caster:FindAllModifiersByName("modifier_item_Staff_of_Streams")
     for _, mod in pairs(modifiers) do
-        if mod and mod:GetAbility() == self then
+        if mod and not mod:IsNull() then
             mod:ForceRefresh()
         end
     end
 end
 
 function item_Staff_of_Streams:PlayToggleEffects(caster, enabled)
-    local effect_path = enabled and "particles/staff_of_streams/mana_eff_1.vpcf" or "particles/staff_of_streams/health_eff_1.vpcf"
+    local effect_path = enabled and "particles/staff_of_streams/mana_eff_1.vpcf" or "particles/staff_of_streams/mana_eff_1.vpcf"
     local particle = ParticleManager:CreateParticle(effect_path, PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:ReleaseParticleIndex(particle)
 end
@@ -53,6 +53,7 @@ end
 
 function modifier_item_Staff_of_Streams:OnRefresh()
     self:UpdateValues()
+
     if not IsServer() then return end
     self:StartIntervalThink(self.interval)
 end
@@ -77,8 +78,30 @@ function modifier_item_Staff_of_Streams:UpdateValues()
     self.regen_per_tree = ability:GetSpecialValueFor("regen_per_tree")
 end
 
+function modifier_item_Staff_of_Streams:IsPrimaryModifier()
+    if not IsServer() then
+        return self:GetStackCount() >= 0
+    end
+
+    local parent = self:GetParent()
+    if not parent or parent:IsNull() then return false end
+
+    local modifiers = parent:FindAllModifiersByName("modifier_item_Staff_of_Streams")
+    if not modifiers or #modifiers == 0 then return false end
+
+    return modifiers[1] == self
+end
+
 function modifier_item_Staff_of_Streams:OnIntervalThink()
     if not IsServer() then return end
+
+    if not self:IsPrimaryModifier() then
+        if self:GetStackCount() ~= 0 then
+            self:SetStackCount(0)
+        end
+        return
+    end
+
     local parent = self:GetParent()
     if not parent or not parent:IsAlive() then
         self:SetStackCount(0)
@@ -105,33 +128,44 @@ function modifier_item_Staff_of_Streams:DeclareFunctions()
 end
 
 function modifier_item_Staff_of_Streams:GetModifierBonusStats_Strength()
+    if not self:IsPrimaryModifier() then return 0 end
     return self.bonus_strength or 0
 end
 
 function modifier_item_Staff_of_Streams:GetModifierBonusStats_Agility()
+    if not self:IsPrimaryModifier() then return 0 end
     return self.bonus_agility or 0
 end
 
 function modifier_item_Staff_of_Streams:GetModifierBonusStats_Intellect()
+    if not self:IsPrimaryModifier() then return 0 end
     return self.bonus_intellect or 0
 end
 
 function modifier_item_Staff_of_Streams:GetModifierMoveSpeedBonus_Constant()
+    if not self:IsPrimaryModifier() then return 0 end
     return self.bonus_movement_speed or 0
 end
 
 function modifier_item_Staff_of_Streams:GetCurrentTreeRegen()
+    if not self:IsPrimaryModifier() then return 0 end
     return (self:GetStackCount() or 0) * (self.regen_per_tree or 0)
 end
 
 function modifier_item_Staff_of_Streams:GetModifierConstantHealthRegen()
+    if not self:IsPrimaryModifier() then return 0 end
+
     local ability = self:GetAbility()
     if not ability or ability:GetToggleState() then return 0 end
+
     return self:GetCurrentTreeRegen()
 end
 
 function modifier_item_Staff_of_Streams:GetModifierConstantManaRegen()
+    if not self:IsPrimaryModifier() then return 0 end
+
     local ability = self:GetAbility()
     if not ability or not ability:GetToggleState() then return 0 end
+
     return self:GetCurrentTreeRegen()
 end

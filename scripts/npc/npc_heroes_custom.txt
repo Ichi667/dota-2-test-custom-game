@@ -125,4 +125,24 @@
 		"Ability16"			"special_bonus_unique_axe_custom_7"
 		"Ability17"			"special_bonus_unique_axe_custom_8"
 	}
+
+	"npc_dota_hero_lina"
+	{
+		"Ability1" "lina_dragon_slave_custom"
+		"Ability2" "lina_light_strike_array_custom"
+		"Ability3" "lina_laguna_blade_custom"
+		"Ability4" "generic_hidden"
+		"Ability5" "generic_hidden"
+		"Ability6" "lina_flame_clock_custom"
+		"Ability7" "lina_fiery_soul_custom"
+		"Ability10" "special_bonus_unique_lina_custom_1"
+		"Ability11" "special_bonus_unique_lina_custom_2"
+		"Ability12" "special_bonus_unique_lina_custom_3"
+		"Ability13" "special_bonus_unique_lina_custom_4"
+		"Ability14" "special_bonus_unique_lina_custom_5"
+		"Ability15" "special_bonus_unique_lina_custom_6"
+		"Ability16" "special_bonus_unique_lina_custom_7"
+		"Ability17" "special_bonus_unique_lina_custom_8"
+	}
+
 }

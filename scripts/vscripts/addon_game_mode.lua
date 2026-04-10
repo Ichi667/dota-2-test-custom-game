@@ -10,7 +10,7 @@ end
 -- Create the game mode when we activate
 function Activate()
 	main:InitGameMode()
-	main:testspawn()
+	main:spawns()
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter(Dynamic_Wrap(main, "OrderFilter"), main)
 end
 

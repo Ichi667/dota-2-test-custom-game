@@ -5,4 +5,5 @@
 	"npc_dota_hero_axe"      "1"
 	"npc_dota_hero_bloodseeker"      "1"
 	"npc_dota_hero_juggernaut"      "1"
+	"npc_dota_hero_lina"      "1"
 }
