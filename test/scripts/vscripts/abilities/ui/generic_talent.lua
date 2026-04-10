@@ -1,0 +1,2 @@
+generic_talent = class({})
+

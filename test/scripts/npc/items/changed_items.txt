@@ -1,0 +1,616 @@
+"DOTAAbilities"
+{
+
+"item_arcane_blink"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_OVERSHOOT"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"              "1400"          // If updating this, update AbilityOvershootCastRange to 4/5 of this value
+    "AbilityCastPoint"              "0.0"
+    "AbilityManaCost"               "0"
+    "AbilityCooldown"               "10.0"
+    "AbilitySharedCooldown"         "blink"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "6800"
+    "ItemShopTags"                  "teleport;mobility;escape;magic_dmg"
+    "ItemQuality"                   "component"
+    //"SideShop"                        "1"
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "SuggestLategame"               "1"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "blink_range"           "1400"
+        "blink_damage_cooldown" "3.0"
+        "blink_range_clamp"     "1120"
+        "bonus_intellect"       "25"
+        "heal_amount"           "250"
+        "mana_amount"           "100"
+        "debuff_amp"            "0"
+        "duration"              "0"
+    }
+}
+
+"item_swift_blink"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_OVERSHOOT"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"              "1200"          // If updating this, update AbilityOvershootCastRange to 4/5 of this value
+    "AbilityCastPoint"              "0.0"
+    "AbilityCooldown"               "15.0"
+    "AbilityManaCost"               "0"
+    "AbilitySharedCooldown"         "blink"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "6800"
+    "ItemShopTags"                  "teleport;mobility;escape"
+    "ItemQuality"                   "component"
+    //"SideShop"                        "1"
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "SuggestLategame"               "1"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "blink_range"           "1200"
+        "blink_damage_cooldown" "3.0"
+        "blink_range_clamp"     "960"
+        "bonus_agility"     "25"
+        "bonus_movement"        "40"
+        "bonus_agi_active"      "50"
+        "duration"      "6"
+    }
+}
+
+
+"item_overwhelming_blink"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_OVERSHOOT"
+    "AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"   
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"              "1200"          // If updating this, update AbilityOvershootCastRange to 4/5 of this value
+    "AbilityOvershootCastRange"     "960"
+    "AbilityCastPoint"              "0.0"
+    "AbilityCooldown"               "15.0"
+    "AbilityManaCost"               "0"
+    "AbilitySharedCooldown"         "blink"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "6800"
+    "ItemShopTags"                  "teleport"
+    "ItemQuality"                   "component"
+    "ItemAliases"                   "blink dagger"
+    //"SideShop"                        "1"
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ShouldBeSuggested"             "1"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "blink_range"           "1200"
+        "blink_damage_cooldown" "3.0"
+        "blink_range_clamp"     "960"
+        "bonus_strength"        "25"
+        "radius"        
+        {
+            "value" "800"
+            "affected_by_aoe_increase"  "1"
+        }
+        "movement_slow"     "50"
+        "attack_slow"       "50"
+        "duration"      "6"
+        "damage_base"           "100"
+        "damage_pct_instant"        "150"
+        "damage_pct_over_time"      "300"
+    }
+}
+
+"item_rapier"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_TOGGLE"
+    "Model"                         "models/props_gameplay/divine_rapier.vmdl"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "5600"
+    "ItemShopTags"                  "damage"
+    "ItemQuality"                   "epic"
+    "ItemAliases"                   "divine rapier"
+    "ItemShareability"              "ITEM_NOT_SHAREABLE"
+    "ItemSellable"                  "0"
+    "ItemKillable"                  "0"
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
+    "ItemContributesToNetWorthWhenDropped"  "0"
+    "AllowedInBackpack"             "0"
+    "IsTempestDoubleClonable"       "0"
+    "ItemDisassembleRule"               "DOTA_ITEM_DISASSEMBLE_NEVER"
+    "ShouldBeSuggested"             "1"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "bonus_spell_amp"       "30"
+        "bonus_damage"          "200"
+        "bonus_damage_base"     "75"
+    }
+}
+
+"item_lotus_orb"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                            "226"                                                       // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+    "FightRecapLevel"               "1"
+    
+    "AbilityCooldown"               "16.0"
+    "AbilityCastRange"              "900"
+    "AbilityManaCost"               "175"
+
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "3850"
+    "ItemShopTags"                  "regen_health;regen_mana;str;agi;int;hard_to_tag"
+    "ItemQuality"                   "epic"
+    "ItemAliases"                   "ls;lotus orb"
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "ItemDisassembleRule"           "DOTA_ITEM_DISASSEMBLE_ALWAYS"
+    "ShouldBeSuggested"             "1" 
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "bonus_armor"       "10"
+        "bonus_health_regen"    "6.5"
+        "bonus_mana_regen"      "4.0"
+        "bonus_mana"            "250"
+        "active_duration"       "5"
+    }
+}
+
+"item_cloak"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                            "31"                                                        // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "900"
+    "ItemShopTags"                  "magic_resist"
+    "ItemQuality"                   "component"
+    "ItemAliases"                   "cloak"
+    //"SideShop"                        "1"     
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "bonus_magical_armor"   "15"
+        "tooltip_resist"    "15" 
+    }
+}
+
+
+"item_blood_grenade"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                            "1123"                                                      // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"  
+    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "Model"                         "models/props_gameplay/neutral_box.vmdl"
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"              "900"
+    "AbilityCastPoint"              "0.2"
+    "AbilityHealthCost"             "75"
+    "AbilityCooldown"               "10"
+
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "65"
+    "ItemShopTags"                  "consumable"
+    "ItemQuality"                   "consumable"
+    "ItemAliases"                   "grenade"
+    "ItemStockMax"                  "0"
+    "ItemStockInitial"              "0"
+    "ItemStockTime"                 "0"
+    "ItemInitialCharges"            "1"
+    "ItemPermanent"                 "0"
+    "IsTempestDoubleClonable"       "0"
+    "ShouldBeInitiallySuggested"    "1"
+    "ItemStackableMax"              "3"
+    "ItemStackable"                 "1"
+
+
+    "ItemPermanent"                 "0"
+    "ItemStockTime"                 "1"           
+    "ItemStockInitial"              "0"
+    "ItemStockMax"                  "1"
+    "ItemInitialStockTime"          "135.0"
+
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "speed"                 "1100"
+        "radius"                "300"
+        "movespeed_slow"        "-25"
+        "bonus_health"          "50"
+        "damage_over_time"      "35"
+        "impact_damage"         "80"
+        "tick_rate"             "1"
+        "debuff_duration"       "5"
+    }
+}
+
+"item_ghost"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                            "37"                                                // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "FightRecapLevel"               "1"
+    
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"               "22.0"       
+    "AbilitySharedCooldown"         "ethereal"
+    "SpellDispellableType"          "SPELL_DISPELLABLE_YES"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "1500"
+    "ItemShopTags"                  "int;agi;str;hard_to_tag"
+    "ItemQuality"                   "component"
+    "ItemAliases"                   "ghost scepter"
+    "ShouldBeSuggested"             "1"
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "bonus_all_stats"       "5"
+        "duration"              "3.0"
+        "extra_spell_damage_percent"    "-30"
+    }
+}
+
+"item_mage_slayer"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                            "598"                                                       // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "SpellDispellableType"          "SPELL_DISPELLABLE_YES"
+
+    // Stats        
+    //-------------------------------------------------------------------------------------------------------------
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "2825"
+    "ItemShopTags"                  "hard_to_tag"
+    "ItemQuality"                   "rare"
+    "ItemAliases"                   "mage slayer;ms"
+    "ShouldBeInitiallySuggested"    "1"
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "bonus_magical_armor"   "15"
+        "spell_amp_debuff"      "25"
+        "bonus_health_regen"    "6"
+        "bonus_mana_regen"      "3"
+        "bonus_damage"          "15"         
+        "duration"              "4"
+        "dps"                   "40"
+    }
+}
+
+//=================================================================================================================
+// Rod of Atos
+//=================================================================================================================
+"item_rod_of_atos"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "FightRecapLevel"               "1"
+    "SpellDispellableType"          "SPELL_DISPELLABLE_YES"
+    "AbilitySharedCooldown"         "atos"
+
+    // Stats        
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"               "18"
+    "AbilityCastRange"              "1100"
+    "AbilityCastPoint"              "0.0"
+
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"               "100"
+    "ItemCost"                      "2250"
+    "ItemShopTags"                  "int;regen_health;disable"
+    "ItemQuality"                   "rare"
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "SuggestLategame"               "1"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {       
+            "bonus_intellect"       "12"
+            "bonus_hp"              "275"
+            "duration"              "1.8"
+    }
+}
+
+//=================================================================================================================
+// Hurricane Pike
+//=================================================================================================================
+"item_hurricane_pike"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_BOTH | DOTA_UNIT_TARGET_TEAM_CUSTOM"
+    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_CUSTOM"
+    "FightRecapLevel"               "1"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"              "650"
+    "AbilityCastPoint"              "0.0"
+    "AbilityCooldown"               "19.0"
+    "AbilitySharedCooldown"         "force"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"               "150"
+    "ItemCost"                      "4450"
+    "ItemShopTags"                  "int;damage;attack_speed;hard_to_tag;mobility;escape;save"
+    "ItemQuality"                   "epic"
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+    "SuggestLategame"               "1"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "bonus_intellect"       "15"
+        "bonus_health"  "300"
+        "bonus_agility"         "20"
+        "bonus_strength"        "15"
+        "base_attack_range"     "140"
+        "push_length"           "600"
+        "enemy_length"          "375"
+        "range_duration"        "6"
+        "cast_range_enemy"      "450"
+        "max_attacks"           "5"
+        "bonus_attack_speed"    "100"
+        "push_time"             "0.5"
+        "dizzy_duration"            "0"
+        "dizzy_distance_pct"            "0"
+
+    }
+}
+
+
+"item_aether_lens"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "2275"
+    "ItemShopTags"                  "int;regen_mana;hard_to_tag"
+    "ItemQuality"                   "rare"
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "SuggestLategame"               "1"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+            "bonus_mana"            "300"
+            "bonus_mana_regen"      "2.5"
+            "cast_range_bonus"          "150"
+    }
+}
+
+  
+"item_demon_edge"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "2200"
+    "ItemShopTags"                  "damage"
+    "ItemQuality"                   "secret_shop"
+    "SecretShop"                    "1"
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+            "bonus_damage"          "35"
+    }
+}
+    
+
+
+"item_recipe_lesser_crit_custom"
+{
+    "BaseClass"                     "item_datadriven"    
+    "Model"                         "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"            "item_recipe_lesser_crit"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "200"   
+    "ItemShopTags"                  ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"                    "1"
+    "ItemResult"                    "item_lesser_crit_custom"
+    "ItemRequirements"
+    {
+        "01"                        "item_claymore;item_blades_of_attack"
+    }
+}
+
+//=================================================================================================================
+// Lesser Crit
+//=================================================================================================================
+"item_lesser_crit_custom"
+{
+    "BaseClass"                      "item_lua"
+    "ScriptFile"                    "abilities/items/item_lesser_crit_custom"
+    "AbilityTextureName"            "item_lesser_crit" 
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "2000"
+    "ItemShopTags"                  "damage;crit;dps"
+    "ItemQuality"                   "epic"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "bonus_damage"          "30"
+        "crit_chance"           "30"
+        "crit_multiplier"       "160"
+    }
+}
+
+
+"item_recipe_greater_crit_custom"
+{
+    // General
+    "BaseClass"                     "item_datadriven"    
+    "Model"                         "models/props_gameplay/recipe.vmdl"
+    "AbilityTextureName"            "item_recipe_greater_crit"
+    
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "900"   
+    "ItemShopTags"                  ""
+    
+    // Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"                    "1"
+    "ItemResult"                    "item_greater_crit_custom"
+    "ItemRequirements"
+    {
+        "01"                        "item_lesser_crit_custom;item_demon_edge"
+    }
+}
+
+//=================================================================================================================
+// Greater Crit
+//=================================================================================================================
+"item_greater_crit_custom"
+{
+    "BaseClass"                     "item_lua"
+    "ScriptFile"                    "abilities/items/item_greater_crit_custom"
+    "AbilityTextureName"            "item_greater_crit" 
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "5100"
+    "ItemShopTags"                  "damage;crit;dps"
+    "ItemQuality"                   "epic"
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "SuggestLategame"               "1"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+        "bonus_damage"          "75"
+        "crit_chance"           "30"
+        "crit_multiplier"       "225"
+    }
+}
+
+"item_ultimate_scepter"
+{
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+
+    // "AbilityCastRange"               "600"
+    
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"                      "4200"
+    "ItemShopTags"                  "int;str;agi;mana_pool;health_pool;hard_to_tag"
+    "ItemQuality"                   "rare"
+
+    //"ItemDisassembleRule"         "DOTA_ITEM_DISASSEMBLE_NEVER"       // heroes for whom this is a problem solve it in their code - ogre magi, meepo
+    "ItemDeclarations"              "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+    "SuggestLategame"               "1"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityValues"
+    {
+            "bonus_all_stats"       "10"
+            "bonus_health"          "250"
+            "bonus_mana"            "250"
+    }
+}
+
+}
+

@@ -1,0 +1,14 @@
+"lang"
+{
+"Language"		"schinese"
+"Tokens"
+{	
+
+"addon_game_name"			"DOTA 1x6"
+
+
+"use_video"     "1"
+
+}
+
+}
