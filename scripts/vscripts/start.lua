@@ -137,6 +137,20 @@ function main:spawns()
         },
     }
 
+    for i = 1, 25 do
+        table.insert(spawns, {
+            spawn_name = "wave_path_" .. i,
+            unit_name = "npc_dota_base_ward2",
+            team = DOTA_TEAM_GOODGUYS,
+            find_clear_space = true,
+            modifiers = {
+                "modifier_invulnerable"
+            },
+            abilities = {
+            }
+        })
+    end
+
     self.spawned_units = self.spawned_units or {}
 
     for _, data in ipairs(spawns) do

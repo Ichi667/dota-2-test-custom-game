@@ -228,13 +228,40 @@
 		"VisionNighttimeRange"		"1000"		// Range of vision at night time.
 	}
 
+	"npc_dota_base_ward2"
+	{
+		// General
+		//
+		"BaseClass"					"npc_dota_ward_base"	// Class of entity of link to.
+		"Model"						""	// Model.
+		"SoundSet"					""					// Name of sound set.
+		"Level"						"0"
+		"ModelScale"					"0"
+ 		"wearable"				"7555"
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
+		"HealthBarOffset"			"140"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"StatusHealth"				"1"	
+		"IsInvulnerable"            "1"
+		"StatusHealthRegen"			"0"	
+		"StatusMana"				"0"	
+		"StatusManaRegen"			"0"	
+		"BountyXP"					"0"		
+		"BountyGoldMin"				"0"		
+		"BountyGoldMax"				"0"	
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+		"VisionDaytimeRange"		"800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+	}
+
 	"npc_dota_t1_tower"
 	{
 		// General
 		//
 		"BaseClass"					"npc_dota_tower"	// Class of entity of link to.
 		"Model"						"models/props_structures/tower_dragon_white.vmdl"
-		"SoundSet"					"Tower.Water"					// Name of sound set.
+		"SoundSet"					"Tower.Water"
 		"MinimapIcon"				"minimap_tower90"
 		"MinimapIconSize"			"320"
 		"Level"						"1"

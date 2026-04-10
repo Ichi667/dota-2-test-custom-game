@@ -1,5 +1,0 @@
-<root>
-    <scripts>
-        <include src="file://{resources}/scripts/custom_game/custom_ui_manifest.js" />
-    </scripts>
-</root>

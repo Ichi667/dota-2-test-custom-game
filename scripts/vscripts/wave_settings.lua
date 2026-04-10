@@ -1,5 +1,5 @@
 WAVE_SETTINGS = {
-    initial_delay = 0,
+    initial_delay = 10,
     default_interval = 120,
     repeat_last_wave = true,
     spawn_point_name = "wave_spawn",
