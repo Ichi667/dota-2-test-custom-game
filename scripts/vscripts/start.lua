@@ -3,6 +3,8 @@ if main == nil then
 end
 
 require("wave_settings")
+require("systems/neutral_camp_manager")
+require("systems/creep_drop_system")
 
 xptable = {
 0,1000,2000,3000,4000,5000,6000,7000,8000,9000,
@@ -37,7 +39,16 @@ function main:InitGameMode()
 
     GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
     GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel(xptable)
-    ListenToGameEvent('entity_killed', Dynamic_Wrap(self, 'finalbosskilled'), self)
+    ListenToGameEvent("entity_killed", Dynamic_Wrap(self, "OnEntityKilled"), self)
+
+    self.neutral_camp_manager = NeutralCampManager()
+    self.neutral_camp_manager:Init()
+
+    self.creep_drop_system = CreepDropSystem()
+    self.creep_drop_system:Init()
+
+    GameRules:GetGameModeEntity():SetModifyGoldFilter(Dynamic_Wrap(self, "ModifyGoldFilter"), self)
+    GameRules:GetGameModeEntity():SetModifyExperienceFilter(Dynamic_Wrap(self, "ModifyExperienceFilter"), self)
 
     GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)   
 
@@ -488,4 +499,42 @@ function main:DebugPrintCurrentWave(round_number, wave_data)
     for _, creep_group in ipairs(wave_data.creeps or {}) do
         print("[RoundSystem]   spawn: " .. tostring(creep_group.name) .. " x" .. tostring(creep_group.count or 1))
     end
+end
+
+function main:OnEntityKilled(data)
+    self:finalbosskilled(data)
+
+    if not data or not data.entindex_killed then
+        return
+    end
+
+    local killed_unit = EntIndexToHScript(data.entindex_killed)
+    if not killed_unit or killed_unit:IsNull() then
+        return
+    end
+
+    local killer_unit = nil
+    if data.entindex_attacker then
+        killer_unit = EntIndexToHScript(data.entindex_attacker)
+    end
+
+    if self.creep_drop_system then
+        self.creep_drop_system:OnEntityKilled(killed_unit, killer_unit)
+    end
+end
+
+function main:ModifyGoldFilter(filter_table)
+    if self.neutral_camp_manager then
+        return self.neutral_camp_manager:OnModifyGold(filter_table)
+    end
+
+    return true
+end
+
+function main:ModifyExperienceFilter(filter_table)
+    if self.neutral_camp_manager then
+        return self.neutral_camp_manager:OnModifyExperience(filter_table)
+    end
+
+    return true
 end
