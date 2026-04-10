@@ -38,6 +38,8 @@ function main:InitGameMode()
     ListenToGameEvent('entity_killed', Dynamic_Wrap(self, 'finalbosskilled'), self)
 
     GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)   
+
+    self:InitRoundSystem()
 end
 
 -- Evaluate the state of the game
@@ -242,4 +244,164 @@ function main:OrderFilter(filterTable)
     end
 
     return true
+end
+
+function main:InitRoundSystem()
+    self.round_settings = {
+        prep_time = 20,
+        spawn_per_wave = 6,
+        wave_interval = 35,
+        wave_unit_name = "npc_dota_creep_badguys_melee",
+        spawn_point_name = "wave_spawn",
+        waypoint_prefix = "wave_path_",
+        waypoint_count_max = 64,
+        target_scan_radius = 700,
+        fort_override_radius = 1200
+    }
+
+    self.round_state = {
+        current_round = 0,
+        next_wave_time = GameRules:GetGameTime() + self.round_settings.prep_time
+    }
+
+    self.wave_waypoints = self:CollectWaypoints(
+        self.round_settings.waypoint_prefix,
+        self.round_settings.waypoint_count_max
+    )
+
+    self.round_creeps = {}
+
+    CustomNetTables:SetTableValue("round_system", "state", self:GetRoundStateNetTableData())
+
+    GameRules:GetGameModeEntity():SetContextThink("round_system_think", function()
+        return self:RoundSystemThink()
+    end, 0.25)
+end
+
+function main:CollectWaypoints(prefix, max_count)
+    local points = {}
+    for index = 1, max_count do
+        local name = prefix .. index
+        local waypoint = Entities:FindByName(nil, name)
+        if not waypoint then
+            break
+        end
+        points[#points + 1] = waypoint:GetAbsOrigin()
+    end
+    return points
+end
+
+function main:GetRoundStateNetTableData()
+    local time_left = math.max(0, self.round_state.next_wave_time - GameRules:GetGameTime())
+    return {
+        round = self.round_state.current_round,
+        time_to_next = math.floor(time_left + 0.5)
+    }
+end
+
+function main:RoundSystemThink()
+    local game_time = GameRules:GetGameTime()
+    if game_time >= self.round_state.next_wave_time then
+        self:StartNextWave()
+    end
+
+    self:UpdateWaveCreepsBehavior()
+    CustomNetTables:SetTableValue("round_system", "state", self:GetRoundStateNetTableData())
+    return 0.25
+end
+
+function main:StartNextWave()
+    self.round_state.current_round = self.round_state.current_round + 1
+    self.round_state.next_wave_time = GameRules:GetGameTime() + self.round_settings.wave_interval
+
+    local spawn_point = Entities:FindByName(nil, self.round_settings.spawn_point_name)
+    if not spawn_point then
+        print("[RoundSystem] Spawn point not found: " .. tostring(self.round_settings.spawn_point_name))
+        return
+    end
+
+    for i = 1, self.round_settings.spawn_per_wave do
+        local spawn_pos = spawn_point:GetAbsOrigin() + RandomVector(RandomFloat(0, 120))
+        local creep = CreateUnitByName(
+            self.round_settings.wave_unit_name,
+            spawn_pos,
+            true,
+            nil,
+            nil,
+            DOTA_TEAM_BADGUYS
+        )
+
+        if creep then
+            creep.round_waypoint_index = 1
+            creep:SetMustReachEachGoalEntity(false)
+            table.insert(self.round_creeps, creep)
+        end
+    end
+end
+
+function main:UpdateWaveCreepsBehavior()
+    if not self.round_creeps then
+        return
+    end
+
+    for index = #self.round_creeps, 1, -1 do
+        local creep = self.round_creeps[index]
+        if not creep or creep:IsNull() or not creep:IsAlive() then
+            table.remove(self.round_creeps, index)
+        else
+            self:UpdateSingleCreepBehavior(creep)
+        end
+    end
+end
+
+function main:UpdateSingleCreepBehavior(creep)
+    local origin = creep:GetAbsOrigin()
+    local fort = Entities:FindByClassnameNearest("npc_dota_goodguys_fort", origin, self.round_settings.fort_override_radius)
+    if fort and not fort:IsNull() and fort:IsAlive() then
+        creep:MoveToTargetToAttack(fort)
+        return
+    end
+
+    local enemies = FindUnitsInRadius(
+        creep:GetTeamNumber(),
+        origin,
+        nil,
+        self.round_settings.target_scan_radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING,
+        DOTA_UNIT_TARGET_FLAG_NONE,
+        FIND_CLOSEST,
+        false
+    )
+
+    if enemies and #enemies > 0 then
+        creep:MoveToTargetToAttack(enemies[1])
+        return
+    end
+
+    self:MoveCreepAlongPath(creep)
+end
+
+function main:MoveCreepAlongPath(creep)
+    if not self.wave_waypoints or #self.wave_waypoints == 0 then
+        return
+    end
+
+    local current_index = creep.round_waypoint_index or 1
+    local current_target = self.wave_waypoints[current_index]
+    if not current_target then
+        current_target = self.wave_waypoints[#self.wave_waypoints]
+        current_index = #self.wave_waypoints
+    end
+
+    local distance = (creep:GetAbsOrigin() - current_target):Length2D()
+    if distance <= 150 and current_index < #self.wave_waypoints then
+        current_index = current_index + 1
+        creep.round_waypoint_index = current_index
+        current_target = self.wave_waypoints[current_index]
+    end
+
+    if current_target then
+        creep:MoveToPositionAggressive(current_target)
+    end
 end
