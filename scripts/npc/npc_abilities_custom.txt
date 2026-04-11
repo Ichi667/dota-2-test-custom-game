@@ -672,4 +672,84 @@
 		}
 	}
 
+	"forest_troll_high_priest_heal_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_forest_frog_custom"
+		"AbilityTextureName"			"forest_troll_high_priest_heal"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"3"
+		"AbilityManaCost"				"20"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"radius"					"800"
+			"heal"						"150"
+			"health_threshold_pct"		"60"
+		}
+	}
+
+	"forest_troll_berserker_frenzy_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_forest_frog_custom"
+		"AbilityTextureName"			"forest_troll_berserker_berserk"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"attack_speed_per_hit"		"3"
+			"duration"					"10"
+		}
+	}
+
+	"tadpole_mana_burn_aura_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_forest_frog_custom"
+		"AbilityTextureName"			"lion_mana_drain"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"radius"					"600"
+			"mana_burn_per_second"		"20"
+		}
+	}
+
+	"frogmen_arm_of_the_deep"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_forest_frog_custom"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"FightRecapLevel"				"2"
+		"AbilitySound"					"Ability.Ravage"
+		"AbilityCastRange"				"275"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_5"
+		"AbilityCastGestureSlot"		"DEFAULT"
+		"AbilityCooldown"				"16"
+		"AbilityManaCost"				"40"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"projectile_width"			"100"
+			"damage"					"200"
+			"duration"					"2"
+			"range"						"275"
+			"speed"						"725"
+			"neutral_shared_cooldown"	"12"
+		}
+	}
+
 }

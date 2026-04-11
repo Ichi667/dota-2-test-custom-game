@@ -539,6 +539,27 @@
 		"DOTA_Tooltip_modifier_kobold_taskmaster_command_aura_custom_effect" "Аура надсмотрщика"
 		"DOTA_Tooltip_modifier_kobold_taskmaster_command_aura_custom_effect_Description" "Уклонение увеличено, скорость атаки и урон повышены."
 
+		"DOTA_Tooltip_ability_forest_troll_high_priest_heal_custom" "Лечение племени"
+		"DOTA_Tooltip_ability_forest_troll_high_priest_heal_custom_Description" "Если у союзника в радиусе %radius% меньше %health_threshold_pct%% здоровья, тролль применяет способность и лечит всех союзников в радиусе на %heal%."
+		"DOTA_Tooltip_ability_forest_troll_high_priest_heal_custom_heal" "ЛЕЧЕНИЕ:"
+		"DOTA_Tooltip_ability_forest_troll_high_priest_heal_custom_radius" "РАДИУС:"
+
+		"DOTA_Tooltip_ability_forest_troll_berserker_frenzy_custom" "Ярость берсерка"
+		"DOTA_Tooltip_ability_forest_troll_berserker_frenzy_custom_Description" "Каждая атака даёт +%attack_speed_per_hit% к скорости атаки на %duration% сек. Новый эффект обновляет длительность."
+		"DOTA_Tooltip_modifier_forest_troll_berserker_frenzy_custom_buff" "Ярость берсерка"
+		"DOTA_Tooltip_modifier_forest_troll_berserker_frenzy_custom_buff_Description" "Скорость атаки увеличена."
+
+		"DOTA_Tooltip_ability_tadpole_mana_burn_aura_custom" "Паразит маны"
+		"DOTA_Tooltip_ability_tadpole_mana_burn_aura_custom_Description" "Каждую секунду выжигает у врагов в радиусе %radius% по %mana_burn_per_second% маны и лечит владельца на 1 за каждую выжженную ману."
+		"DOTA_Tooltip_ability_tadpole_mana_burn_aura_custom_radius" "РАДИУС:"
+		"DOTA_Tooltip_ability_tadpole_mana_burn_aura_custom_mana_burn_per_second" "СЖИГАНИЕ МАНЫ В СЕКУНДУ:"
+
+		"DOTA_Tooltip_ability_frogmen_arm_of_the_deep" "Рука глубин"
+		"DOTA_Tooltip_ability_frogmen_arm_of_the_deep_Description" "Выпускает удар по области, нанося %damage% магического урона и оглушая на %duration% сек."
+		"DOTA_Tooltip_ability_frogmen_arm_of_the_deep_damage" "УРОН:"
+		"DOTA_Tooltip_ability_frogmen_arm_of_the_deep_duration" "ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ:"
+		"DOTA_Tooltip_ability_frogmen_arm_of_the_deep_range" "ДАЛЬНОСТЬ:"
+
 		"DOTA_SUBSHOP_CONSUMABLES" "Новые предметы"
 
 	}
