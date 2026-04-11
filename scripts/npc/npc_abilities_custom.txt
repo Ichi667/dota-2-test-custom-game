@@ -640,4 +640,36 @@
 		}
 	}
 
+	"kobold_tunneler_disarm_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/kobold_custom"
+		"AbilityTextureName"			"kobold_disarm"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"attacks_to_proc"			"3"
+			"disarm_duration"			"3"
+		}
+	}
+
+	"kobold_taskmaster_command_aura_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/kobold_custom"
+		"AbilityTextureName"			"kobold_taskmaster_speed_aura"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"aura_radius"				"1200"
+			"bonus_evasion"				"25"
+			"bonus_attack_speed"		"40"
+			"bonus_damage"				"5"
+		}
+	}
+
 }

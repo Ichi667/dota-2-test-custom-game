@@ -18041,6 +18041,22 @@
 		"DOTA_Tooltip_Ability_item_royale_with_cheese_Description"	"<h1>Использование: Scrumptious</h1>Съешь меня!"
 		"DOTA_Tooltip_Ability_item_royale_with_cheese"				"Block of Cheese"
 		"DOTA_Tooltip_ability_item_royale_with_cheese_Lore"			"Вначале был пояс силы. Затем — сапоги странствия. И вот, наконец, — головка сыра."
+
+		"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom"									"Украсть оружие"
+		"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom_Description"						"Каждая третья атака Kobold Soldier обезоруживает цель."
+		"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom_attacks_to_proc"					"АТАК ДО СРАБАТЫВАНИЯ:"
+		"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom_disarm_duration"					"ДЛИТЕЛЬНОСТЬ ОБЕЗОРУЖИВАНИЯ:"
+		"DOTA_Tooltip_modifier_kobold_tunneler_disarm_custom_debuff"							"Обезоружен"
+		"DOTA_Tooltip_modifier_kobold_tunneler_disarm_custom_debuff_Description"				"Не может атаковать."
+
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom"							"Аура надсмотрщика"
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_Description"				"Даёт союзникам в радиусе уклонение, скорость атаки и бонус к урону."
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_aura_radius"				"РАДИУС:"
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_bonus_evasion"				"%УКЛОНЕНИЕ:"
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_bonus_attack_speed"		"БОНУС К СКОРОСТИ АТАКИ:"
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_bonus_damage"				"БОНУС К УРОНУ:"
+		"DOTA_Tooltip_modifier_kobold_taskmaster_command_aura_custom_effect"					"Аура надсмотрщика"
+		"DOTA_Tooltip_modifier_kobold_taskmaster_command_aura_custom_effect_Description"		"Уклонение увеличено на %dMODIFIER_PROPERTY_EVASION_CONSTANT%%%, скорость атаки — на %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, а урон — на %dMODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE%."
 		
 		// s1 is current value, s2 is the base value, s3 is the levelup operator, s4 is the levelup value, and s5 is the levelup interval
 		"DOTA_Tooltip_Ability_per_hero_level_up_single"				"<span class=\"GameplayVariable\">%s1</span> (%s2 %s3 %s4 за уровень)"
@@ -18051,7 +18067,6 @@
 		"DOTA_Tooltip_Ability_per_hero_level_up_multiple_no_base"	"<span class=\"GameplayVariable\">%s1</span> (%s2 с каждым %s3-м уровнем)"
 	}
 }
-
 
 
 
