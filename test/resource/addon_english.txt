@@ -16987,6 +16987,22 @@
 "DOTA_Tooltip_modifier_item_custom_smoke_quest_kill"					"Smoke of Deceit"
 "DOTA_Tooltip_modifier_item_custom_smoke_quest_kill_Description"		"Kill heroes within 10 seconds after Smoke of Deceit ends"
 
+"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom"									"Steal Weapon"
+"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom_Description"						"Every third attack by Kobold Soldier disarms its target."
+"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom_attacks_to_proc"					"ATTACKS TO PROC:"
+"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom_disarm_duration"					"DISARM DURATION:"
+"DOTA_Tooltip_modifier_kobold_tunneler_disarm_custom_debuff"							"Disarmed"
+"DOTA_Tooltip_modifier_kobold_tunneler_disarm_custom_debuff_Description"				"Cannot attack."
+
+"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom"							"Taskmaster's Command Aura"
+"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_Description"				"Grants allied units within the aura bonus evasion, attack speed, and damage."
+"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_aura_radius"				"RADIUS:"
+"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_bonus_evasion"				"%EVASION:"
+"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_bonus_attack_speed"		"BONUS ATTACK SPEED:"
+"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_bonus_damage"				"BONUS DAMAGE:"
+"DOTA_Tooltip_modifier_kobold_taskmaster_command_aura_custom_effect"					"Taskmaster's Command Aura"
+"DOTA_Tooltip_modifier_kobold_taskmaster_command_aura_custom_effect_Description"		"Evasion increased by %dMODIFIER_PROPERTY_EVASION_CONSTANT%%%, attack speed increased by %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, and damage increased by %dMODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE%."
+
 // !TEST MODE!
 
 "no_selected_bot" "Select an enemy hero"
@@ -17012,4 +17028,3 @@
 
 }
 }
-

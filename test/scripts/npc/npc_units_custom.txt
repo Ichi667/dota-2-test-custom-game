@@ -8708,6 +8708,13 @@
 		"Level"						"1"
 		"ModelScale" 					".9"
 		"IsNeutralUnitType"			"1"
+		"AttributePrimary"				"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"			"0"
+		"AttributeStrengthGain"			"0"
+		"AttributeBaseAgility"			"0"
+		"AttributeAgilityGain"			"0"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -8788,10 +8795,17 @@
 		"Level"						"1"
 		"ModelScale" 					".9"
 		"IsNeutralUnitType"			"1"
+		"AttributePrimary"				"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"			"0"
+		"AttributeStrengthGain"			"0"
+		"AttributeBaseAgility"			"0"
+		"AttributeAgilityGain"			"0"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""			// Ability 1
+		"Ability1"					"kobold_tunneler_disarm_custom"			// Ability 1
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -8862,10 +8876,17 @@
 		"Level"						"2"
 		"ModelScale" 					"1"
 		"IsNeutralUnitType"			"1"
+		"AttributePrimary"				"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"			"0"
+		"AttributeStrengthGain"			"0"
+		"AttributeBaseAgility"			"0"
+		"AttributeAgilityGain"			"0"
+		"AttributeBaseIntelligence"		"0"
+		"AttributeIntelligenceGain"		"0"
 
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"kobold_taskmaster_speed_aura"			// Ability 1
+		"Ability1"					"kobold_taskmaster_command_aura_custom"			// Ability 1
 		"Ability2"					""			// Ability 2
 		"Ability3"					""			// Ability 3
 		"Ability4"					""			// Ability 4
@@ -8906,7 +8927,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"325"		// Base health.
+		"StatusHealth"				"100"		// Base health.
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"600"			// Base mana.
 		"StatusManaRegen"			"0"		// Mana regeneration rate.		 
@@ -16211,5 +16232,4 @@
 
 
 }
-
 
