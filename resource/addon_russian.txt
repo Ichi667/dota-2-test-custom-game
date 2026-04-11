@@ -523,6 +523,22 @@
 		"DOTA_Tooltip_ability_special_bonus_unique_lina_custom_7" "+4 к макс. стакам Fiery Soul"
 		"DOTA_Tooltip_ability_special_bonus_unique_lina_custom_8" "Light Strike Array наносит урон от максимальной маны"
 
+		"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom" "Украсть оружие"
+		"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom_Description" "Каждая третья атака Kobold Soldier обезоруживает цель на %disarm_duration% сек."
+		"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom_attacks_to_proc" "АТАК ДО СРАБАТЫВАНИЯ:"
+		"DOTA_Tooltip_ability_kobold_tunneler_disarm_custom_disarm_duration" "ДЛИТЕЛЬНОСТЬ ОБЕЗОРУЖИВАНИЯ:"
+		"DOTA_Tooltip_modifier_kobold_tunneler_disarm_custom_debuff" "Обезоружен"
+		"DOTA_Tooltip_modifier_kobold_tunneler_disarm_custom_debuff_Description" "Не может атаковать."
+
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom" "Аура надсмотрщика"
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_Description" "Даёт союзникам в радиусе %aura_radius%: +%bonus_evasion%% уклонения, +%bonus_attack_speed% скорости атаки и +%bonus_damage% урона."
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_aura_radius" "РАДИУС:"
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_bonus_evasion" "%УКЛОНЕНИЕ:"
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_bonus_attack_speed" "БОНУС К СКОРОСТИ АТАКИ:"
+		"DOTA_Tooltip_ability_kobold_taskmaster_command_aura_custom_bonus_damage" "БОНУС К УРОНУ:"
+		"DOTA_Tooltip_modifier_kobold_taskmaster_command_aura_custom_effect" "Аура надсмотрщика"
+		"DOTA_Tooltip_modifier_kobold_taskmaster_command_aura_custom_effect_Description" "Уклонение увеличено, скорость атаки и урон повышены."
+
 		"DOTA_SUBSHOP_CONSUMABLES" "Новые предметы"
 
 	}
