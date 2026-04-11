@@ -8,7 +8,6 @@ NeutralCampManager.DEFAULT_REWARD_LEVEL_GAP = 10
 NeutralCampManager.DEFAULT_RESPAWN_INTERVAL = 60
 
 NeutralCampManager.CAMPS = {
-    -- Примеры. Добавьте/измените спавны под имена энтити на карте.
     {
         spawn_name = "neutral_camp_easy_1",
         pack = {
@@ -32,6 +31,7 @@ function NeutralCampManager:Init(options)
     self.reward_level_gap = options.reward_level_gap or self.DEFAULT_REWARD_LEVEL_GAP
     self.camps = self:BuildCampState(options.camps or self.CAMPS)
     self.unit_entindex_to_camp = {}
+    self.unit_rewards = {}
 
     self:StartThinker()
 end
@@ -111,6 +111,22 @@ function NeutralCampManager:TrySpawnCamp(camp)
             if creep then
                 creep:AddNewModifier(creep, nil, "modifier_neutral_camp_tag", {})
 
+                self.unit_rewards[creep:entindex()] = {
+                    gold_min = creep.GetMinimumGoldBounty and creep:GetMinimumGoldBounty() or 0,
+                    gold_max = creep.GetMaximumGoldBounty and creep:GetMaximumGoldBounty() or 0,
+                    xp = creep.GetDeathXP and creep:GetDeathXP() or 0,
+                }
+
+                if creep.SetMinimumGoldBounty then
+                    creep:SetMinimumGoldBounty(0)
+                end
+                if creep.SetMaximumGoldBounty then
+                    creep:SetMaximumGoldBounty(0)
+                end
+                if creep.SetDeathXP then
+                    creep:SetDeathXP(0)
+                end
+
                 camp.spawned_units[#camp.spawned_units + 1] = creep
                 self.unit_entindex_to_camp[creep:entindex()] = camp
             else
@@ -128,6 +144,7 @@ function NeutralCampManager:CleanupCampUnits(camp)
             alive_units[#alive_units + 1] = unit
         elseif unit and not unit:IsNull() then
             self.unit_entindex_to_camp[unit:entindex()] = nil
+            self.unit_rewards[unit:entindex()] = nil
         end
     end
 
@@ -160,40 +177,66 @@ function NeutralCampManager:ShouldSuppressReward(victim, attacker)
     return level_gap >= self.reward_level_gap
 end
 
-function NeutralCampManager:OnModifyGold(filter_table)
-    local victim_index = filter_table.killed_entindex_const
-    local attacker_index = filter_table.player_id_const
-
-    if not victim_index or not attacker_index then
-        return true
+function NeutralCampManager:ResolveHero(unit)
+    if not unit or unit:IsNull() then
+        return nil
     end
 
-    local victim = EntIndexToHScript(victim_index)
-    local player = PlayerResource:GetPlayer(attacker_index)
-    local hero = player and player:GetAssignedHero() or nil
-
-    if self:ShouldSuppressReward(victim, hero) then
-        filter_table.gold = 0
+    if unit:IsRealHero() then
+        return unit
+    end
+    
+    if unit.GetOwnerEntity then
+        local owner = unit:GetOwnerEntity()
+        if owner and not owner:IsNull() and owner:IsRealHero() then
+            return owner
+        end
     end
 
-    return true
+    if unit.GetPlayerOwnerID then
+        local player_id = unit:GetPlayerOwnerID()
+        if player_id ~= nil and player_id >= 0 then
+            return PlayerResource:GetSelectedHeroEntity(player_id)
+        end
+    end
+
+    return nil
 end
 
-function NeutralCampManager:OnModifyExperience(filter_table)
-    local victim_index = filter_table.killed_entindex_const
-    local player_id = filter_table.player_id_const
-
-    if not victim_index or not player_id then
-        return true
+function NeutralCampManager:OnEntityKilled(victim, killer_unit)
+    if not self:IsManagedNeutral(victim) then
+        return
     end
 
-    local victim = EntIndexToHScript(victim_index)
-    local player = PlayerResource:GetPlayer(player_id)
-    local hero = player and player:GetAssignedHero() or nil
+    local entindex = victim:entindex()
+    local reward_data = self.unit_rewards[entindex]
+    self.unit_entindex_to_camp[entindex] = nil
+    self.unit_rewards[entindex] = nil
+
+    local hero = self:ResolveHero(killer_unit)
+    if not hero or hero:IsNull() then
+        return
+    end
 
     if self:ShouldSuppressReward(victim, hero) then
-        filter_table.experience = 0
+        return
     end
 
-    return true
+    reward_data = reward_data or { gold_min = 0, gold_max = 0, xp = 0 }
+
+    local min_gold = reward_data.gold_min or 0
+    local max_gold = reward_data.gold_max or min_gold
+    if max_gold < min_gold then
+        max_gold = min_gold
+    end
+
+    local gold = RandomInt(min_gold, max_gold)
+    if gold > 0 then
+        PlayerResource:ModifyGold(hero:GetPlayerOwnerID(), gold, true, DOTA_ModifyGold_CreepKill)
+    end
+
+    local xp = reward_data.xp or 0
+    if xp > 0 then
+        hero:AddExperience(xp, DOTA_ModifyXP_CreepKill, false, true)
+    end
 end

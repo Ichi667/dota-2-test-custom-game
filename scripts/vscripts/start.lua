@@ -47,9 +47,6 @@ function main:InitGameMode()
     self.creep_drop_system = CreepDropSystem()
     self.creep_drop_system:Init()
 
-    GameRules:GetGameModeEntity():SetModifyGoldFilter(Dynamic_Wrap(self, "ModifyGoldFilter"), self)
-    GameRules:GetGameModeEntity():SetModifyExperienceFilter(Dynamic_Wrap(self, "ModifyExperienceFilter"), self)
-
     GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)   
 
     self:InitRoundSystem()
@@ -148,7 +145,18 @@ function main:spawns()
         },
     }
 
-    for i = 1, 25 do
+    for i = 1, 3 do
+        table.insert(spawns, {
+            spawn_name = "chest_lvl_1_" .. i,
+            unit_name = "npc_dota_case_1_lvl",
+            team = DOTA_TEAM_BADGUYS,
+            find_clear_space = true,
+            abilities = {
+            }
+        })
+    end
+
+    for i = 15, 35 do
         table.insert(spawns, {
             spawn_name = "wave_path_" .. i,
             unit_name = "npc_dota_base_ward2",
@@ -521,20 +529,8 @@ function main:OnEntityKilled(data)
     if self.creep_drop_system then
         self.creep_drop_system:OnEntityKilled(killed_unit, killer_unit)
     end
-end
 
-function main:ModifyGoldFilter(filter_table)
     if self.neutral_camp_manager then
-        return self.neutral_camp_manager:OnModifyGold(filter_table)
+        self.neutral_camp_manager:OnEntityKilled(killed_unit, killer_unit)
     end
-
-    return true
-end
-
-function main:ModifyExperienceFilter(filter_table)
-    if self.neutral_camp_manager then
-        return self.neutral_camp_manager:OnModifyExperience(filter_table)
-    end
-
-    return true
 end
