@@ -6,6 +6,9 @@ end
 
 NeutralCampManager.DEFAULT_REWARD_LEVEL_GAP = 10
 NeutralCampManager.DEFAULT_RESPAWN_INTERVAL = 60
+NeutralCampManager.DEFAULT_AGGRO_RADIUS = 500
+NeutralCampManager.DEFAULT_LEASH_DURATION = 10
+NeutralCampManager.DEFAULT_THINK_INTERVAL = 0.25
 
 NeutralCampManager.CAMPS = {
     {
@@ -83,9 +86,13 @@ function NeutralCampManager:Init(options)
 
     self.respawn_interval = options.respawn_interval or self.DEFAULT_RESPAWN_INTERVAL
     self.reward_level_gap = options.reward_level_gap or self.DEFAULT_REWARD_LEVEL_GAP
+    self.aggro_radius = options.aggro_radius or self.DEFAULT_AGGRO_RADIUS
+    self.leash_duration = options.leash_duration or self.DEFAULT_LEASH_DURATION
+    self.think_interval = options.think_interval or self.DEFAULT_THINK_INTERVAL
     self.camps = self:BuildCampState(options.camps or self.CAMPS)
     self.unit_entindex_to_camp = {}
     self.unit_rewards = {}
+    self.last_respawn_second = nil
 
     self:StartThinker()
 end
@@ -100,6 +107,9 @@ function NeutralCampManager:BuildCampState(camp_config)
                 pack = camp_data.pack,
                 spawned_units = {},
                 force_find_clear_space = camp_data.force_find_clear_space ~= false,
+                aggro_target = nil,
+                aggro_expires_at = 0,
+                spawn_origin = nil,
             })
         end
     end
@@ -110,7 +120,7 @@ end
 function NeutralCampManager:StartThinker()
     GameRules:GetGameModeEntity():SetContextThink("NeutralCampManagerThink", function()
         return self:OnThink()
-    end, 1)
+    end, self.think_interval)
 end
 
 function NeutralCampManager:OnThink()
@@ -120,16 +130,18 @@ function NeutralCampManager:OnThink()
 
     local game_time = GameRules:GetDOTATime(false, false)
     if game_time < 0 then
-        return 1
+        return self.think_interval
     end
 
-    local seconds_from_minute = math.floor(game_time) % self.respawn_interval
-    if seconds_from_minute == 0 then
+    local game_second = math.floor(game_time)
+    local seconds_from_minute = game_second % self.respawn_interval
+    if seconds_from_minute == 0 and self.last_respawn_second ~= game_second then
         self:TrySpawnAllCamps()
-        return 1
+        self.last_respawn_second = game_second
     end
 
-    return 1
+    self:UpdateCampBehavior()
+    return self.think_interval
 end
 
 function NeutralCampManager:TrySpawnAllCamps()
@@ -141,6 +153,7 @@ end
 function NeutralCampManager:TrySpawnCamp(camp)
     self:CleanupCampUnits(camp)
 
+    -- Кемп респавнится только тогда, когда в нём не осталось ни одного живого крипа.
     if #camp.spawned_units > 0 then
         return
     end
@@ -150,6 +163,7 @@ function NeutralCampManager:TrySpawnCamp(camp)
         print("[NeutralCampManager] Spawn point not found: " .. tostring(camp.spawn_name))
         return
     end
+    camp.spawn_origin = spawn_entity:GetAbsOrigin()
 
     for _, unit_data in ipairs(camp.pack) do
         for _ = 1, (unit_data.count or 1) do
@@ -188,6 +202,9 @@ function NeutralCampManager:TrySpawnCamp(camp)
             end
         end
     end
+
+    camp.aggro_target = nil
+    camp.aggro_expires_at = 0
 end
 
 function NeutralCampManager:CleanupCampUnits(camp)
@@ -203,6 +220,11 @@ function NeutralCampManager:CleanupCampUnits(camp)
     end
 
     camp.spawned_units = alive_units
+
+    if #camp.spawned_units == 0 then
+        camp.aggro_target = nil
+        camp.aggro_expires_at = 0
+    end
 end
 
 function NeutralCampManager:IsManagedNeutral(unit)
@@ -255,6 +277,130 @@ function NeutralCampManager:ResolveHero(unit)
     end
 
     return nil
+end
+
+function NeutralCampManager:FindHeroInRange(position, radius)
+    local targets = FindUnitsInRadius(
+        DOTA_TEAM_NEUTRALS,
+        position,
+        nil,
+        radius,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE,
+        FIND_CLOSEST,
+        false
+    )
+
+    for _, target in ipairs(targets) do
+        if target and not target:IsNull() and target:IsRealHero() and target:IsAlive() then
+            return target
+        end
+    end
+
+    return nil
+end
+
+function NeutralCampManager:CommandUnitAggro(unit, target)
+    if not unit or unit:IsNull() or not unit:IsAlive() then
+        return
+    end
+
+    if not target or target:IsNull() or not target:IsAlive() then
+        return
+    end
+
+    unit:MoveToTargetToAttack(target)
+end
+
+function NeutralCampManager:ReturnCampToSpawn(camp)
+    camp.aggro_target = nil
+    camp.aggro_expires_at = 0
+
+    local return_pos = camp.spawn_origin
+    if not return_pos then
+        local spawn_entity = Entities:FindByName(nil, camp.spawn_name)
+        if spawn_entity then
+            return_pos = spawn_entity:GetAbsOrigin()
+        end
+    end
+
+    for _, unit in ipairs(camp.spawned_units) do
+        if unit and not unit:IsNull() and unit:IsAlive() then
+            if return_pos then
+                unit:MoveToPosition(return_pos)
+            else
+                unit:Stop()
+            end
+        end
+    end
+end
+
+function NeutralCampManager:AggroCamp(camp, target, source_position)
+    if not camp or not target or target:IsNull() or not target:IsAlive() then
+        return
+    end
+
+    camp.aggro_target = target
+    camp.aggro_expires_at = GameRules:GetGameTime() + self.leash_duration
+
+    for _, unit in ipairs(camp.spawned_units) do
+        if unit and not unit:IsNull() and unit:IsAlive() then
+            local within_radius = true
+            if source_position then
+                within_radius = (unit:GetAbsOrigin() - source_position):Length2D() <= self.aggro_radius
+            end
+
+            if within_radius then
+                self:CommandUnitAggro(unit, target)
+            end
+        end
+    end
+end
+
+function NeutralCampManager:UpdateCampBehavior()
+    local now = GameRules:GetGameTime()
+
+    for _, camp in ipairs(self.camps) do
+        self:CleanupCampUnits(camp)
+
+        if #camp.spawned_units > 0 then
+            local has_active_aggro_target = camp.aggro_target and not camp.aggro_target:IsNull() and camp.aggro_target:IsAlive()
+            if has_active_aggro_target and now <= (camp.aggro_expires_at or 0) then
+                self:AggroCamp(camp, camp.aggro_target)
+            elseif has_active_aggro_target or (camp.aggro_expires_at or 0) > 0 then
+                self:ReturnCampToSpawn(camp)
+            else
+                for _, unit in ipairs(camp.spawned_units) do
+                    if unit and not unit:IsNull() and unit:IsAlive() then
+                        local target = self:FindHeroInRange(unit:GetAbsOrigin(), self.aggro_radius)
+                        if target then
+                            self:AggroCamp(camp, target, unit:GetAbsOrigin())
+                            break
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+function NeutralCampManager:OnEntityHurt(victim, attacker)
+    if not self:IsManagedNeutral(victim) then
+        return
+    end
+
+    local hero = self:ResolveHero(attacker)
+    if not hero or hero:IsNull() or not hero:IsAlive() then
+        return
+    end
+
+    local camp = self.unit_entindex_to_camp[victim:entindex()]
+    if not camp then
+        return
+    end
+
+    self:AggroCamp(camp, hero, victim:GetAbsOrigin())
 end
 
 function NeutralCampManager:OnEntityKilled(victim, killer_unit)

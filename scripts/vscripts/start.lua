@@ -40,6 +40,7 @@ function main:InitGameMode()
     GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
     GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel(xptable)
     ListenToGameEvent("entity_killed", Dynamic_Wrap(self, "OnEntityKilled"), self)
+    ListenToGameEvent("entity_hurt", Dynamic_Wrap(self, "OnEntityHurt"), self)
 
     self.neutral_camp_manager = NeutralCampManager()
     self.neutral_camp_manager:Init()
@@ -60,6 +61,25 @@ function main:OnThink()
         return nil
     end
     return 1
+end
+
+function main:OnEntityHurt(data)
+    if not self.neutral_camp_manager or not data then
+        return
+    end
+
+    if not data.entindex_killed or not data.entindex_attacker then
+        return
+    end
+
+    local victim = EntIndexToHScript(data.entindex_killed)
+    local attacker = EntIndexToHScript(data.entindex_attacker)
+
+    if not victim or victim:IsNull() or not attacker or attacker:IsNull() then
+        return
+    end
+
+    self.neutral_camp_manager:OnEntityHurt(victim, attacker)
 end
 
 
