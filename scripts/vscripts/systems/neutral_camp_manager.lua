@@ -7,8 +7,12 @@ end
 NeutralCampManager.DEFAULT_REWARD_LEVEL_GAP = 10
 NeutralCampManager.DEFAULT_RESPAWN_INTERVAL = 60
 NeutralCampManager.DEFAULT_AGGRO_RADIUS = 500
-NeutralCampManager.DEFAULT_LEASH_DURATION = 10
+NeutralCampManager.DEFAULT_LEASH_DURATION = 15
+NeutralCampManager.DEFAULT_LEASH_DISTANCE = 1500
+NeutralCampManager.DEFAULT_RETURN_RADIUS_MIN = 150
+NeutralCampManager.DEFAULT_RETURN_RADIUS_MAX = 250
 NeutralCampManager.DEFAULT_THINK_INTERVAL = 0.25
+NeutralCampManager.DEFAULT_RETURN_REISSUE_INTERVAL = 1.0
 
 NeutralCampManager.CAMPS = {
     {
@@ -88,7 +92,12 @@ function NeutralCampManager:Init(options)
     self.reward_level_gap = options.reward_level_gap or self.DEFAULT_REWARD_LEVEL_GAP
     self.aggro_radius = options.aggro_radius or self.DEFAULT_AGGRO_RADIUS
     self.leash_duration = options.leash_duration or self.DEFAULT_LEASH_DURATION
+    self.leash_distance = options.leash_distance or self.DEFAULT_LEASH_DISTANCE
+    self.return_radius_min = options.return_radius_min or self.DEFAULT_RETURN_RADIUS_MIN
+    self.return_radius_max = options.return_radius_max or self.DEFAULT_RETURN_RADIUS_MAX
     self.think_interval = options.think_interval or self.DEFAULT_THINK_INTERVAL
+    self.return_reissue_interval = options.return_reissue_interval or self.DEFAULT_RETURN_REISSUE_INTERVAL
+
     self.camps = self:BuildCampState(options.camps or self.CAMPS)
     self.unit_entindex_to_camp = {}
     self.unit_rewards = {}
@@ -110,6 +119,7 @@ function NeutralCampManager:BuildCampState(camp_config)
                 aggro_target = nil,
                 aggro_expires_at = 0,
                 spawn_origin = nil,
+                returning = false,
             })
         end
     end
@@ -153,7 +163,6 @@ end
 function NeutralCampManager:TrySpawnCamp(camp)
     self:CleanupCampUnits(camp)
 
-    -- Кемп респавнится только тогда, когда в нём не осталось ни одного живого крипа.
     if #camp.spawned_units > 0 then
         return
     end
@@ -163,6 +172,7 @@ function NeutralCampManager:TrySpawnCamp(camp)
         print("[NeutralCampManager] Spawn point not found: " .. tostring(camp.spawn_name))
         return
     end
+
     camp.spawn_origin = spawn_entity:GetAbsOrigin()
 
     for _, unit_data in ipairs(camp.pack) do
@@ -178,6 +188,9 @@ function NeutralCampManager:TrySpawnCamp(camp)
 
             if creep then
                 creep:AddNewModifier(creep, nil, "modifier_neutral_camp_tag", {})
+
+                creep.neutral_return_radius = RandomInt(self.return_radius_min, self.return_radius_max)
+                creep.neutral_last_return_order = 0
 
                 self.unit_rewards[creep:entindex()] = {
                     gold_min = creep.GetMinimumGoldBounty and creep:GetMinimumGoldBounty() or 0,
@@ -205,6 +218,7 @@ function NeutralCampManager:TrySpawnCamp(camp)
 
     camp.aggro_target = nil
     camp.aggro_expires_at = 0
+    camp.returning = false
 end
 
 function NeutralCampManager:CleanupCampUnits(camp)
@@ -224,6 +238,7 @@ function NeutralCampManager:CleanupCampUnits(camp)
     if #camp.spawned_units == 0 then
         camp.aggro_target = nil
         camp.aggro_expires_at = 0
+        camp.returning = false
     end
 end
 
@@ -261,7 +276,7 @@ function NeutralCampManager:ResolveHero(unit)
     if unit:IsRealHero() then
         return unit
     end
-    
+
     if unit.GetOwnerEntity then
         local owner = unit:GetOwnerEntity()
         if owner and not owner:IsNull() and owner:IsRealHero() then
@@ -301,6 +316,76 @@ function NeutralCampManager:FindHeroInRange(position, radius)
     return nil
 end
 
+function NeutralCampManager:FindCampByUnit(unit)
+    if not unit or unit:IsNull() then
+        return nil
+    end
+
+    local camp = self.unit_entindex_to_camp[unit:entindex()]
+    if camp then
+        return camp
+    end
+
+    for _, search_camp in ipairs(self.camps) do
+        for _, camp_unit in ipairs(search_camp.spawned_units) do
+            if camp_unit == unit then
+                return search_camp
+            end
+        end
+    end
+
+    return nil
+end
+
+function NeutralCampManager:IsCampUnitInRange(camp, position, radius)
+    if not camp or not position then
+        return false
+    end
+
+    for _, unit in ipairs(camp.spawned_units) do
+        if unit and not unit:IsNull() and unit:IsAlive() then
+            if (unit:GetAbsOrigin() - position):Length2D() <= radius then
+                return true
+            end
+        end
+    end
+
+    return false
+end
+
+function NeutralCampManager:IsAnyUnitTooFarFromSpawn(camp)
+    if not camp or not camp.spawn_origin then
+        return false
+    end
+
+    for _, unit in ipairs(camp.spawned_units) do
+        if unit and not unit:IsNull() and unit:IsAlive() then
+            if (unit:GetAbsOrigin() - camp.spawn_origin):Length2D() > self.leash_distance then
+                return true
+            end
+        end
+    end
+
+    return false
+end
+
+function NeutralCampManager:AreAllUnitsBackToSpawn(camp)
+    if not camp or not camp.spawn_origin then
+        return false
+    end
+
+    for _, unit in ipairs(camp.spawned_units) do
+        if unit and not unit:IsNull() and unit:IsAlive() then
+            local return_radius = unit.neutral_return_radius or self.return_radius_max
+            if (unit:GetAbsOrigin() - camp.spawn_origin):Length2D() > return_radius then
+                return false
+            end
+        end
+    end
+
+    return true
+end
+
 function NeutralCampManager:CommandUnitAggro(unit, target)
     if not unit or unit:IsNull() or not unit:IsAlive() then
         return
@@ -310,34 +395,101 @@ function NeutralCampManager:CommandUnitAggro(unit, target)
         return
     end
 
-    unit:MoveToTargetToAttack(target)
+    ExecuteOrderFromTable({
+        UnitIndex = unit:entindex(),
+        OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET,
+        TargetIndex = target:entindex(),
+        Queue = false,
+    })
 end
 
-function NeutralCampManager:ReturnCampToSpawn(camp)
+function NeutralCampManager:CommandUnitReturn(unit, camp, force)
+    if not unit or unit:IsNull() or not unit:IsAlive() then
+        return
+    end
+
+    if not camp or not camp.spawn_origin then
+        return
+    end
+
+    local now = GameRules:GetGameTime()
+    if not force and unit.neutral_last_return_order and now - unit.neutral_last_return_order < self.return_reissue_interval then
+        return
+    end
+
+    unit.neutral_last_return_order = now
+
+    ExecuteOrderFromTable({
+        UnitIndex = unit:entindex(),
+        OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
+        Position = camp.spawn_origin,
+        Queue = false,
+    })
+end
+
+function NeutralCampManager:StartReturning(camp)
+    if not camp then
+        return
+    end
+
+    camp.returning = true
     camp.aggro_target = nil
     camp.aggro_expires_at = 0
 
-    local return_pos = camp.spawn_origin
-    if not return_pos then
+    if not camp.spawn_origin then
         local spawn_entity = Entities:FindByName(nil, camp.spawn_name)
         if spawn_entity then
-            return_pos = spawn_entity:GetAbsOrigin()
+            camp.spawn_origin = spawn_entity:GetAbsOrigin()
         end
     end
 
     for _, unit in ipairs(camp.spawned_units) do
         if unit and not unit:IsNull() and unit:IsAlive() then
-            if return_pos then
-                unit:MoveToPosition(return_pos)
+            self:CommandUnitReturn(unit, camp, true)
+        end
+    end
+end
+
+function NeutralCampManager:UpdateReturningCamp(camp)
+    if not camp or not camp.returning then
+        return
+    end
+
+    if not camp.spawn_origin then
+        local spawn_entity = Entities:FindByName(nil, camp.spawn_name)
+        if spawn_entity then
+            camp.spawn_origin = spawn_entity:GetAbsOrigin()
+        else
+            return
+        end
+    end
+
+    for _, unit in ipairs(camp.spawned_units) do
+        if unit and not unit:IsNull() and unit:IsAlive() then
+            local return_radius = unit.neutral_return_radius or self.return_radius_max
+            local distance = (unit:GetAbsOrigin() - camp.spawn_origin):Length2D()
+
+            if distance > return_radius then
+                self:CommandUnitReturn(unit, camp, false)
             else
                 unit:Stop()
             end
         end
     end
+
+    if self:AreAllUnitsBackToSpawn(camp) then
+        camp.returning = false
+        camp.aggro_target = nil
+        camp.aggro_expires_at = 0
+    end
 end
 
 function NeutralCampManager:AggroCamp(camp, target, source_position)
-    if not camp or not target or target:IsNull() or not target:IsAlive() then
+    if not camp or camp.returning then
+        return
+    end
+
+    if not target or target:IsNull() or not target:IsAlive() then
         return
     end
 
@@ -347,6 +499,7 @@ function NeutralCampManager:AggroCamp(camp, target, source_position)
     for _, unit in ipairs(camp.spawned_units) do
         if unit and not unit:IsNull() and unit:IsAlive() then
             local within_radius = true
+
             if source_position then
                 within_radius = (unit:GetAbsOrigin() - source_position):Length2D() <= self.aggro_radius
             end
@@ -365,18 +518,26 @@ function NeutralCampManager:UpdateCampBehavior()
         self:CleanupCampUnits(camp)
 
         if #camp.spawned_units > 0 then
-            local has_active_aggro_target = camp.aggro_target and not camp.aggro_target:IsNull() and camp.aggro_target:IsAlive()
-            if has_active_aggro_target and now <= (camp.aggro_expires_at or 0) then
-                self:AggroCamp(camp, camp.aggro_target)
-            elseif has_active_aggro_target or (camp.aggro_expires_at or 0) > 0 then
-                self:ReturnCampToSpawn(camp)
+            if camp.returning then
+                self:UpdateReturningCamp(camp)
             else
-                for _, unit in ipairs(camp.spawned_units) do
-                    if unit and not unit:IsNull() and unit:IsAlive() then
-                        local target = self:FindHeroInRange(unit:GetAbsOrigin(), self.aggro_radius)
-                        if target then
-                            self:AggroCamp(camp, target, unit:GetAbsOrigin())
-                            break
+                local target = camp.aggro_target
+                local target_alive = target and not target:IsNull() and target:IsAlive()
+
+                if self:IsAnyUnitTooFarFromSpawn(camp) then
+                    self:StartReturning(camp)
+                elseif target_alive and now <= (camp.aggro_expires_at or 0) then
+                    self:AggroCamp(camp, target)
+                elseif target_alive or (camp.aggro_expires_at or 0) > 0 then
+                    self:StartReturning(camp)
+                else
+                    for _, unit in ipairs(camp.spawned_units) do
+                        if unit and not unit:IsNull() and unit:IsAlive() then
+                            local hero = self:FindHeroInRange(unit:GetAbsOrigin(), self.aggro_radius)
+                            if hero then
+                                self:AggroCamp(camp, hero, unit:GetAbsOrigin())
+                                break
+                            end
                         end
                     end
                 end
@@ -386,17 +547,17 @@ function NeutralCampManager:UpdateCampBehavior()
 end
 
 function NeutralCampManager:OnEntityHurt(victim, attacker)
-    if not self:IsManagedNeutral(victim) then
-        return
-    end
-
     local hero = self:ResolveHero(attacker)
     if not hero or hero:IsNull() or not hero:IsAlive() then
         return
     end
 
-    local camp = self.unit_entindex_to_camp[victim:entindex()]
-    if not camp then
+    local camp = self:FindCampByUnit(victim)
+    if not camp or camp.returning then
+        return
+    end
+
+    if not self:IsCampUnitInRange(camp, victim:GetAbsOrigin(), self.aggro_radius) then
         return
     end
 
@@ -432,7 +593,10 @@ function NeutralCampManager:OnEntityKilled(victim, killer_unit)
 
     local gold = RandomInt(min_gold, max_gold)
     if gold > 0 then
-        PlayerResource:ModifyGold(hero:GetPlayerOwnerID(), gold, true, DOTA_ModifyGold_CreepKill)
+        local player_id = hero:GetPlayerOwnerID()
+        if player_id ~= nil and player_id >= 0 then
+            PlayerResource:ModifyGold(player_id, gold, true, DOTA_ModifyGold_CreepKill)
+        end
     end
 
     local xp = reward_data.xp or 0

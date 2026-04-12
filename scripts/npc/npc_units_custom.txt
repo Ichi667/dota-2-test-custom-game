@@ -402,7 +402,8 @@
 		"AttackDamageMax"			"8"		// Damage range max.	
 		"AttackRate"				"1.35"		// Speed of attack.
 		"AttackAnimationPoint"		"0.38"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"1500"		// Range within a target can be acquired.
+		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
+		"AutoAttacksByDefault"        "0"
 		"AttackRange"				"128"		// Range within a target can be attacked.
 		"ProjectileModel"			""			// Particle system model for projectile.
 		"ProjectileSpeed"			"0"			// Speed of projectile.		   
@@ -444,7 +445,6 @@
 
 		
 		"vscripts"    "ai/kobold.lua"
-		"AutoAttacksByDefault"        "1"
 	}
 	
 	"npc_kobold_t"
@@ -482,7 +482,8 @@
 		"AttackDamageMax"			"12"		// Damage range max.	
 		"AttackRate"				"1.35"		// Speed of attack.
 		"AttackAnimationPoint"		"0.38"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"1500"		// Range within a target can be acquired.
+		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
+		"AutoAttacksByDefault"        "0"
 		"AttackRange"				"128"		// Range within a target can be attacked.
 		"ProjectileModel"			""			// Particle system model for projectile.
 		"ProjectileSpeed"			"0"			// Speed of projectile.		   
@@ -524,7 +525,6 @@
 
 		
 		"vscripts"    "ai/kobold.lua"
-		"AutoAttacksByDefault"        "1"
 	}
 
 	"npc_kobold_m"
@@ -563,7 +563,8 @@
 		"AttackDamageMax"			"7"		// Damage range max.	
 		"AttackRate"				"1.35"		// Speed of attack.
 		"AttackAnimationPoint"		"0.38"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"1500"		// Range within a target can be acquired.
+		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
+		"AutoAttacksByDefault"        "0"
 		"AttackRange"				"128"		// Range within a target can be attacked.
 		"ProjectileModel"			""			// Particle system model for projectile.
 		"ProjectileSpeed"			"0"			// Speed of projectile.		   
@@ -605,7 +606,6 @@
 
 		
 		"vscripts"    "ai/kobold.lua"
-		"AutoAttacksByDefault"        "1"
 	}
 
 	"npc_dota_neutral_forest_troll_high_priest"
@@ -634,7 +634,8 @@
 		"AttackDamageMax"			"24"
 		"AttackRate"				"1.5"
 		"AttackAnimationPoint"		"0.3"
-		"AttackAcquisitionRange"	"800"
+		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
+		"AutoAttacksByDefault"        "0"
 		"AttackRange"				"600"
 		"ProjectileModel"			"particles/units/heroes/hero_dazzle/dazzle_base_attack.vpcf"
 		"ProjectileSpeed"			"900"
@@ -687,7 +688,8 @@
 		"AttackDamageMax"			"5"
 		"AttackRate"				"1.5"
 		"AttackAnimationPoint"		"0.4"
-		"AttackAcquisitionRange"	"800"
+		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
+		"AutoAttacksByDefault"        "0"
 		"AttackRange"				"150"
 
 		"ArmorPhysical"				"0"
@@ -739,7 +741,8 @@
 		"AttackRate"				"2"		// Speed of attack.
 		"BaseAttackSpeed"			"125"		
 		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
+		"AutoAttacksByDefault"        "0"
 		"AttackRange"				"100"		// Range within a target can be attacked.
 		"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf" // Particle system model for projectile.
 		"ProjectileSpeed"			"1500"		// Speed of projectile.		     
@@ -807,7 +810,8 @@
 		"AttackRate"				"2"			// Speed of attack.
 		"BaseAttackSpeed"			"150"		// Speed of attack.
 		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackAcquisitionRange"	"0"		// Range within a target can be acquired.
+		"AutoAttacksByDefault"        "0"
 		"AttackRange"				"100"		// Range within a target can be attacked.
 		"ProjectileModel"			""			// Particle system model for projectile.
 		"ProjectileSpeed"			"0"			// Speed of projectile.		   
