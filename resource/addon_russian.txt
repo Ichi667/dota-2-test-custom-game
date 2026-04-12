@@ -560,6 +560,52 @@
 		"DOTA_Tooltip_ability_frogmen_arm_of_the_deep_duration" "ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ:"
 		"DOTA_Tooltip_ability_frogmen_arm_of_the_deep_range" "ДАЛЬНОСТЬ:"
 
+
+		"DOTA_Tooltip_ability_neutral_gnoll_assassin_bleed_custom" "Кровоточащий удар"
+		"DOTA_Tooltip_ability_neutral_gnoll_assassin_bleed_custom_Description" "Каждая атака накладывает кровотечение на %duration% сек. Эффект складывается и обновляется, нанося %damage_per_second% физического урона в секунду."
+		"DOTA_Tooltip_ability_neutral_gnoll_assassin_bleed_custom_damage_per_second" "УРОН В СЕКУНДУ:"
+		"DOTA_Tooltip_ability_neutral_gnoll_assassin_bleed_custom_duration" "ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_modifier_neutral_gnoll_assassin_bleed_custom_debuff" "Кровотечение"
+		"DOTA_Tooltip_modifier_neutral_gnoll_assassin_bleed_custom_debuff_Description" "Получает физический урон каждую секунду."
+
+		"DOTA_Tooltip_ability_neutral_fel_beast_evasion_custom" "Фазовый уворот"
+		"DOTA_Tooltip_ability_neutral_fel_beast_evasion_custom_Description" "С шансом %avoid_chance%% полностью избегает любой входящий урон."
+		"DOTA_Tooltip_ability_neutral_fel_beast_evasion_custom_avoid_chance" "%ШАНС УКЛОНЕНИЯ ОТ УРОНА:"
+
+		"DOTA_Tooltip_ability_neutral_ghost_max_health_burn_custom" "Проклятие пустоты"
+		"DOTA_Tooltip_ability_neutral_ghost_max_health_burn_custom_Description" "Каждая атака наносит дополнительно %max_health_damage_pct%% от максимального здоровья цели в виде магического урона."
+		"DOTA_Tooltip_ability_neutral_ghost_max_health_burn_custom_max_health_damage_pct" "%УРОН ОТ МАКС. ЗДОРОВЬЯ:"
+
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_poison_touch_custom" "Poison Touch"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_poison_touch_custom_Description" "Запускает снаряд в каждого врага. При попадании наносит %impact_damage% физического урона и замедляет на %duration% сек. Замедление начинается с %max_slow_pct%%% и линейно спадает до 0 к концу эффекта."
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_poison_touch_custom_impact_damage" "УРОН:"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_poison_touch_custom_max_slow_pct" "%НАЧАЛЬНОЕ ЗАМЕДЛЕНИЕ:"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_poison_touch_custom_duration" "ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_modifier_neutral_dazzle_boss_poison_debuff_custom" "Ядовитое касание"
+		"DOTA_Tooltip_modifier_neutral_dazzle_boss_poison_debuff_custom_Description" "Скорость передвижения снижена, замедление постепенно ослабевает."
+
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_shadow_grave_custom" "Shadow Grave"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_shadow_grave_custom_Description" "Накладывает на союзного крипа эффект на %duration% сек., не позволяя ему умереть. Применяется по союзникам с запасом здоровья ниже %health_threshold_pct%% в радиусе %radius%."
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_shadow_grave_custom_duration" "ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_shadow_grave_custom_radius" "РАДИУС ПОИСКА:"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_shadow_grave_custom_health_threshold_pct" "%ПОРОГ ЗДОРОВЬЯ:"
+		"DOTA_Tooltip_modifier_neutral_dazzle_boss_grave_buff_custom" "Shadow Grave"
+		"DOTA_Tooltip_modifier_neutral_dazzle_boss_grave_buff_custom_Description" "Невозможно умереть, пока действует эффект."
+
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_weave_burst_custom" "Weave Burst"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_weave_burst_custom_Description" "Когда здоровье Даззла ниже %self_health_threshold_pct%%, накладывает на всех врагов в радиусе %radius% эффект на %duration% сек., который наносит %max_health_damage_pct%% от максимального здоровья как физический урон каждую секунду. Эффект можно развеять."
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_weave_burst_custom_radius" "РАДИУС:"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_weave_burst_custom_duration" "ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_weave_burst_custom_max_health_damage_pct" "%УРОН ОТ МАКС. ЗДОРОВЬЯ В СЕКУНДУ:"
+		"DOTA_Tooltip_modifier_neutral_dazzle_boss_weave_debuff_custom" "Разрыв плетения"
+		"DOTA_Tooltip_modifier_neutral_dazzle_boss_weave_debuff_custom_Description" "Получает физический урон в процентах от максимального здоровья каждую секунду."
+
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_cheat_death_custom" "Последняя воля"
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_cheat_death_custom_Description" "Смертельный урон не убивает Даззла, а даёт эффект Shadow Grave на %duration% сек."
+		"DOTA_Tooltip_ability_neutral_dazzle_boss_cheat_death_custom_duration" "ДЛИТЕЛЬНОСТЬ:"
+		"DOTA_Tooltip_modifier_neutral_dazzle_boss_cheat_death_buff_custom" "Последняя воля"
+		"DOTA_Tooltip_modifier_neutral_dazzle_boss_cheat_death_buff_custom_Description" "Невозможно умереть, пока действует эффект."
+
 		"DOTA_SUBSHOP_CONSUMABLES" "Новые предметы"
 
 	}
