@@ -678,7 +678,7 @@
 		"ScriptFile"					"abilities/creeps/neutral_forest_frog_custom"
 		"AbilityTextureName"			"forest_troll_high_priest_heal"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityCastPoint"				"0.3"
+		"AbilityCastPoint"				"0"
 		"AbilityCooldown"				"3"
 		"AbilityManaCost"				"20"
 		"MaxLevel"						"1"
@@ -701,7 +701,7 @@
 
 		"AbilityValues"
 		{
-			"attack_speed_per_hit"		"3"
+			"attack_speed_per_hit"		"10"
 			"duration"					"10"
 		}
 	}
@@ -723,32 +723,44 @@
 
 	"frogmen_arm_of_the_deep"
 	{
-		"BaseClass"						"ability_lua"
-		"ScriptFile"					"abilities/creeps/neutral_forest_frog_custom"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
 		"FightRecapLevel"				"2"
 		"AbilitySound"					"Ability.Ravage"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastRange"				"275"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_5"
 		"AbilityCastGestureSlot"		"DEFAULT"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"16"
-		"AbilityManaCost"				"40"
-		"MaxLevel"						"1"
 
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"40"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
 		"AbilityValues"
 		{
-			"projectile_width"			"100"
-			"damage"					"200"
-			"duration"					"2"
-			"range"						"275"
-			"speed"						"725"
-			"neutral_shared_cooldown"	"12"
+			"projectile_width"				"100"
+			"damage"						"200"
+			"duration"						"2"
+			"range"							"275"
+			"speed"							"725"
+			"neutral_shared_cooldown"		"5.0"		// 0 disables
 		}
 	}
 

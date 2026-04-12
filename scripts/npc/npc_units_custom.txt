@@ -425,15 +425,15 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"120"		// Base health.
+		"StatusHealth"				"250"		// Base health.
 		"StatusHealthRegen"			"0"		// Health regeneration rate.
-		"StatusMana"				"1000"			// Base mana.
+		"StatusMana"				"50"			// Base mana.
 		"StatusManaRegen"			"0"		// Mana regeneration rate.		 
 		
 		// Vision
 		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1000"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1000"		// Range of vision at night time.
+		"VisionDaytimeRange"		"500"		// Range of vision during day light.
+		"VisionNighttimeRange"		"500"		// Range of vision at night time.
 		
 		// Team
 		//----------------------------------------------------------------
@@ -473,7 +473,7 @@
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"			// Physical protection.
+		"ArmorPhysical"				"4"			// Physical protection.
 
 		// Attack
 		//----------------------------------------------------------------
@@ -505,15 +505,15 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"140"		// Base health.
+		"StatusHealth"				"150"		// Base health.
 		"StatusHealthRegen"			"0"		// Health regeneration rate.
-		"StatusMana"				"1000"			// Base mana.
+		"StatusMana"				"50"			// Base mana.
 		"StatusManaRegen"			"0"		// Mana regeneration rate.		 
 		
 		// Vision
 		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1000"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1000"		// Range of vision at night time.
+		"VisionDaytimeRange"		"500"		// Range of vision during day light.
+		"VisionNighttimeRange"		"500"		// Range of vision at night time.
 		
 		// Team
 		//----------------------------------------------------------------
@@ -553,7 +553,8 @@
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"			// Physical protection.
+		"ArmorPhysical"				"5"			// Physical protection.
+		"MagicalResistance"				"30"			// Magical protection.
 
 		// Attack
 		//----------------------------------------------------------------
@@ -574,9 +575,9 @@
 
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"80"		// Experience earn.
-		"BountyGoldMin"				"60"			// Gold earned min.
-		"BountyGoldMax"				"60"			// Gold earned max.
+		"BountyXP"					"45"		// Experience earn.
+		"BountyGoldMin"				"30"			// Gold earned min.
+		"BountyGoldMax"				"35"			// Gold earned max.
 
 		// Movement
 		//----------------------------------------------------------------
@@ -592,8 +593,8 @@
 		
 		// Vision
 		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1000"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1000"		// Range of vision at night time.
+		"VisionDaytimeRange"		"500"		// Range of vision during day light.
+		"VisionNighttimeRange"		"500"		// Range of vision at night time.
 		
 		// Team
 		//----------------------------------------------------------------
@@ -626,6 +627,7 @@
 		"Ability2"					""
 		"Ability3"					""
 		"Ability4"					""
+		"MagicalResistance"				"45"			// Magical protection.
 
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageMin"			"24"
@@ -648,8 +650,8 @@
 		"StatusHealthRegen"			"0"
 		"StatusMana"				"50"
 		"StatusManaRegen"			"0.5"
-		"VisionDaytimeRange"		"1000"
-		"VisionNighttimeRange"		"1000"
+		"VisionDaytimeRange"		"500"
+		"VisionNighttimeRange"		"500"
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
@@ -663,6 +665,7 @@
 		"SoundSet"					"n_creep_Melee"
 		"Level"						"1"
 		"IsNeutralUnitType"			"1"
+		"ModelScale" 				"1.3"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
 		"AttributeBaseStrength"		"0"
 		"AttributeStrengthGain"		"0"
@@ -671,6 +674,9 @@
 		"AttributeBaseIntelligence"	"0"
 		"AttributeIntelligenceGain"	"0"
 
+		"ArmorPhysical"				"5"
+		"MagicalResistance"				"0"
+
 		"Ability1"					"forest_troll_berserker_frenzy_custom"
 		"Ability2"					""
 		"Ability3"					""
@@ -678,7 +684,7 @@
 
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"25"
-		"AttackDamageMax"			"25"
+		"AttackDamageMax"			"5"
 		"AttackRate"				"1.5"
 		"AttackAnimationPoint"		"0.4"
 		"AttackAcquisitionRange"	"800"
@@ -690,111 +696,168 @@
 		"BountyGoldMin"				"20"
 		"BountyGoldMax"				"20"
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"300"
-		"StatusHealth"				"500"
+		"MovementSpeed"				"325"
+		"StatusHealth"				"355"
 		"StatusHealthRegen"			"0"
 		"StatusMana"				"0"
 		"StatusManaRegen"			"0"
-		"VisionDaytimeRange"		"1000"
-		"VisionNighttimeRange"		"1000"
+		"VisionDaytimeRange"		"500"
+		"VisionNighttimeRange"		"500"
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
 
-	"npc_dota_neutral_tadpole"
+	"npc_dota_neutral_tadpole"	
 	{
-		"Model"						"models/creeps/neutral_creeps/n_creep_froglet/n_creep_froglet_tadpole.vmdl"
-		"BaseClass"					"npc_dota_creature"
-		"SoundSet"					"n_creep_Melee"
-		"Level"						"1"
-		"IsNeutralUnitType"			"1"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
-		"AttributeBaseStrength"		"0"
-		"AttributeStrengthGain"		"0"
-		"AttributeBaseAgility"		"0"
-		"AttributeAgilityGain"		"0"
-		"AttributeBaseIntelligence"	"0"
-		"AttributeIntelligenceGain"	"0"
+		// General
+		//----------------------------------------------------------------
+		"Model"				"models/creeps/neutral_creeps/n_creep_tadpole_c/n_creep_tadpole_c.vmdl"	// Model.
+		
+		"BaseClass"					"npc_dota_creep_neutral"
+		"SoundSet"					"n_creep_Ranged"
+		"Level"						"2"
+		"ModelScale" 					".45"
 
-		"Ability1"					"tadpole_mana_burn_aura_custom"
-		"Ability2"					""
-		"Ability3"					""
-		"Ability4"					""
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"tadpole_mana_burn_aura_custom"			// Ability 1
+		"Ability2"					""			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
 
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"1"			// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"18"
-		"AttackDamageMax"			"18"
-		"AttackRate"				"1.5"
-		"AttackAnimationPoint"		"0.4"
-		"AttackAcquisitionRange"	"800"
-		"AttackRange"				"120"
+		"AttackDamageMin"			"19"		// Damage range min.
+		"AttackDamageMax"			"21"		// Damage range max.
+		"AttackRate"				"2"		// Speed of attack.
+		"BaseAttackSpeed"			"125"		
+		"AttackAnimationPoint"		"0.4"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"800"		// Range within a target can be acquired.
+		"AttackRange"				"100"		// Range within a target can be attacked.
+		"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf" // Particle system model for projectile.
+		"ProjectileSpeed"			"1500"		// Speed of projectile.		     
 
-		"ArmorPhysical"				"0"
-		"MagicalResistance"			"25"
-		"BountyXP"					"30"
-		"BountyGoldMin"				"20"
-		"BountyGoldMax"				"20"
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"40"
+		"HealthBarOffset"			"170"
+		"BountyXP"					"35"
+		"BountyGoldMin"				"23"
+		"BountyGoldMax"				"26"
+
+		"ArmorPhysical"				"2"
+		"MagicalResistance"				"15"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"				"300"
 		"StatusHealth"				"300"
 		"StatusHealthRegen"			"0"
 		"StatusMana"				"0"
-		"StatusManaRegen"			"0"
-		"VisionDaytimeRange"		"1000"
-		"VisionNighttimeRange"		"1000"
-		"TeamName"					"DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"StatusManaRegen"			"0" 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"600"		// Range of vision during day light.
+		"VisionNighttimeRange"		"600"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}
+	}	
 
 	"npc_dota_neutral_froglet"
-	{
-		"Model"						"models/creeps/neutral_creeps/n_creep_froglet/n_creep_froglet.vmdl"
-		"BaseClass"					"npc_dota_creature"
+	{										
+		// General
+		//----------------------------------------------------------------
+		"Model"				"models/creeps/neutral_creeps/n_creep_tadpole/n_creep_tadpole_v2.vmdl"	// Model.
+		"BaseClass"					"npc_dota_creep_neutral"
 		"SoundSet"					"n_creep_Melee"
-		"Level"						"1"
+		"Level"						"3"
+		"ModelScale" 					"0.85"
 		"IsNeutralUnitType"			"1"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
-		"AttributeBaseStrength"		"0"
-		"AttributeStrengthGain"		"0"
-		"AttributeBaseAgility"		"0"
-		"AttributeAgilityGain"		"0"
-		"AttributeBaseIntelligence"	"0"
-		"AttributeIntelligenceGain"	"0"
 
-		"Ability1"					"frogmen_arm_of_the_deep"
-		"Ability2"					""
-		"Ability3"					""
-		"Ability4"					""
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"frogmen_arm_of_the_deep"			// Ability 1
+		"Ability2"					"frogmen_riverborn_aura"			// Ability 2
+		"Ability3"					""			// Ability 3
+		"Ability4"					""			// Ability 4
 
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"			// Physical protection.
+
+		// Attack
+		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"22"
-		"AttackDamageMax"			"22"
-		"AttackRate"				"1.5"
-		"AttackAnimationPoint"		"0.4"
-		"AttackAcquisitionRange"	"800"
-		"AttackRange"				"120"
+		"AttackDamageMin"			"22"		// Damage range min.
+		"AttackDamageMax"			"24"		// Damage range max.	
+		"AttackRate"				"2"			// Speed of attack.
+		"BaseAttackSpeed"			"150"		// Speed of attack.
+		"AttackAnimationPoint"		"0.3"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"500"		// Range within a target can be acquired.
+		"AttackRange"				"100"		// Range within a target can be attacked.
+		"ProjectileModel"			""			// Particle system model for projectile.
+		"ProjectileSpeed"			"0"			// Speed of projectile.		   
 
-		"ArmorPhysical"				"0"
-		"MagicalResistance"			"25"
-		"BountyXP"					"30"
-		"BountyGoldMin"				"20"
-		"BountyGoldMax"				"20"
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"60"
+		"HealthBarOffset"			"190"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"65"		// Experience earn.
+		"BountyGoldMin"				"35"		// Gold earned min.
+		"BountyGoldMax"				"45"		// Gold earned max.
+
+		// Movement
+		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"300"
-		"StatusHealth"				"350"
-		"StatusHealthRegen"			"0"
-		"StatusMana"				"100"
-		"StatusManaRegen"			"0"
-		"VisionDaytimeRange"		"1000"
-		"VisionNighttimeRange"		"1000"
-		"TeamName"					"DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"MovementSpeed"				"290"		// Speed.
+
+		// Status
+		//----------------------------------------------------------------
+
+		"ArmorPhysical"				"5"
+		"MagicalResistance"				"25"
+		"StatusHealth"				"500"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"300"		// Base mana.
+		"StatusManaRegen"			"1"			// Mana regeneration rate.		 
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"500"		// Range of vision during day light.
+		"VisionNighttimeRange"		"500"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-	}
+
+		"Creature"
+		{
+			"OffensiveAbilities"
+			{
+				"Ability1"
+				{
+					"Name"		"frogmen_arm_of_the_deep"
+				}
+			}
+		}
+	}	
 
 }

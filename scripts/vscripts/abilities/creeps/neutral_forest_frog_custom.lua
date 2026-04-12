@@ -105,60 +105,58 @@ function modifier_tadpole_mana_burn_aura_custom:IsPurgable() return false end
 
 function modifier_tadpole_mana_burn_aura_custom:OnCreated()
 	if not IsServer() then return end
-	self.radius = self:GetAbility():GetSpecialValueFor("radius")
-	self.mana_burn = self:GetAbility():GetSpecialValueFor("mana_burn_per_second")
+	self:OnRefresh()
 	self:StartIntervalThink(1.0)
+end
+
+function modifier_tadpole_mana_burn_aura_custom:OnRefresh()
+	local ability = self:GetAbility()
+	if not ability or ability:IsNull() then
+		self.radius = 0
+		self.mana_burn = 0
+		return
+	end
+
+	self.radius = ability:GetSpecialValueFor("radius") or 0
+	self.mana_burn = ability:GetSpecialValueFor("mana_burn_per_second") or 0
 end
 
 function modifier_tadpole_mana_burn_aura_custom:OnIntervalThink()
 	if not IsServer() then return end
-	local parent = self:GetParent()
-	local total_burned = 0
-	local enemies = FindUnitsInRadius(parent:GetTeamNumber(), parent:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MANA_ONLY, FIND_ANY_ORDER, false)
 
-	for _,enemy in pairs(enemies) do
-		local current_mana = enemy:GetMana()
-		if current_mana > 0 then
-			local burn = math.min(self.mana_burn, current_mana)
-			enemy:ReduceMana(burn)
-			total_burned = total_burned + burn
+	local parent = self:GetParent()
+	local ability = self:GetAbility()
+
+	if not parent or parent:IsNull() or not parent:IsAlive() then return end
+	if not ability or ability:IsNull() then return end
+	if self.radius <= 0 or self.mana_burn <= 0 then return end
+
+	local total_burned = 0
+	local enemies = FindUnitsInRadius(
+		parent:GetTeamNumber(),
+		parent:GetAbsOrigin(),
+		nil,
+		self.radius,
+		DOTA_UNIT_TARGET_TEAM_ENEMY,
+		DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+		DOTA_UNIT_TARGET_FLAG_MANA_ONLY,
+		FIND_ANY_ORDER,
+		false
+	)
+
+	for _, enemy in pairs(enemies) do
+		if enemy and not enemy:IsNull() and enemy:IsAlive() then
+			local current_mana = enemy:GetMana()
+			if current_mana > 0 then
+				local burn = math.min(self.mana_burn, current_mana)
+				enemy:SetMana(current_mana - burn)
+				total_burned = total_burned + burn
+			end
 		end
 	end
 
 	if total_burned > 0 then
-		parent:Heal(total_burned, self:GetAbility())
+		parent:Heal(total_burned, ability)
 		SendOverheadEventMessage(nil, OVERHEAD_ALERT_HEAL, parent, total_burned, nil)
 	end
-end
-
-
-frogmen_arm_of_the_deep = class({})
-
-function frogmen_arm_of_the_deep:OnSpellStart()
-	local caster = self:GetCaster()
-	local point = self:GetCursorPosition()
-	local range = self:GetSpecialValueFor("range")
-	local damage = self:GetSpecialValueFor("damage")
-	local duration = self:GetSpecialValueFor("duration")
-
-	local direction = point - caster:GetAbsOrigin()
-	direction.z = 0
-	if direction:Length2D() > range then
-		direction = direction:Normalized() * range
-		point = caster:GetAbsOrigin() + direction
-	end
-
-	local enemies = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, self:GetSpecialValueFor("projectile_width"), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
-	for _,enemy in pairs(enemies) do
-		ApplyDamage({
-			victim = enemy,
-			attacker = caster,
-			damage = damage,
-			damage_type = DAMAGE_TYPE_MAGICAL,
-			ability = self,
-		})
-		enemy:AddNewModifier(caster, self, "modifier_stunned", {duration = duration * (1 - enemy:GetStatusResistance())})
-	end
-
-	caster:EmitSound("Ability.Ravage")
 end

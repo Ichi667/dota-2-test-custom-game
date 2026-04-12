@@ -9,17 +9,71 @@ NeutralCampManager.DEFAULT_RESPAWN_INTERVAL = 60
 
 NeutralCampManager.CAMPS = {
     {
-        spawn_name = "neutral_camp_easy_1",
+        spawn_name = "camp_spawn_1",
         pack = {
-            { unit_name = "npc_dota_neutral_kobold", count = 2 },
-            { unit_name = "npc_dota_neutral_kobold_tunneler", count = 1 },
+            { unit_name = "npc_kobold", count = 2 },
         },
     },
     {
-        spawn_name = "neutral_camp_medium_1",
+        spawn_name = "camp_spawn_2",
         pack = {
-            { unit_name = "npc_dota_neutral_centaur_outrunner", count = 2 },
-            { unit_name = "npc_dota_neutral_centaur_khan", count = 1 },
+            { unit_name = "npc_kobold", count = 2 },
+            { unit_name = "npc_kobold_t", count = 2 },
+            { unit_name = "npc_kobold_m", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_3",
+        pack = {
+            { unit_name = "npc_kobold", count = 2 },
+            { unit_name = "npc_kobold_t", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_4",
+        pack = {
+            { unit_name = "npc_kobold", count = 1 },
+            { unit_name = "npc_kobold_t", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_5",
+        pack = {
+            { unit_name = "npc_kobold_t", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_6",
+        pack = {
+            { unit_name = "npc_kobold", count = 1 },
+            { unit_name = "npc_kobold_t", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_7",
+        pack = {
+            { unit_name = "npc_kobold_t", count = 3 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_8",
+        pack = {
+            { unit_name = "npc_kobold_t", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_9",
+        pack = {
+            { unit_name = "npc_dota_neutral_forest_troll_high_priest", count = 1 },
+            { unit_name = "npc_dota_neutral_forest_troll_berserker", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_10",
+        pack = {
+            { unit_name = "npc_dota_neutral_forest_troll_berserker", count = 1 },
+            { unit_name = "npc_kobold_t", count = 2 },
+            { unit_name = "npc_kobold_m", count = 1 },
         },
     },
 }
