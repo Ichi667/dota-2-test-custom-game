@@ -764,4 +764,141 @@
 		}
 	}
 
+
+
+	"neutral_gnoll_assassin_bleed_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_gnoll_assassin_custom"
+		"AbilityTextureName"			"bloodseeker_blood_bath"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"damage_per_second"			"8"
+			"duration"					"5"
+		}
+	}
+
+	"neutral_fel_beast_evasion_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_fel_beast_custom"
+		"AbilityTextureName"			"phantom_assassin_blur"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"avoid_chance"				"80"
+		}
+	}
+
+	"neutral_ghost_max_health_burn_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_ghost_custom"
+		"AbilityTextureName"			"obsidian_destroyer_arcane_orb"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"max_health_damage_pct"		"3"
+		}
+	}
+
+	"neutral_dazzle_boss_ai_controller_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_dazzle_boss_custom"
+		"AbilityTextureName"			"dazzle_shallow_grave"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"1"
+	}
+
+	"neutral_dazzle_boss_poison_touch_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_dazzle_boss_custom"
+		"AbilityTextureName"			"dazzle_poison_touch"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityCastPoint"				"0.2"
+		"AbilityManaCost"				"150"
+		"AbilityCooldown"				"16"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"impact_damage"				"300"
+			"max_slow_pct"				"80"
+			"duration"					"5"
+		}
+	}
+
+	"neutral_dazzle_boss_shadow_grave_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_dazzle_boss_custom"
+		"AbilityTextureName"			"dazzle_shallow_grave"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastRange"				"1200"
+		"AbilityCastPoint"				"0.2"
+		"AbilityManaCost"				"75"
+		"AbilityCooldown"				"6"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"duration"					"3"
+			"radius"					"1200"
+			"health_threshold_pct"			"30"
+		}
+	}
+
+	"neutral_dazzle_boss_weave_burst_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_dazzle_boss_custom"
+		"AbilityTextureName"			"dazzle_weave"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilityCastPoint"				"0.3"
+		"AbilityManaCost"				"50"
+		"AbilityCooldown"				"60"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"radius"					"1500"
+			"duration"					"20"
+			"max_health_damage_pct"		"5"
+			"self_health_threshold_pct"	"30"
+		}
+	}
+
+	"neutral_dazzle_boss_cheat_death_custom"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"abilities/creeps/neutral_dazzle_boss_custom"
+		"AbilityTextureName"			"dazzle_shallow_grave"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityCooldown"				"60"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"duration"					"5"
+		}
+	}
+
 }
