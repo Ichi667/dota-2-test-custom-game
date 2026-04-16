@@ -12,7 +12,7 @@ function antimage_mana_void_custom:OnSpellStart()
     local stun_duration = self:GetSpecialValueFor("stun_duration")
 
     local debuff_duration = self:GetSpecialValueFor("disable_regen_duration")
-    if caster:HasShard() then
+    if caster.HasShard and caster:HasShard() then
         debuff_duration = debuff_duration + self:GetSpecialValueFor("shard_bonus_disable_regen_duration")
     end
 

@@ -36,10 +36,5 @@ function modifier_antimage_persecutor:GetModifierDamageOutgoing_Percentage(param
     local mana_missing_pct = (target:GetMaxMana() - target:GetMana()) / target:GetMaxMana() * 100
     local bonus_per_missing_pct = self:GetAbility():GetSpecialValueFor("bonus_damage_per_missing_mana_pct")
 
-    local talent = parent:FindAbilityByName("special_bonus_unique_antimage_custom_7")
-    if talent and talent:GetLevel() > 0 then
-        bonus_per_missing_pct = bonus_per_missing_pct + talent:GetSpecialValueFor("value")
-    end
-
     return mana_missing_pct * bonus_per_missing_pct
 end

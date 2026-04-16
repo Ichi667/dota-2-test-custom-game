@@ -48,12 +48,13 @@ function antimage_physical_shield:OnToggle()
             return
         end
 
-        caster:ReduceMana(activation_cost)
+        caster:Script_ReduceMana(activation_cost, self)
         self.lock_until = GameRules:GetGameTime() + lock_duration
 
         local other = caster:FindAbilityByName("antimage_mage_shield")
         if other then
             if other:GetToggleState() then
+                other._ignore_lock = true
                 other:ToggleAbility()
             end
             other:SetActivated(false)
@@ -113,7 +114,7 @@ function modifier_antimage_physical_shield_active:OnIntervalThink()
     end
 
     local drain = ability:GetSpecialValueFor("drain_mana_flat_per_sec") + max_mana * ability:GetSpecialValueFor("drain_mana_pct_per_sec") * 0.01
-    parent:ReduceMana(drain)
+    parent:Script_ReduceMana(drain, ability)
 end
 
 function modifier_antimage_physical_shield_active:DeclareFunctions()
@@ -123,11 +124,5 @@ function modifier_antimage_physical_shield_active:DeclareFunctions()
 end
 
 function modifier_antimage_physical_shield_active:GetModifierIncomingPhysicalDamage_Percentage()
-    local reduction = self:GetAbility():GetSpecialValueFor("damage_reduction_pct")
-    local talent = self:GetParent():FindAbilityByName("special_bonus_unique_antimage_custom_6")
-    if talent and talent:GetLevel() > 0 then
-        reduction = reduction + talent:GetSpecialValueFor("value")
-    end
-
-    return -reduction
+    return -self:GetAbility():GetSpecialValueFor("damage_reduction_pct")
 end

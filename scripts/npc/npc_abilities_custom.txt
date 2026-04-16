@@ -68,6 +68,11 @@
 
 		"AbilityValues"
 		{
+			"AbilityCharges"
+			{
+				"value"					"1 1 1 2 2 2 3 3 3 4"
+				"special_bonus_unique_antimage_custom_3" "+1"
+			}
 			"dash_distance"				"500"
 			"strike_radius"				"150"
 			"damage_pct"				"70 75 80 85 90 95 100 105 110 115"
@@ -916,7 +921,11 @@
 
 		"AbilityValues"
 		{
-			"bonus_damage_per_missing_mana_pct"	"0.75"
+			"bonus_damage_per_missing_mana_pct"
+			{
+				"value"					"0.75"
+				"special_bonus_unique_antimage_custom_7" "+0.25"
+			}
 		}
 	}
 
@@ -934,8 +943,12 @@
 
 		"AbilityValues"
 		{
-			"mana_burn_pct"				"1 1.45 1.9 2.35 2.8 3.25 3.7 4.15 4.6 5"
-			"damage_from_burn_pct"		"10 14.45 18.9 23.35 27.8 32.25 36.7 41.15 45.6 50"
+			"mana_burn_pct"
+			{
+				"value"					"1 1.5 2 2.5 3 3.5 4 4.5 5 5"
+				"special_bonus_unique_antimage_custom_5" "+1"
+			}
+			"damage_from_burn_pct"		"10 14.5 19 23.5 28 32 36.5 41 45.5 50"
 		}
 	}
 
@@ -952,7 +965,11 @@
 		"AbilityValues"
 		{
 			"spells_needed"				"3"
-			"restore_pct"				"4 5.22 6.44 7.66 8.88 10.1 11.32 12.54 13.76 15"
+			"restore_pct"
+			{
+				"value"					"4 5 6.5 7.5 9 10 11.5 12.5 14 15"
+				"special_bonus_unique_antimage_custom_4" "+5"
+			}
 		}
 	}
 
@@ -972,7 +989,11 @@
 
 		"AbilityValues"
 		{
-			"damage_reduction_pct"			"20 25.55 31.1 36.65 42.2 47.75 53.3 58.85 64.4 70"
+			"damage_reduction_pct"
+			{
+				"value"					"20 25.5 31 36.5 42 47.5 53 58.5 64 70"
+				"special_bonus_unique_antimage_custom_6" "+10"
+			}
 			"activation_mana_flat"			"50"
 			"activation_mana_pct"			"15"
 			"drain_mana_flat_per_sec"		"50"
@@ -997,7 +1018,11 @@
 
 		"AbilityValues"
 		{
-			"damage_reduction_pct"			"20 25.55 31.1 36.65 42.2 47.75 53.3 58.85 64.4 70"
+			"damage_reduction_pct"
+			{
+				"value"					"20 25.5 31 36.5 42 47.5 53 58.5 64 70"
+				"special_bonus_unique_antimage_custom_6" "+10"
+			}
 			"activation_mana_flat"			"50"
 			"activation_mana_pct"			"15"
 			"drain_mana_flat_per_sec"		"50"
@@ -1041,32 +1066,16 @@
 
 	"special_bonus_unique_antimage_custom_1"
 	{
-		"BaseClass"					"special_bonus_base"
+		"BaseClass"					"special_bonus_agility_8"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"value"						"8"
-			}
-		}
 	}
 
 	"special_bonus_unique_antimage_custom_2"
 	{
-		"BaseClass"					"special_bonus_base"
+		"BaseClass"					"special_bonus_movement_speed_20"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"value"						"20"
-			}
-		}
 	}
 
 	"special_bonus_unique_antimage_custom_3"

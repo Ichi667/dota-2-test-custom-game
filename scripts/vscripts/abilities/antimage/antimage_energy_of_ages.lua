@@ -46,10 +46,6 @@ function modifier_antimage_energy_of_ages:OnAbilityExecuted(params)
     self.spell_counter = 0
 
     local restore_pct = self:GetAbility():GetSpecialValueFor("restore_pct")
-    local talent = parent:FindAbilityByName("special_bonus_unique_antimage_custom_4")
-    if talent and talent:GetLevel() > 0 then
-        restore_pct = restore_pct + talent:GetSpecialValueFor("value")
-    end
 
     local heal_amount = parent:GetMaxHealth() * restore_pct * 0.01
     local mana_amount = parent:GetMaxMana() * restore_pct * 0.01

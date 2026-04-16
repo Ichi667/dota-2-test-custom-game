@@ -42,10 +42,6 @@ function modifier_antimage_mana_break_custom:OnAttackLanded(params)
     end
 
     local mana_burn_pct = ability:GetSpecialValueFor("mana_burn_pct")
-    local talent = parent:FindAbilityByName("special_bonus_unique_antimage_custom_5")
-    if talent and talent:GetLevel() > 0 then
-        mana_burn_pct = mana_burn_pct + talent:GetSpecialValueFor("value")
-    end
 
     local burn_from_max = target:GetMaxMana() * mana_burn_pct * 0.01
     local mana_burned = math.min(target:GetMana(), burn_from_max)
