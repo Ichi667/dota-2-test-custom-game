@@ -1,13 +1,13 @@
-local PARTICLE_POISON_PROJECTILE = "particles/units/heroes/hero_dazzle/dazzle_poison_touch.vpcf"
-local PARTICLE_POISON_DEBUFF = "particles/units/heroes/hero_dazzle/dazzle_poison_debuff.vpcf"
-local PARTICLE_GRAVE_BUFF = "particles/units/heroes/hero_dazzle/dazzle_shadow_grave.vpcf"
-local PARTICLE_WEAVE = "particles/units/heroes/hero_dazzle/dazzle_armor_friend_shield.vpcf"
-local PARTICLE_WEAVE_DEBUFF = "particles/units/heroes/hero_dazzle/dazzle_armor_enemy.vpcf"
+local PARTICLE_POISON_PROJECTILE = "particles/creeps/dazzle_poison_touch.vpcf"
+local PARTICLE_POISON_DEBUFF = "particles/creeps/dazzle_poison_debuff.vpcf"
+local PARTICLE_GRAVE_BUFF = "particles/creeps/dazzle_shallow_grave.vpcf"
+local PARTICLE_WEAVE = "particles/creeps/dazzle_armor_friend_shield_glow.vpcf"
+local PARTICLE_WEAVE_DEBUFF = "particles/creeps/dazzle_armor_enemy.vpcf"
 
-local SOUND_POISON_CAST = "Hero_Dazzle.Poison_Cast"
-local SOUND_POISON_TARGET = "Hero_Dazzle.Poison_Tick"
-local SOUND_GRAVE_CAST = "Hero_Dazzle.Shallow_Grave"
-local SOUND_WEAVE_CAST = "Hero_Dazzle.Weave"
+local SOUND_POISON_CAST = "Poison_Cast"
+local SOUND_POISON_TARGET = "Poison_Tick"
+local SOUND_GRAVE_CAST = "Shallow_Grave"
+local SOUND_WEAVE_CAST = "weave"
 
 LinkLuaModifier("modifier_neutral_dazzle_boss_ai_custom", "abilities/creeps/neutral_dazzle_boss_custom", LUA_MODIFIER_MOTION_NONE)
 LinkLuaModifier("modifier_neutral_dazzle_boss_poison_debuff_custom", "abilities/creeps/neutral_dazzle_boss_custom", LUA_MODIFIER_MOTION_NONE)
@@ -38,8 +38,18 @@ function modifier_neutral_dazzle_boss_ai_custom:OnIntervalThink()
 	local parent = self:GetParent()
 	if not parent:IsAlive() then return end
 	if parent:IsStunned() or parent:IsHexed() or parent:IsSilenced() then return end
+	if parent:IsChanneling() then return end
 
 	local poison = parent:FindAbilityByName("neutral_dazzle_boss_poison_touch_custom")
+	local grave = parent:FindAbilityByName("neutral_dazzle_boss_shadow_grave_custom")
+	local weave = parent:FindAbilityByName("neutral_dazzle_boss_weave_burst_custom")
+
+	if (poison and poison:IsInAbilityPhase()) or
+	   (grave and grave:IsInAbilityPhase()) or
+	   (weave and weave:IsInAbilityPhase()) then
+		return
+	end
+
 	if poison and poison:IsFullyCastable() then
 		parent:CastAbilityNoTarget(poison, -1)
 		return
@@ -48,7 +58,7 @@ function modifier_neutral_dazzle_boss_ai_custom:OnIntervalThink()
 	local now = GameRules:GetGameTime()
 	if now >= self.next_grave_scan then
 		self.next_grave_scan = now + 1.0
-		local grave = parent:FindAbilityByName("neutral_dazzle_boss_shadow_grave_custom")
+
 		if grave and grave:IsFullyCastable() then
 			local radius = grave:GetSpecialValueFor("radius")
 			local threshold = grave:GetSpecialValueFor("health_threshold_pct")
@@ -73,7 +83,6 @@ function modifier_neutral_dazzle_boss_ai_custom:OnIntervalThink()
 		end
 	end
 
-	local weave = parent:FindAbilityByName("neutral_dazzle_boss_weave_burst_custom")
 	if weave and weave:IsFullyCastable() then
 		local hp_threshold = weave:GetSpecialValueFor("self_health_threshold_pct")
 		if parent:GetHealthPercent() < hp_threshold then
@@ -218,17 +227,13 @@ function neutral_dazzle_boss_weave_burst_custom:OnSpellStart()
 	local caster = self:GetCaster()
 	local radius = self:GetSpecialValueFor("radius")
 	local duration = self:GetSpecialValueFor("duration")
+	local origin = caster:GetAbsOrigin()
 
-	caster:EmitSound(SOUND_WEAVE_CAST)
-
-	local pfx = ParticleManager:CreateParticle(PARTICLE_WEAVE, PATTACH_ABSORIGIN, caster)
-	ParticleManager:SetParticleControl(pfx, 0, caster:GetAbsOrigin())
-	ParticleManager:SetParticleControl(pfx, 1, Vector(radius, radius, radius))
-	ParticleManager:ReleaseParticleIndex(pfx)
+	self:PlayEffects(origin)
 
 	local enemies = FindUnitsInRadius(
 		caster:GetTeamNumber(),
-		caster:GetAbsOrigin(),
+		origin,
 		nil,
 		radius,
 		DOTA_UNIT_TARGET_TEAM_ENEMY,
@@ -239,8 +244,25 @@ function neutral_dazzle_boss_weave_burst_custom:OnSpellStart()
 	)
 
 	for _, enemy in pairs(enemies) do
-		enemy:AddNewModifier(caster, self, "modifier_neutral_dazzle_boss_weave_debuff_custom", { duration = duration * (1 - enemy:GetStatusResistance()) })
+		enemy:AddNewModifier(caster, self, "modifier_neutral_dazzle_boss_weave_debuff_custom", {
+			duration = duration * (1 - enemy:GetStatusResistance())
+		})
 	end
+end
+
+function neutral_dazzle_boss_weave_burst_custom:PlayEffects(point)
+	local radius = self:GetSpecialValueFor("radius")
+
+	local effect_cast = ParticleManager:CreateParticle(
+		"particles/creeps/dazzle_weave.vpcf",
+		PATTACH_WORLDORIGIN,
+		nil
+	)
+	ParticleManager:SetParticleControl(effect_cast, 0, point)
+	ParticleManager:SetParticleControl(effect_cast, 1, Vector(radius, 0, 0))
+	ParticleManager:ReleaseParticleIndex(effect_cast)
+
+	EmitSoundOnLocationWithCaster(point, "weave", self:GetCaster())
 end
 
 modifier_neutral_dazzle_boss_weave_debuff_custom = class({})
@@ -260,6 +282,7 @@ end
 
 function modifier_neutral_dazzle_boss_weave_debuff_custom:OnIntervalThink()
 	if not IsServer() then return end
+
 	local parent = self:GetParent()
 	local damage = parent:GetMaxHealth() * self.damage_pct * 0.01
 
@@ -278,62 +301,4 @@ end
 
 function modifier_neutral_dazzle_boss_weave_debuff_custom:GetEffectAttachType()
 	return PATTACH_ABSORIGIN_FOLLOW
-end
-
-neutral_dazzle_boss_cheat_death_custom = class({})
-
-function neutral_dazzle_boss_cheat_death_custom:GetIntrinsicModifierName()
-	return "modifier_neutral_dazzle_boss_cheat_death_custom"
-end
-
-modifier_neutral_dazzle_boss_cheat_death_custom = class({})
-
-function modifier_neutral_dazzle_boss_cheat_death_custom:IsHidden() return true end
-function modifier_neutral_dazzle_boss_cheat_death_custom:IsPurgable() return false end
-
-function modifier_neutral_dazzle_boss_cheat_death_custom:DeclareFunctions()
-	return {
-		MODIFIER_PROPERTY_MIN_HEALTH,
-		MODIFIER_EVENT_ON_TAKEDAMAGE,
-	}
-end
-
-function modifier_neutral_dazzle_boss_cheat_death_custom:GetMinHealth()
-	local ability = self:GetAbility()
-	if ability and ability:IsCooldownReady() and not self:GetParent():HasModifier("modifier_neutral_dazzle_boss_cheat_death_buff_custom") then
-		return 1
-	end
-	return 0
-end
-
-function modifier_neutral_dazzle_boss_cheat_death_custom:OnTakeDamage(params)
-	if not IsServer() then return end
-	local parent = self:GetParent()
-	if params.unit ~= parent then return end
-	if parent:IsIllusion() then return end
-
-	local ability = self:GetAbility()
-	if not ability or ability:IsNull() or not ability:IsCooldownReady() then return end
-	if parent:HasModifier("modifier_neutral_dazzle_boss_cheat_death_buff_custom") then return end
-	if parent:GetHealth() > 1 then return end
-
-	local duration = ability:GetSpecialValueFor("duration")
-	parent:AddNewModifier(parent, ability, "modifier_neutral_dazzle_boss_cheat_death_buff_custom", { duration = duration })
-	ability:UseResources(false, false, false, true)
-end
-
-modifier_neutral_dazzle_boss_cheat_death_buff_custom = class({})
-
-function modifier_neutral_dazzle_boss_cheat_death_buff_custom:IsPurgable() return false end
-function modifier_neutral_dazzle_boss_cheat_death_buff_custom:GetEffectName() return PARTICLE_GRAVE_BUFF end
-function modifier_neutral_dazzle_boss_cheat_death_buff_custom:GetEffectAttachType() return PATTACH_ABSORIGIN_FOLLOW end
-
-function modifier_neutral_dazzle_boss_cheat_death_buff_custom:DeclareFunctions()
-	return {
-		MODIFIER_PROPERTY_MIN_HEALTH,
-	}
-end
-
-function modifier_neutral_dazzle_boss_cheat_death_buff_custom:GetMinHealth()
-	return 1
 end

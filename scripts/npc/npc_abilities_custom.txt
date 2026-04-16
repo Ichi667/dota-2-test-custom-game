@@ -851,16 +851,16 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
 		"AbilityCastRange"				"1200"
-		"AbilityCastPoint"				"0.2"
+		"AbilityCastPoint"				"0"
 		"AbilityManaCost"				"75"
 		"AbilityCooldown"				"6"
 		"MaxLevel"						"1"
 
 		"AbilityValues"
 		{
-			"duration"					"3"
+			"duration"					"6"
 			"radius"					"1200"
-			"health_threshold_pct"			"30"
+			"health_threshold_pct"			"20"
 		}
 	}
 
@@ -880,8 +880,8 @@
 		"AbilityValues"
 		{
 			"radius"					"1500"
-			"duration"					"20"
-			"max_health_damage_pct"		"5"
+			"duration"					"10"
+			"max_health_damage_pct"		"10"
 			"self_health_threshold_pct"	"30"
 		}
 	}
@@ -897,7 +897,7 @@
 
 		"AbilityValues"
 		{
-			"duration"					"5"
+			"duration"					"8"
 		}
 	}
 

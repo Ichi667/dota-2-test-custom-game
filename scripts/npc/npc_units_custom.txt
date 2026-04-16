@@ -870,7 +870,8 @@
 	{
 		"Model"						"models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll_frost.vmdl"
 		"BaseClass"					"npc_dota_creature"
-		"SoundSet"					"n_creep_Melee"
+		"SoundSet"					"n_creep_Ranged"
+		"GameSoundsFile"			"soundevents/game_sounds_creeps.vsndevts"
 		"Level"						"1"
 		"IsNeutralUnitType"			"1"
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
@@ -884,13 +885,14 @@
 		"Ability2"					""
 		"Ability3"					""
 		"Ability4"					""
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackRange"				"450"	
+		"ProjectileModel"			"particles/neutral_fx/gnoll_base_attack.vpcf"
 		"AttackDamageMin"			"40"
 		"AttackDamageMax"			"40"
 		"AttackRate"				"1.3"
 		"AttackAnimationPoint"		"0.4"
 		"AttackAcquisitionRange"	"600"
-		"AttackRange"				"150"
 		"ArmorPhysical"			"0"
 		"MagicalResistance"			"25"
 		"BountyXP"					"35"
@@ -909,6 +911,7 @@
 		"CombatClassDefend"		"DOTA_COMBAT_CLASS_DEFEND_BASIC"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
+
 
 	"npc_dota_neutral_fel_beast"
 	{
@@ -972,13 +975,14 @@
 		"Ability2"					""
 		"Ability3"					""
 		"Ability4"					""
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"ProjectileModel"			"particles/neutral_fx/ghost_base_attack.vpcf"
+		"AttackRange"				"400"
 		"AttackDamageMin"			"30"
 		"AttackDamageMax"			"30"
-		"AttackRate"				"1.3"
+		"AttackRate"				"1.5"
 		"AttackAnimationPoint"		"0.4"
 		"AttackAcquisitionRange"	"600"
-		"AttackRange"				"150"
 		"ArmorPhysical"			"0"
 		"MagicalResistance"			"25"
 		"BountyXP"					"30"
@@ -1003,6 +1007,7 @@
 		"Model"						"models/heroes/dazzle/dazzle.vmdl"
 		"BaseClass"					"npc_dota_creature"
 		"SoundSet"					"Hero_Dazzle"
+		"ModelScale" 					"2"
 		"Level"						"1"
 		"IsNeutralUnitType"			"1"
 		"IsAncient"				"1"
@@ -1037,13 +1042,24 @@
 		"StatusHealth"				"5500"
 		"StatusHealthRegen"		"0"
 		"StatusMana"				"1000"
-		"StatusManaRegen"			"8"
+		"StatusManaRegen"			"4"
 		"VisionDaytimeRange"		"1200"
 		"VisionNighttimeRange"		"800"
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"		"DOTA_COMBAT_CLASS_ATTACK_HERO"
 		"CombatClassDefend"		"DOTA_COMBAT_CLASS_DEFEND_HERO"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		"Creature"
+		{
+			"AttachWearables"
+			{
+				"Wearable1" { "ItemDef" "13466" }
+				"Wearable2" { "ItemDef" "13467" }
+				"Wearable3" { "ItemDef" "13468" }
+				"Wearable4" { "ItemDef" "13469" }
+				"Wearable5" { "ItemDef" "13471" }
+			}
+		}
 	}
 
 }

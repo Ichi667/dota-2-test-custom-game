@@ -24,10 +24,14 @@ function modifier_neutral_gnoll_assassin_bleed_custom:OnAttackLanded(params)
 	if not params.target or params.target:IsNull() then return end
 	if params.target:IsBuilding() or params.target:IsOther() then return end
 
-	local duration = self:GetAbility():GetSpecialValueFor("duration")
+	local ability = self:GetAbility()
+	if not ability or ability:IsNull() then return end
+
+	local duration = ability:GetSpecialValueFor("duration")
+
 	params.target:AddNewModifier(
 		self:GetParent(),
-		self:GetAbility(),
+		ability,
 		"modifier_neutral_gnoll_assassin_bleed_custom_debuff",
 		{ duration = duration * (1 - params.target:GetStatusResistance()) }
 	)
@@ -38,24 +42,41 @@ modifier_neutral_gnoll_assassin_bleed_custom_debuff = class({})
 function modifier_neutral_gnoll_assassin_bleed_custom_debuff:IsDebuff() return true end
 function modifier_neutral_gnoll_assassin_bleed_custom_debuff:IsPurgable() return true end
 
+function modifier_neutral_gnoll_assassin_bleed_custom_debuff:GetAttributes()
+	return MODIFIER_ATTRIBUTE_MULTIPLE
+end
+
 function modifier_neutral_gnoll_assassin_bleed_custom_debuff:OnCreated()
-	self.damage_per_second = self:GetAbility():GetSpecialValueFor("damage_per_second")
+	local ability = self:GetAbility()
+	if not ability or ability:IsNull() then return end
+
+	self.damage_per_second = ability:GetSpecialValueFor("damage_per_second")
+
 	if not IsServer() then return end
 	self:StartIntervalThink(1.0)
 end
 
 function modifier_neutral_gnoll_assassin_bleed_custom_debuff:OnRefresh()
-	self.damage_per_second = self:GetAbility():GetSpecialValueFor("damage_per_second")
+	local ability = self:GetAbility()
+	if not ability or ability:IsNull() then return end
+
+	self.damage_per_second = ability:GetSpecialValueFor("damage_per_second")
 end
 
 function modifier_neutral_gnoll_assassin_bleed_custom_debuff:OnIntervalThink()
 	if not IsServer() then return end
+
 	local ability = self:GetAbility()
+	local caster = self:GetCaster()
+	local parent = self:GetParent()
+
 	if not ability or ability:IsNull() then return end
+	if not caster or caster:IsNull() then return end
+	if not parent or parent:IsNull() then return end
 
 	ApplyDamage({
-		victim = self:GetParent(),
-		attacker = self:GetCaster(),
+		victim = parent,
+		attacker = caster,
 		damage = self.damage_per_second,
 		damage_type = DAMAGE_TYPE_PHYSICAL,
 		ability = ability,

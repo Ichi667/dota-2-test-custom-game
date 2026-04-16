@@ -83,6 +83,175 @@ NeutralCampManager.CAMPS = {
             { unit_name = "npc_kobold_m", count = 1 },
         },
     },
+    {
+        spawn_name = "camp_spawn_11",
+        pack = {
+            { unit_name = "npc_dota_neutral_forest_troll_berserker", count = 3 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_12",
+        pack = {
+            { unit_name = "npc_dota_neutral_forest_troll_berserker", count = 1 },
+            { unit_name = "npc_kobold_t", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_13",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 1 },
+            { unit_name = "npc_kobold_t", count = 3 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_14",
+        pack = {
+            { unit_name = "npc_dota_neutral_forest_troll_berserker", count = 2 },
+            { unit_name = "npc_dota_neutral_forest_troll_high_priest", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_15",
+        pack = {
+            { unit_name = "npc_dota_neutral_forest_troll_berserker", count = 2 },
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_16",
+        pack = {
+            { unit_name = "npc_dota_neutral_tadpole", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_17",
+        pack = {
+            { unit_name = "npc_dota_neutral_tadpole", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_18",
+        pack = {
+            { unit_name = "npc_dota_neutral_tadpole", count = 3 },
+            { unit_name = "npc_dota_neutral_froglet", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_19",
+        pack = {
+            { unit_name = "npc_dota_neutral_tadpole", count = 4 },
+            { unit_name = "npc_dota_neutral_froglet", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_20",
+        pack = {
+            { unit_name = "npc_dota_neutral_ghost", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_21",
+        pack = {
+            { unit_name = "npc_dota_neutral_ghost", count = 2 },
+            { unit_name = "npc_dota_neutral_fel_beast", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_22",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_23",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 3 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_24",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_25",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_26",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 3 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_27",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_28",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_29",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_30",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_31",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 3 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_32",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_33",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_34",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+            { unit_name = "npc_dota_neutral_ghost", count = 1 },
+            { unit_name = "npc_dota_neutral_forest_troll_berserker", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_35",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+            { unit_name = "npc_dota_neutral_ghost", count = 1 },
+            { unit_name = "npc_dota_neutral_forest_troll_berserker", count = 1 },
+        },
+    },
+    {
+        spawn_name = "camp_spawn_36",
+        pack = {
+            { unit_name = "npc_dota_neutral_gnoll_assassin", count = 2 },
+            { unit_name = "npc_dota_neutral_ghost", count = 1 },
+            { unit_name = "npc_dota_neutral_forest_troll_berserker", count = 1 },
+        },
+    },
 }
 
 function NeutralCampManager:Init(options)
@@ -103,7 +272,22 @@ function NeutralCampManager:Init(options)
     self.unit_rewards = {}
     self.last_respawn_second = nil
 
+    self:TrySpawnAllCamps()
     self:StartThinker()
+end
+
+function NeutralCampManager:CampHasAliveUnits(camp)
+    if not camp then
+        return false
+    end
+
+    for _, unit in ipairs(camp.spawned_units) do
+        if unit and not unit:IsNull() and unit:IsAlive() then
+            return true
+        end
+    end
+
+    return false
 end
 
 function NeutralCampManager:BuildCampState(camp_config)
@@ -145,6 +329,7 @@ function NeutralCampManager:OnThink()
 
     local game_second = math.floor(game_time)
     local seconds_from_minute = game_second % self.respawn_interval
+
     if seconds_from_minute == 0 and self.last_respawn_second ~= game_second then
         self:TrySpawnAllCamps()
         self.last_respawn_second = game_second
@@ -163,7 +348,7 @@ end
 function NeutralCampManager:TrySpawnCamp(camp)
     self:CleanupCampUnits(camp)
 
-    if #camp.spawned_units > 0 then
+    if self:CampHasAliveUnits(camp) then
         return
     end
 
