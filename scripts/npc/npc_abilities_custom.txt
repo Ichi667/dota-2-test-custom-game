@@ -48,12 +48,12 @@
 	"hero_dash_strike"
 	{
 	    "BaseClass"                     "ability_lua"
-	    "ScriptFile"                    "abilities/hero_dash_strike"
+	    "ScriptFile"                    "abilities/antimage/hero_dash_strike"
 		"AbilityTextureName"			"void_spirit_astral_step"
 		"FightRecapLevel"				"1"
-		"MaxLevel"						"4"
+		"MaxLevel"						"10"
 
-		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -62,15 +62,15 @@
 
 		"AbilityCastPoint"				"0.0"
 		"AbilityCooldown"				"0.5"
-		"AbilityManaCost"				"100"
-		"AbilityCharges"				"1 2 3 4"
-		"AbilityChargeRestoreTime"		"20 16 12 8"
+		"AbilityManaCost"				"90 100 110 120 130 140 150 160 170 180"
+		"AbilityCharges"				"1 1 1 2 2 2 3 3 3 4"
+		"AbilityChargeRestoreTime"		"20 19 18 17 16 15 14 12 10 8"
 
 		"AbilityValues"
 		{
 			"dash_distance"				"500"
 			"strike_radius"				"150"
-			"damage_pct"				"70"
+			"damage_pct"				"70 75 80 85 90 95 100 105 110 115"
 		}
 	}
 
@@ -898,6 +898,264 @@
 		"AbilityValues"
 		{
 			"duration"					"8"
+		}
+	}
+
+
+
+	"antimage_persecutor"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"					"abilities/antimage/antimage_persecutor"
+		"AbilityTextureName"			"antimage_mana_hunger"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Innate"						"1"
+		"IsBreakable"					"1"
+		"MaxLevel"						"1"
+
+		"AbilityValues"
+		{
+			"bonus_damage_per_missing_mana_pct"	"0.75"
+		}
+	}
+
+	"antimage_mana_break_custom"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"					"abilities/antimage/antimage_mana_break_custom"
+		"AbilityTextureName"			"antimage_mana_break"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"IsBreakable"					"1"
+		"MaxLevel"						"10"
+
+		"AbilityValues"
+		{
+			"mana_burn_pct"				"1 1.45 1.9 2.35 2.8 3.25 3.7 4.15 4.6 5"
+			"damage_from_burn_pct"		"10 14.45 18.9 23.35 27.8 32.25 36.7 41.15 45.6 50"
+		}
+	}
+
+	"antimage_energy_of_ages"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"					"abilities/antimage/antimage_energy_of_ages"
+		"AbilityTextureName"			"obsidian_destroyer_essence_flux"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"						"10"
+		"IsBreakable"					"1"
+
+		"AbilityValues"
+		{
+			"spells_needed"				"3"
+			"restore_pct"				"4 5.22 6.44 7.66 8.88 10.1 11.32 12.54 13.76 15"
+		}
+	}
+
+	"antimage_mage_shield"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"					"abilities/antimage/antimage_mage_shield"
+		"AbilityTextureName"			"antimage_counterspell"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"MaxLevel"						"10"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"2"
+		"HasScepterUpgrade"			"1"
+		"AssociatedSecondaryAbilities"	"antimage_physical_shield"
+
+		"AbilityValues"
+		{
+			"damage_reduction_pct"			"20 25.55 31.1 36.65 42.2 47.75 53.3 58.85 64.4 70"
+			"activation_mana_flat"			"50"
+			"activation_mana_pct"			"15"
+			"drain_mana_flat_per_sec"		"50"
+			"drain_mana_pct_per_sec"		"10"
+			"min_toggle_lock"				"2"
+		}
+	}
+
+	"antimage_physical_shield"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"					"abilities/antimage/antimage_physical_shield"
+		"AbilityTextureName"			"medusa_mana_shield"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"MaxLevel"						"10"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"3"
+		"HasScepterUpgrade"			"1"
+		"AssociatedPrimaryAbilities"	"antimage_mage_shield"
+
+		"AbilityValues"
+		{
+			"damage_reduction_pct"			"20 25.55 31.1 36.65 42.2 47.75 53.3 58.85 64.4 70"
+			"activation_mana_flat"			"50"
+			"activation_mana_pct"			"15"
+			"drain_mana_flat_per_sec"		"50"
+			"drain_mana_pct_per_sec"		"10"
+			"min_toggle_lock"				"2"
+		}
+	}
+
+	"antimage_mana_void_custom"
+	{
+		"BaseClass"					"ability_lua"
+		"ScriptFile"					"abilities/antimage/antimage_mana_void_custom"
+		"AbilityTextureName"			"antimage_mana_void"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"MaxLevel"						"5"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastRange"				"900"
+		"AbilityManaCost"				"200 250 300 350 400"
+		"AbilityCooldown"				"60"
+		"HasShardUpgrade"				"1"
+		"AbilityAOERadius"				"500"
+
+		"AbilityValues"
+		{
+			"radius"						"500"
+			"mana_burn_pct"				"20 40 60 80 100"
+			"damage_from_burn_pct"		"50 62.5 75 87.5 100"
+			"stun_duration"				"0.8"
+			"disable_regen_duration"		"0"
+			"shard_bonus_disable_regen_duration" "5"
+			"AbilityCooldown"
+			{
+				"value"					"60"
+				"special_bonus_unique_antimage_custom_8" "-30"
+			}
+		}
+	}
+
+	"special_bonus_unique_antimage_custom_1"
+	{
+		"BaseClass"					"special_bonus_base"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"						"8"
+			}
+		}
+	}
+
+	"special_bonus_unique_antimage_custom_2"
+	{
+		"BaseClass"					"special_bonus_base"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"						"20"
+			}
+		}
+	}
+
+	"special_bonus_unique_antimage_custom_3"
+	{
+		"BaseClass"					"special_bonus_base"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"						"1"
+			}
+		}
+	}
+
+	"special_bonus_unique_antimage_custom_4"
+	{
+		"BaseClass"					"special_bonus_base"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"value"						"5"
+			}
+		}
+	}
+
+	"special_bonus_unique_antimage_custom_5"
+	{
+		"BaseClass"					"special_bonus_base"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"value"						"1"
+			}
+		}
+	}
+
+	"special_bonus_unique_antimage_custom_6"
+	{
+		"BaseClass"					"special_bonus_base"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"value"						"10"
+			}
+		}
+	}
+
+	"special_bonus_unique_antimage_custom_7"
+	{
+		"BaseClass"					"special_bonus_base"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"value"						"0.25"
+			}
+		}
+	}
+
+	"special_bonus_unique_antimage_custom_8"
+	{
+		"BaseClass"					"special_bonus_base"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"						"-30"
+			}
 		}
 	}
 

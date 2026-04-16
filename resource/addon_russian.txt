@@ -204,12 +204,12 @@
 
         "DOTA_Tooltip_ability_item_bloody_shard_Lore" "Осколок, напитанный яростью битв. Кровь на его гранях ищет следующую цель."
 
-        "DOTA_Tooltip_ability_hero_dash_strike"                    "Пронзающий рывок"
+        "DOTA_Tooltip_ability_hero_dash_strike"                    "Dash"
         "DOTA_Tooltip_ability_hero_dash_strike_Description"        "Герой совершает рывок в направлении своего взгляда на расстояние %dash_distance% и наносит всем врагам на пути физический урон в размере %damage_pct%% от урона своей атаки."
         "DOTA_Tooltip_ability_hero_dash_strike_Lore"               "Молниеносный бросок вперёд сметает всех, кто оказался на пути."
         "DOTA_Tooltip_ability_hero_dash_strike_dash_distance"      "ДАЛЬНОСТЬ РЫВКА:"
         "DOTA_Tooltip_ability_hero_dash_strike_damage_pct"         "УРОН ОТ АТАКИ:"
-        "DOTA_Tooltip_ability_hero_dash_strike_dash_width"         "ШИРИНА:"
+        "DOTA_Tooltip_ability_hero_dash_strike_strike_radius"      "ШИРИНА:"
 
 		"DOTA_Tooltip_ability_juggernaut_agility_mastery"                        "Agility Mastery"
 		"DOTA_Tooltip_ability_juggernaut_agility_mastery_Description"            "Пассивно усиливает героя от его ловкости. За каждую 1 ед. ловкости герой получает дополнительную скорости атаки и урон."
@@ -605,6 +605,50 @@
 		"DOTA_Tooltip_ability_neutral_dazzle_boss_cheat_death_custom_duration" "ДЛИТЕЛЬНОСТЬ:"
 		"DOTA_Tooltip_modifier_neutral_dazzle_boss_cheat_death_buff_custom" "Последняя воля"
 		"DOTA_Tooltip_modifier_neutral_dazzle_boss_cheat_death_buff_custom_Description" "Невозможно умереть, пока действует эффект."
+
+
+		"DOTA_Tooltip_ability_antimage_persecutor" "Persecutor"
+		"DOTA_Tooltip_ability_antimage_persecutor_Description" "Герой наносит дополнительный урон в зависимости от недостающей маны цели."
+		"DOTA_Tooltip_ability_antimage_persecutor_bonus_damage_per_missing_mana_pct" "%ДОП. УРОН ЗА 1% НЕДОСТАЮЩЕЙ МАНЫ:"
+
+		"DOTA_Tooltip_ability_antimage_mana_break_custom" "Mana Break"
+		"DOTA_Tooltip_ability_antimage_mana_break_custom_Description" "Каждая атака выжигает процент от максимальной маны цели и наносит дополнительный урон, равный доле от выжженной маны."
+		"DOTA_Tooltip_ability_antimage_mana_break_custom_mana_burn_pct" "%СЖИГАНИЕ МАНЫ ОТ МАКСИМУМА:"
+		"DOTA_Tooltip_ability_antimage_mana_break_custom_damage_from_burn_pct" "%УРОН ОТ ВЫЖЖЕННОЙ МАНЫ:"
+
+
+		"DOTA_Tooltip_ability_antimage_energy_of_ages" "Energy of Ages"
+		"DOTA_Tooltip_ability_antimage_energy_of_ages_Description" "Каждое третье применённое заклинание восстанавливает здоровье и ману. Для переключаемых способностей считается только включение."
+		"DOTA_Tooltip_ability_antimage_energy_of_ages_restore_pct" "%ВОССТАНОВЛЕНИЕ ЗДОРОВЬЯ И МАНЫ:"
+
+		"DOTA_Tooltip_ability_antimage_mage_shield" "Mage Shield"
+		"DOTA_Tooltip_ability_antimage_mage_shield_Description" "Пока активна, вокруг героя действует магический барьер. Снижает входящий магический урон, расходует ману каждую секунду и автоматически отключается при недостатке маны."
+		"DOTA_Tooltip_ability_antimage_mage_shield_damage_reduction_pct" "%СНИЖЕНИЕ МАГИЧЕСКОГО УРОНА:"
+		"DOTA_Tooltip_ability_antimage_mage_shield_activation_mana_flat" "МАНА НА ВКЛЮЧЕНИЕ (БАЗА):"
+		"DOTA_Tooltip_ability_antimage_mage_shield_activation_mana_pct" "%МАНА НА ВКЛЮЧЕНИЕ ОТ МАКСИМУМА:"
+		"DOTA_Tooltip_ability_antimage_mage_shield_drain_mana_flat_per_sec" "МАНА В СЕКУНДУ (БАЗА):"
+		"DOTA_Tooltip_ability_antimage_mage_shield_drain_mana_pct_per_sec" "%МАНА В СЕКУНДУ ОТ МАКСИМУМА:"
+
+		"DOTA_Tooltip_ability_antimage_physical_shield" "Physical Shield"
+		"DOTA_Tooltip_ability_antimage_physical_shield_Description" "Пока активна, вокруг героя действует барьер. Снижает входящий физический урон, расходует ману каждую секунду и автоматически отключается при недостатке маны."
+		"DOTA_Tooltip_ability_antimage_physical_shield_damage_reduction_pct" "%СНИЖЕНИЕ ФИЗИЧЕСКОГО УРОНА:"
+
+		"DOTA_Tooltip_ability_antimage_mana_void_custom" "Mana Void"
+		"DOTA_Tooltip_ability_antimage_mana_void_custom_Description" "В выбранной области выжигает процент от максимальной маны врагов, наносит урон от выжженной маны и оглушает."
+		"DOTA_Tooltip_ability_antimage_mana_void_custom_mana_burn_pct" "%СЖИГАНИЕ МАНЫ ОТ МАКСИМУМА:"
+		"DOTA_Tooltip_ability_antimage_mana_void_custom_damage_from_burn_pct" "%УРОН ОТ ВЫЖЖЕННОЙ МАНЫ:"
+		"DOTA_Tooltip_ability_antimage_mana_void_custom_stun_duration" "ДЛИТЕЛЬНОСТЬ ОГЛУШЕНИЯ:"
+		"DOTA_Tooltip_modifier_antimage_mana_void_custom_block_regen" "Void Lock"
+		"DOTA_Tooltip_modifier_antimage_mana_void_custom_block_regen_Description" "Нельзя восстанавливать здоровье и ману."
+
+		"DOTA_Tooltip_ability_special_bonus_unique_antimage_custom_1" "+8 Agility"
+		"DOTA_Tooltip_ability_special_bonus_unique_antimage_custom_2" "+20 Movement Speed"
+		"DOTA_Tooltip_ability_special_bonus_unique_antimage_custom_3" "+1 Dash Charge"
+		"DOTA_Tooltip_ability_special_bonus_unique_antimage_custom_4" "+5% Energy of Ages Restore"
+		"DOTA_Tooltip_ability_special_bonus_unique_antimage_custom_5" "+1% Mana Break Burn"
+		"DOTA_Tooltip_ability_special_bonus_unique_antimage_custom_6" "+10% Shield Damage Reduction"
+		"DOTA_Tooltip_ability_special_bonus_unique_antimage_custom_7" "+0.25% Persecutor Damage"
+		"DOTA_Tooltip_ability_special_bonus_unique_antimage_custom_8" "-30s Mana Void Cooldown"
 
 		"DOTA_SUBSHOP_CONSUMABLES" "Новые предметы"
 

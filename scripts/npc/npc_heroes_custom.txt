@@ -145,4 +145,24 @@
 		"Ability17" "special_bonus_unique_lina_custom_8"
 	}
 
+
+	"npc_dota_hero_antimage"
+	{
+		"Ability1"			"antimage_mana_break_custom"
+		"Ability2"			"hero_dash_strike"
+		"Ability3"			"antimage_energy_of_ages"
+		"Ability4"			"antimage_persecutor"
+		"Ability5"			"antimage_physical_shield"
+		"Ability6"			"antimage_mana_void_custom"
+		"Ability7"			"antimage_mage_shield"
+		"Ability10"		"special_bonus_unique_antimage_custom_1"
+		"Ability11"		"special_bonus_unique_antimage_custom_2"
+		"Ability12"		"special_bonus_unique_antimage_custom_3"
+		"Ability13"		"special_bonus_unique_antimage_custom_4"
+		"Ability14"		"special_bonus_unique_antimage_custom_5"
+		"Ability15"		"special_bonus_unique_antimage_custom_6"
+		"Ability16"		"special_bonus_unique_antimage_custom_7"
+		"Ability17"		"special_bonus_unique_antimage_custom_8"
+	}
+
 }
